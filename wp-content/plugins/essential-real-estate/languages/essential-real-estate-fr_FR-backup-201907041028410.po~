@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: essential-real-estate\n"
 "POT-Creation-Date: 2019-04-28 08:28+0700\n"
-"PO-Revision-Date: 2019-07-02 14:44+0000\n"
+"PO-Revision-Date: 2019-07-04 10:27+0000\n"
 "Last-Translator: Glorie <gloryayivi@gmail.com>\n"
 "Language-Team: Français\n"
 "MIME-Version: 1.0\n"
@@ -22,12 +22,12 @@ msgstr ""
 
 #: admin/class-ere-admin-agent.php:20
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 #: admin/class-ere-admin-agent.php:21 admin/class-ere-admin-location.php:148
 #: admin/class-ere-admin-location.php:330 admin/class-ere-admin-package.php:33
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: admin/class-ere-admin-agent.php:22 admin/class-ere-admin.php:809
 #: admin/class-ere-admin.php:1434 public/templates/account/my-profile.php:183
@@ -35,7 +35,7 @@ msgstr ""
 #: public/templates/shortcodes/agency/agency.php:278
 #: public/templates/taxonomy/agency-detail.php:149
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: admin/class-ere-admin-agent.php:23
 #: public/partials/account/class-ere-profile.php:508
@@ -43,7 +43,7 @@ msgstr ""
 #: public/templates/shortcodes/agency/agency.php:266
 #: public/templates/taxonomy/agency-detail.php:131
 msgid "Mobile"
-msgstr ""
+msgstr "Téléphone"
 
 #: admin/class-ere-admin-agent.php:24 admin/class-ere-admin.php:1193
 #: admin/class-ere-admin.php:1194 admin/class-ere-admin.php:4356
@@ -52,15 +52,15 @@ msgstr ""
 #: includes/shortcodes/class-ere-vcmap.php:1479
 #: includes/shortcodes/class-ere-vcmap.php:1683
 msgid "Agency"
-msgstr ""
+msgstr "Agence"
 
 #: admin/class-ere-admin-agent.php:95 admin/class-ere-admin-property.php:93
 msgid "Approve"
-msgstr ""
+msgstr "Confirmer"
 
 #: admin/class-ere-admin-invoice.php:19 admin/class-ere-admin.php:202
 msgid "Invoice"
-msgstr ""
+msgstr "Facture"
 
 #: admin/class-ere-admin-invoice.php:20 admin/class-ere-admin-property.php:23
 #: admin/class-ere-admin-trans-log.php:24 admin/class-ere-admin.php:2518
@@ -90,23 +90,23 @@ msgstr ""
 #: public/templates/property/edit-property/type.php:34
 #: public/templates/property/submit-property/type.php:32
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: admin/class-ere-admin-invoice.php:21 admin/class-ere-admin-trans-log.php:20
 #: public/templates/payment/payment-completed.php:32
 #: public/templates/payment/per-listing.php:59
 #: public/templates/payment/per-package.php:104
 msgid "Payment Method"
-msgstr ""
+msgstr "Mode de payement"
 
 #: admin/class-ere-admin-invoice.php:22 admin/class-ere-admin-trans-log.php:21
 #: public/templates/payment/payment-completed.php:37
 msgid "Payment Type"
-msgstr ""
+msgstr "Type de paiement"
 
 #: admin/class-ere-admin-invoice.php:23 admin/class-ere-admin-trans-log.php:22
 msgid "Money"
-msgstr ""
+msgstr "Somme"
 
 #: admin/class-ere-admin-invoice.php:24 admin/class-ere-admin-invoice.php:246
 #: admin/class-ere-admin-trans-log.php:23
@@ -114,52 +114,52 @@ msgstr ""
 #: admin/class-ere-admin-user-package.php:20
 #: admin/class-ere-admin-user-package.php:108
 msgid "Buyer"
-msgstr ""
+msgstr "Acheteur"
 
 #: admin/class-ere-admin-invoice.php:25 admin/class-ere-admin-trans-log.php:25
 #: public/templates/payment/payment-completed.php:28
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #: admin/class-ere-admin-invoice.php:112 admin/class-ere-admin-invoice.php:182
 #: admin/class-ere-admin-setup-metaboxes.php:441
 #: public/templates/invoice/my-invoices.php:105
 #: public/templates/invoice/my-invoices.php:154
 msgid "Not Paid"
-msgstr ""
+msgstr "Impayé"
 
 #: admin/class-ere-admin-invoice.php:114 admin/class-ere-admin-invoice.php:183
 #: admin/class-ere-admin-setup-metaboxes.php:443
 #: public/templates/invoice/my-invoices.php:103
 #: public/templates/invoice/my-invoices.php:152
 msgid "Paid"
-msgstr ""
+msgstr "Payé"
 
 #: admin/class-ere-admin-invoice.php:146
 msgid "No invoice"
-msgstr ""
+msgstr "Pas de facture"
 
 #: admin/class-ere-admin-invoice.php:151
 msgid "Click to view invoice"
-msgstr ""
+msgstr "Cliquez pour afficher la facture"
 
 #: admin/class-ere-admin-invoice.php:187
 #: admin/class-ere-admin-trans-log.php:146
 #: public/templates/property/my-properties.php:85
 msgid "All Status"
-msgstr ""
+msgstr "Tous les statuts"
 
 #: admin/class-ere-admin-invoice.php:203
 #: admin/class-ere-admin-trans-log.php:162
 #: public/partials/invoice/class-ere-invoice.php:175
 msgid "Paypal"
-msgstr ""
+msgstr "Paypal"
 
 #: admin/class-ere-admin-invoice.php:204
 #: admin/class-ere-admin-trans-log.php:163
 #: public/partials/invoice/class-ere-invoice.php:178
 msgid "Stripe"
-msgstr ""
+msgstr "Stripe"
 
 #: admin/class-ere-admin-invoice.php:205
 #: admin/class-ere-admin-trans-log.php:164
@@ -177,7 +177,7 @@ msgstr ""
 #: admin/class-ere-admin-invoice.php:210
 #: admin/class-ere-admin-trans-log.php:169
 msgid "All Payment Methods"
-msgstr ""
+msgstr "Moyens de paiement"
 
 #: admin/class-ere-admin-invoice.php:226
 #: admin/class-ere-admin-trans-log.php:185
@@ -188,7 +188,7 @@ msgstr ""
 #: public/templates/invoice/my-invoices.php:85
 #: public/templates/payment/per-package.php:56
 msgid "Package"
-msgstr ""
+msgstr "Package"
 
 #: admin/class-ere-admin-invoice.php:227
 #: admin/class-ere-admin-trans-log.php:186
@@ -217,7 +217,7 @@ msgstr ""
 #: admin/class-ere-admin-invoice.php:233
 #: admin/class-ere-admin-trans-log.php:192
 msgid "All Payment Types"
-msgstr ""
+msgstr "Tous les types de paiement"
 
 #: admin/class-ere-admin-location.php:17 admin/class-ere-admin-location.php:18
 #: admin/class-ere-admin-location.php:54 admin/class-ere-admin-location.php:103
@@ -236,16 +236,16 @@ msgstr ""
 #: public/templates/property/edit-property/location.php:38
 #: public/templates/property/submit-property/location.php:37
 msgid "Country"
-msgstr ""
+msgstr "Pays"
 
 #: admin/class-ere-admin-location.php:30
 #: public/templates/property/search-fields/property_country.php:15
 msgid "Countries"
-msgstr ""
+msgstr "Pays"
 
 #: admin/class-ere-admin-location.php:31
 msgid "Please Choose Country"
-msgstr ""
+msgstr "Veuillez choisir votre Pays"
 
 #: admin/class-ere-admin-location.php:65 admin/class-ere-admin-location.php:114
 #: admin/class-ere-admin-location.php:151
@@ -274,7 +274,7 @@ msgstr ""
 #: public/templates/property/edit-property/location.php:61
 #: public/templates/property/submit-property/location.php:57
 msgid "Province / State"
-msgstr ""
+msgstr "Province / État"
 
 #: admin/class-ere-admin-location.php:67 admin/class-ere-admin-location.php:116
 #: admin/class-ere-admin-location.php:201
@@ -291,7 +291,7 @@ msgstr ""
 #: public/templates/property/edit-property/price.php:40
 #: public/templates/property/submit-property/price.php:40
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #: admin/class-ere-admin-location.php:149
 #: admin/class-ere-admin-location.php:331 admin/class-ere-admin.php:610
@@ -299,12 +299,12 @@ msgstr ""
 #: public/templates/property/property-print.php:242
 #: public/templates/single-property/description.php:15
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: admin/class-ere-admin-location.php:150
 #: admin/class-ere-admin-location.php:332
 msgid "Slug"
-msgstr ""
+msgstr "Label court"
 
 #: admin/class-ere-admin-location.php:152
 #: admin/class-ere-admin-location.php:334
@@ -315,7 +315,7 @@ msgstr ""
 #: admin/class-ere-admin-location.php:292
 #: admin/class-ere-admin-location.php:333
 msgid "City"
-msgstr ""
+msgstr "Ville"
 
 #: admin/class-ere-admin-package.php:34 admin/class-ere-admin-property.php:24
 #: admin/class-ere-admin.php:289 admin/class-ere-admin.php:2521
@@ -339,7 +339,7 @@ msgstr ""
 #: public/templates/single-property/features.php:124
 #: public/templates/single-property/floors.php:81
 msgid "Price"
-msgstr ""
+msgstr "Prix"
 
 #: admin/class-ere-admin-package.php:35 admin/class-ere-admin-property.php:25
 msgid "Featured?"
@@ -348,7 +348,7 @@ msgstr ""
 #: admin/class-ere-admin-package.php:56 admin/class-ere-admin-package.php:64
 #: public/templates/package/package.php:90
 msgid "Free"
-msgstr ""
+msgstr "Gratuit"
 
 #: admin/class-ere-admin-package.php:72 admin/class-ere-admin-property.php:69
 #: public/templates/archive-property/action.php:49
@@ -368,7 +368,7 @@ msgstr ""
 
 #: admin/class-ere-admin-property.php:20
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: admin/class-ere-admin-property.php:21
 #: includes/widgets/class-ere-widget-search-form.php:47
@@ -404,30 +404,30 @@ msgstr "Titre de la propriété"
 #: public/templates/property/property-submit.php:82
 #: public/templates/property/submit-property/type.php:21
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: admin/class-ere-admin-property.php:26 admin/class-ere-admin-property.php:362
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: admin/class-ere-admin-property.php:27
 msgid "View Count"
-msgstr ""
+msgstr "Nombre de vues"
 
 #: admin/class-ere-admin-property.php:96
 msgid "Expire"
-msgstr ""
+msgstr "Expire"
 
 #: admin/class-ere-admin-property.php:99 admin/class-ere-admin.php:3818
 #: admin/class-ere-admin.php:3847
 #: public/templates/property/my-properties.php:297
 msgid "Hide"
-msgstr ""
+msgstr "Masquer"
 
 #: admin/class-ere-admin-property.php:102
 #: public/templates/property/my-properties.php:292
 msgid "Show"
-msgstr ""
+msgstr "Afficher"
 
 #: admin/class-ere-admin-property.php:363 admin/class-ere-admin.php:428
 #: admin/class-ere-admin.php:2514 admin/class-ere-admin.php:2692
@@ -512,14 +512,14 @@ msgstr ""
 #: admin/class-ere-admin-setup-metaboxes.php:162
 #: admin/class-ere-admin-setup-metaboxes.php:322
 msgid "PayerID (PayPal,Stripe):"
-msgstr ""
+msgstr "ID du Client (Paypal, Stripe)"
 
 #: admin/class-ere-admin-setup-metaboxes.php:171
 #: admin/class-ere-admin-setup-metaboxes.php:331
 #: public/templates/invoice/invoice-print.php:155
 #: public/templates/single-invoice/invoice.php:150
 msgid "Payment Type:"
-msgstr ""
+msgstr "Type de paiement:"
 
 #: admin/class-ere-admin-setup-metaboxes.php:180
 #: admin/class-ere-admin-setup-metaboxes.php:340
@@ -586,7 +586,7 @@ msgstr ""
 #: admin/class-ere-admin-trans-log.php:113
 #: admin/class-ere-admin-trans-log.php:142
 msgid "Failed"
-msgstr ""
+msgstr "Achoué"
 
 #: admin/class-ere-admin-setup-metaboxes.php:301
 msgid "Log ID:"
@@ -610,20 +610,20 @@ msgstr ""
 
 #: admin/class-ere-admin-setup-metaboxes.php:626
 msgid "View Invoice: "
-msgstr ""
+msgstr "Afficher la facture:"
 
 #: admin/class-ere-admin-setup.php:17 admin/class-ere-admin-setup.php:18
 msgid "Essential Real Estate"
-msgstr ""
+msgstr "Essential Real Estate"
 
 #: admin/class-ere-admin-setup.php:27 admin/class-ere-admin-setup.php:28
 msgid "Welcome"
-msgstr ""
+msgstr "Bienvenue"
 
 #: admin/class-ere-admin-setup.php:35 admin/class-ere-admin-setup.php:36
 #: admin/class-ere-admin.php:1572 admin/class-ere-admin.php:1573
 msgid "Real Estate Options"
-msgstr ""
+msgstr "Options de Real Estate"
 
 #: admin/class-ere-admin-setup.php:42 admin/class-ere-admin-setup.php:43
 #: admin/class-ere-admin.php:1861
@@ -709,7 +709,7 @@ msgstr ""
 
 #: admin/class-ere-admin-setup.php:196
 msgid "Continue to page setup"
-msgstr ""
+msgstr "Aller à la page de configuration"
 
 #: admin/class-ere-admin-setup.php:198
 msgid "Skip setup. I will setup the plugin manually (Not Recommended)"
@@ -717,7 +717,7 @@ msgstr ""
 
 #: admin/class-ere-admin-setup.php:204
 msgid "Page Setup"
-msgstr ""
+msgstr "Configuration de la page"
 
 #: admin/class-ere-admin-setup.php:206
 #, php-format
@@ -730,15 +730,15 @@ msgstr ""
 
 #: admin/class-ere-admin-setup.php:213
 msgid "Page Title"
-msgstr ""
+msgstr "Titre de la page"
 
 #: admin/class-ere-admin-setup.php:214
 msgid "Page Description"
-msgstr ""
+msgstr "Description de la page"
 
 #: admin/class-ere-admin-setup.php:215
 msgid "Content Shortcode"
-msgstr ""
+msgstr "Code du contenu"
 
 #: admin/class-ere-admin-setup.php:223
 msgctxt "Default page title (wizard)"
@@ -758,6 +758,11 @@ msgid ""
 "you just want to post property from the admin dashboard) you can skip "
 "creating this page."
 msgstr ""
+"Si vous ne souhaitez pas accepter les soumissions d'utilisateurs de cette "
+"manière (par exemple, vous souhaitez uniquement publier une propriété à "
+"partir du tableau de bord de l'administrateur), vous pouvez ignorer la "
+"création de cette page.\n"
+"\n"
 
 #: admin/class-ere-admin-setup.php:236
 msgctxt "Default page title (wizard)"
@@ -921,11 +926,11 @@ msgstr ""
 
 #: admin/class-ere-admin-setup.php:428
 msgid "View login page"
-msgstr ""
+msgstr "Afficher la page de connexion"
 
 #: admin/class-ere-admin-setup.php:433
 msgid "View register page"
-msgstr ""
+msgstr "Afficher la page d'inscription"
 
 #: admin/class-ere-admin-setup.php:438
 msgid "View advanced search page"
@@ -937,7 +942,7 @@ msgstr ""
 
 #: admin/class-ere-admin-texts.php:61
 msgid "Premium Theme"
-msgstr ""
+msgstr "Thème Premium"
 
 #: admin/class-ere-admin-trans-log.php:19
 msgid "Log"
@@ -976,7 +981,7 @@ msgstr ""
 #: public/templates/property/search-fields/property_title.php:18
 #: public/templates/property/submit-property/details.php:200
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: admin/class-ere-admin-user-package.php:22 admin/class-ere-admin.php:1053
 msgid "Number Listings"
@@ -1366,7 +1371,7 @@ msgstr ""
 
 #: admin/class-ere-admin.php:498
 msgid "Zip"
-msgstr ""
+msgstr "Code postal"
 
 #: admin/class-ere-admin.php:505
 msgid "Property Location at Google Map"
@@ -1383,27 +1388,27 @@ msgstr ""
 #: public/templates/property/property-print.php:441
 #: public/templates/property/submit-property/floors.php:14
 msgid "Floor Plans"
-msgstr ""
+msgstr "Plan des étages"
 
 #: admin/class-ere-admin.php:519
 msgid "Enable Floors"
-msgstr ""
+msgstr "Activer les étapes"
 
 #: admin/class-ere-admin.php:530
 #: public/templates/property/property-print.php:461
 #: public/templates/single-property/floors.php:17
 msgid "Floor"
-msgstr ""
+msgstr "Étage"
 
 #: admin/class-ere-admin.php:536 public/class-ere-public.php:218
 #: public/templates/property/edit-property/floors.php:43
 #: public/templates/property/submit-property/floors.php:36
 msgid "Floor Name"
-msgstr ""
+msgstr "Nom de l'étage"
 
 #: admin/class-ere-admin.php:537
 msgid "Example Value: Ground Floor"
-msgstr ""
+msgstr "Exemple de Valeur: Rez de chaussée"
 
 #: admin/class-ere-admin.php:548 public/class-ere-public.php:223
 msgid "Floor Price"
@@ -1654,7 +1659,7 @@ msgstr ""
 #: admin/class-ere-admin.php:952 admin/class-ere-admin.php:1543
 #: admin/class-ere-admin.php:2324 public/templates/account/my-profile.php:363
 msgid "Youtube URL"
-msgstr ""
+msgstr "URL Youtube"
 
 #: admin/class-ere-admin.php:967
 msgid "Package Setting"
@@ -3679,7 +3684,7 @@ msgstr ""
 
 #: admin/class-ere-admin.php:3691
 msgid "Zoo"
-msgstr ""
+msgstr "Zoo"
 
 #: admin/class-ere-admin.php:3697
 msgid "Label Place"
@@ -4160,7 +4165,7 @@ msgstr ""
 
 #: admin/class-ere-admin.php:5156
 msgid "Your username and password on %website_url"
-msgstr ""
+msgstr "Votre identifiant et mot de passe sur %website_url"
 
 #: admin/class-ere-admin.php:5166
 msgid ""
@@ -4196,7 +4201,7 @@ msgstr ""
 
 #: admin/class-ere-admin.php:5215
 msgid "Your agent account approved"
-msgstr ""
+msgstr "Votre compte agent a été approuvé"
 
 #: admin/class-ere-admin.php:5225
 msgid ""
@@ -4224,7 +4229,7 @@ msgstr ""
 
 #: admin/class-ere-admin.php:5273 admin/class-ere-admin.php:5306
 msgid "Your purchase was activated"
-msgstr ""
+msgstr "Votre achat a été activé"
 
 #: admin/class-ere-admin.php:5283
 msgid ""
@@ -5508,11 +5513,11 @@ msgstr ""
 
 #: includes/ere-core-functions.php:1224
 msgid "Zambia"
-msgstr ""
+msgstr "Zambie"
 
 #: includes/ere-core-functions.php:1225
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbabwe"
 
 #: includes/ere-core-functions.php:1381
 #, php-format
@@ -5580,7 +5585,7 @@ msgstr ""
 
 #: includes/insert-shortcode/class-ere-insert-shortcode.php:205
 msgid "Zigzac"
-msgstr ""
+msgstr "Zigzac"
 
 #: includes/insert-shortcode/class-ere-insert-shortcode.php:289
 #: includes/shortcodes/class-ere-vcmap.php:169
@@ -6292,7 +6297,7 @@ msgstr ""
 
 #: includes/shortcodes/class-ere-vcmap.php:32
 msgid "Zig Zac"
-msgstr ""
+msgstr "Zig Zac"
 
 #: includes/shortcodes/class-ere-vcmap.php:39
 #: includes/shortcodes/class-ere-vcmap.php:43
@@ -7152,7 +7157,7 @@ msgstr ""
 
 #: public/partials/account/class-ere-login-register.php:148
 msgid "Your account was created, you can login now!"
-msgstr ""
+msgstr "Votre compte a été créé, vous pouvez vous connecter maintenant!"
 
 #: public/partials/account/class-ere-login-register.php:150
 msgid "A generated password was sent to your email, please check email!"
@@ -7315,7 +7320,7 @@ msgstr ""
 
 #: public/partials/account/class-ere-profile.php:703
 msgid "Youtube"
-msgstr ""
+msgstr "Youtube"
 
 #: public/partials/account/class-ere-profile.php:712
 msgid "Vimeo"
@@ -7567,6 +7572,8 @@ msgid ""
 "Your current account type is set to agent, if you want to remove your agent "
 "account, and return to normal account, you must click the button below"
 msgstr ""
+"Votre compte actuel est un compte agent, si vous souhaitez supprimer votre "
+"compte agent et retourner au compte client, cliquez sur le bouton ci-dessous"
 
 #: public/templates/account/my-profile.php:97
 msgid ""
@@ -8412,7 +8419,7 @@ msgstr ""
 #: public/templates/property/edit-property/media.php:131
 #: public/templates/property/submit-property/media.php:65
 msgid "YouTube, Vimeo, SWF File, MOV File"
-msgstr ""
+msgstr "YouTube, Vimeo, Fichier SWF , Fichier MOV "
 
 #: public/templates/property/edit-property/price.php:37
 #: public/templates/property/submit-property/price.php:37
@@ -8946,7 +8953,7 @@ msgstr "Propriétés"
 #: public/templates/shortcodes/property-search-map/property-search-map.php:387
 #: public/templates/shortcodes/property-search/property-search.php:430
 msgid " No property found"
-msgstr ""
+msgstr "Aucune propriété trouvée"
 
 #: public/templates/shortcodes/property/property.php:599
 msgid "View All"
@@ -9010,7 +9017,7 @@ msgstr ""
 #: public/templates/single-property/contact-agent.php:282
 #: public/templates/taxonomy/agency-detail.php:229
 msgid "Your Email address is not Valid!"
-msgstr ""
+msgstr "Votre adresse mail n'es"
 
 #: public/templates/single-agent/agent-info.php:256
 #: public/templates/single-property/contact-agent.php:283
