@@ -1,0 +1,32 @@
+li#accordion-section-construc_premium h3 {
+    background: #ffb300 !important;
+    color: #fff !important;
+}
+li#accordion-section-construc_premium h3:after{
+	color: #fff !important;
+}
+a.btn.pro-btn-success.btn {
+    background: #ffb300;
+    padding: 10px 20px;
+    color: #fff;
+    text-transform: capitalize;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+}
+li#accordion-section-construc_premium h3 {
+    background: #ffb300 !important;
+    color: #fff !important;
+    margin-left: 0 !important;
+    border-left-color: #ffb300 !important;
+}
+ul.features-list {
+    padding-left: 20px;
+}
+ul.features-list span{
+    color: #ffb300;
+}
+.padding-left-20{
+	padding-left: 20px;
+}
+

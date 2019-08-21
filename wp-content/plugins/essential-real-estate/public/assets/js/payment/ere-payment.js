@@ -1,6 +1,72 @@
+var ERE_STRIPE = ERE_STRIPE || {};
 (function ($) {
     'use strict';
+
+    ERE_STRIPE = {
+        init: function () {
+            this.setupForm();
+        },
+
+        setupForm: function () {
+            var self = this,
+                $form = $('.ere-stripe-form');
+            if ($form.length === 0) return;
+            var formId = $form.attr('id');
+            // Set formData array index of the current form ID to match the localized data passed over for form settings.
+            var formData =   ere_stripe_vars[ formId ];
+            // Variable to hold the Stripe configuration.
+            var stripeHandler = null;
+            var $submitBtn = $form.find( '.ere-stripe-button' );
+
+            if ($submitBtn.length) {
+                stripeHandler = StripeCheckout.configure( {
+                    // Key param MUST be sent here instead of stripeHandler.open().
+                    key: formData.key,
+                    token: function( token, args ) {
+                        $( '<input>' ).attr( {
+                            type: 'hidden',
+                            name: 'stripeToken',
+                            value: token.id
+                        } ).appendTo( $form );
+
+                        $( '<input>' ).attr( {
+                            type: 'hidden',
+                            name: 'stripeTokenType',
+                            value: token.type
+                        } ).appendTo( $form );
+
+                        if (token.email) {
+                            $( '<input>' ).attr( {
+                                type: 'hidden',
+                                name: 'stripeEmail',
+                                value: token.email
+                            } ).appendTo( $form );
+                        }
+                        $form.submit();
+                    },
+                } );
+
+                $submitBtn.on('click',function (event) {
+                    event.preventDefault();
+                    stripeHandler.open(formData.params);
+                });
+            }
+
+            // Close Checkout on page navigation:
+            window.addEventListener('popstate', function() {
+                if (stripeHandler != null) {
+                    stripeHandler.close();
+                }
+            });
+
+        }
+
+    };
+
+
     $(document).ready(function () {
+        ERE_STRIPE.init();
+
         if (typeof ere_payment_vars !== "undefined") {
             var ajax_url = ere_payment_vars.ajax_url;
             var processing_text = ere_payment_vars.processing_text;
@@ -67,7 +133,7 @@
                 });
             };
 
-            $('#ere_payment_package').on('click', function () {
+            $('#ere_payment_package').on('click', function (event) {
                 var payment_method = $("input[name='ere_payment_method']:checked").val();
                 var package_id = $("input[name='ere_package_id']").val();
                 if (payment_method == 'paypal') {

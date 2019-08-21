@@ -31,7 +31,6 @@ $user_twitter_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_twitter_url
 $user_linkedin_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_linkedin_url', $user_id);
 $user_pinterest_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_pinterest_url', $user_id);
 $user_instagram_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_instagram_url', $user_id);
-$user_googleplus_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_googleplus_url', $user_id);
 $user_youtube_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_youtube_url', $user_id);
 $user_vimeo_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_vimeo_url', $user_id);
 $user_skype = get_the_author_meta(ERE_METABOX_PREFIX . 'author_skype', $user_id);
@@ -80,13 +79,7 @@ if (!is_array($hide_user_info_fields)) {
                                 if (!$is_agent) {
                                     if ($user_as_agent == 1) {
                                         $become_agent_terms_condition = ere_get_option('become_agent_terms_condition');
-                                        $message = sprintf(wp_kses(__('If you want to become an agent, please read our <a class="accent-color" target="_blank" href="%s">Terms & Conditions</a> first', 'essential-real-estate'), array(
-                                            'a' => array(
-                                                'target' => array(),
-                                                'class' => array(),
-                                                'href' => array()
-                                            )
-                                        )), get_permalink($become_agent_terms_condition));
+                                        $message = sprintf(__('If you want to become an agent, please read our <a class="accent-color" target="_blank" href="%s">Terms & Conditions</a> first', 'essential-real-estate'), get_permalink($become_agent_terms_condition));
                                     }
                                 } else {
                                     $agent_id = get_the_author_meta(ERE_METABOX_PREFIX . 'author_agent_id', $user_id);
@@ -102,7 +95,7 @@ if (!is_array($hide_user_info_fields)) {
                                         <div class="jumbotron ere-account-agent">
                                             <h4><?php esc_html_e('Agent Account', 'essential-real-estate'); ?></h4>
 
-                                            <p><?php echo($message); ?></p>
+                                            <p><?php echo wp_kses_post($message); ?></p>
                                             <?php if (!$is_agent): ?>
                                                 <?php wp_nonce_field('ere_become_agent_ajax_nonce', 'ere_security_become_agent'); ?>
                                                 <button type="button" class="btn btn-primary"
@@ -297,7 +290,7 @@ if (!is_array($hide_user_info_fields)) {
                                         <label
                                             for="user_facebook_url"><?php esc_html_e('Facebook URL', 'essential-real-estate'); ?></label>
                                         <input type="text" id="user_facebook_url" name="user_facebook_url"
-                                               value="<?php echo esc_url($user_facebook_url); ?>" class="form-control">
+                                               value="<?php echo esc_attr($user_facebook_url); ?>" class="form-control">
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -308,7 +301,7 @@ if (!is_array($hide_user_info_fields)) {
                                             for="user_twitter_url"><?php esc_html_e('Twitter URL', 'essential-real-estate'); ?></label>
                                         <input type="text" id="user_twitter_url" name="user_twitter_url"
                                                class="form-control"
-                                               value="<?php echo esc_url($user_twitter_url); ?>">
+                                               value="<?php echo esc_attr($user_twitter_url); ?>">
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -319,7 +312,7 @@ if (!is_array($hide_user_info_fields)) {
                                             for="user_linkedin_url"><?php esc_html_e('Linkedin URL', 'essential-real-estate'); ?></label>
                                         <input type="text" id="user_linkedin_url" name="user_linkedin_url"
                                                class="form-control"
-                                               value="<?php echo esc_url($user_linkedin_url); ?>">
+                                               value="<?php echo esc_attr($user_linkedin_url); ?>">
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -330,7 +323,7 @@ if (!is_array($hide_user_info_fields)) {
                                             for="user_instagram_url"><?php esc_html_e('Instagram URL', 'essential-real-estate'); ?></label>
                                         <input type="text" id="user_instagram_url" name="user_instagram_url"
                                                class="form-control"
-                                               value="<?php echo esc_url($user_instagram_url); ?>">
+                                               value="<?php echo esc_attr($user_instagram_url); ?>">
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -341,18 +334,7 @@ if (!is_array($hide_user_info_fields)) {
                                             for="user_pinterest_url"><?php esc_html_e('Pinterest URL', 'essential-real-estate'); ?></label>
                                         <input type="text" id="user_pinterest_url" name="user_pinterest_url"
                                                class="form-control"
-                                               value="<?php echo esc_url($user_pinterest_url); ?>">
-                                    </div>
-                                </div>
-                            <?php endif; ?>
-                            <?php if (!in_array("user_googleplus_url", $hide_user_info_fields)): ?>
-                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label
-                                            for="user_googleplus_url"><?php esc_html_e('Google Plus URL', 'essential-real-estate'); ?></label>
-                                        <input type="text" id="user_googleplus_url" name="user_googleplus_url"
-                                               class="form-control"
-                                               value="<?php echo esc_url($user_googleplus_url); ?>">
+                                               value="<?php echo esc_attr($user_pinterest_url); ?>">
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -363,7 +345,7 @@ if (!is_array($hide_user_info_fields)) {
                                             for="user_youtube_url"><?php esc_html_e('Youtube URL', 'essential-real-estate'); ?></label>
                                         <input type="text" id="user_youtube_url" name="user_youtube_url"
                                                class="form-control"
-                                               value="<?php echo esc_url($user_youtube_url); ?>">
+                                               value="<?php echo esc_attr($user_youtube_url); ?>">
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -374,7 +356,7 @@ if (!is_array($hide_user_info_fields)) {
                                             for="user_vimeo_url"><?php esc_html_e('Vimeo URL', 'essential-real-estate'); ?></label>
                                         <input type="text" id="user_vimeo_url" name="user_vimeo_url"
                                                class="form-control"
-                                               value="<?php echo esc_url($user_vimeo_url); ?>">
+                                               value="<?php echo esc_attr($user_vimeo_url); ?>">
                                     </div>
                                 </div>
                             <?php endif; ?>

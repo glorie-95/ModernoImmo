@@ -41,12 +41,12 @@ if ( !is_null( $get_comments )) {
                         <span class="label"><?php echo esc_html($i); ?></span>
                             <span class="item-list">
                                 <?php if ( $total_reviews > 0 ) { ?>
-                                    <span style="width: <?php echo ($agent_rating[$i] > 0 && $total_reviews > 0 ? (round(( $agent_rating[$i] / $total_reviews ) * 100, 2)) : 0); ?>%"></span>
+                                    <span style="width: <?php echo esc_attr($agent_rating[$i] > 0 && $total_reviews > 0 ? (round(( $agent_rating[$i] / $total_reviews ) * 100, 2)) : 0); ?>%"></span>
                                 <?php } else { ?>
                                     <span style="width: 0%"></span>
                                 <?php } ?>
                             </span>
-                        <span class="label"><?php echo (isset($agent_rating[$i]) && $agent_rating[$i] > 0 && $total_reviews > 0 ? (round(( $agent_rating[$i] / $total_reviews ) * 100, 2)) : 0); ?>%</span>
+                        <span class="label"><?php echo esc_html(isset($agent_rating[$i]) && $agent_rating[$i] > 0 && $total_reviews > 0 ? (round(( $agent_rating[$i] / $total_reviews ) * 100, 2)) : 0); ?>%</span>
                     </li>
                 <?php endfor;?>
             </ul>
@@ -132,7 +132,7 @@ if ( !is_null( $get_comments )) {
                         <input id="agent_rating" name="rating" value="5" type="text" data-size="md" class="rating ere-rating">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" rows="5" name="message" placeholder="<?php esc_html_e('Your review', 'essential-real-estate'); ?>"></textarea>
+                        <textarea class="form-control" rows="5" name="message" placeholder="<?php esc_attr_e('Your review', 'essential-real-estate'); ?>"></textarea>
                     </div>
                     <button type="submit" class="ere-submit-agent-rating btn btn-default"><?php esc_html_e('Submit Review', 'essential-real-estate'); ?></button>
                     <?php wp_nonce_field('ere_submit_review_ajax_nonce', 'ere_security_submit_review'); ?>
@@ -148,7 +148,7 @@ if ( !is_null( $get_comments )) {
                         <input id="agent_rating" name="rating" value="<?php echo esc_attr($my_review->meta_value); ?>" type="text" data-size="md" class="rating ere-rating">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" rows="5" name="message" placeholder="<?php esc_html_e('Your review', 'essential-real-estate'); ?>"><?php echo esc_html($my_review->comment_content); ?></textarea>
+                        <textarea class="form-control" rows="5" name="message" placeholder="<?php esc_attr_e('Your review', 'essential-real-estate'); ?>"><?php echo esc_html($my_review->comment_content); ?></textarea>
                     </div>
                     <button type="submit" class="ere-submit-agent-rating btn btn-default"><?php esc_html_e('Update Review', 'essential-real-estate'); ?></button>
                     <?php wp_nonce_field('ere_submit_review_ajax_nonce', 'ere_security_submit_review'); ?>

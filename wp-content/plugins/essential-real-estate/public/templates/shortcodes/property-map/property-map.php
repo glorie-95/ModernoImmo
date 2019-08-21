@@ -151,7 +151,7 @@ if (!empty($icon)) {
             }
         });
         google.maps.event.addListener(marker, 'click', function () {
-            infobox.setContent('<?php echo $html_content;?>');
+            infobox.setContent('<?php echo esc_js($html_content);?>');
             infobox.open(map, this);
         });
         <?php endif; ?>

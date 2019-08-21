@@ -49,12 +49,12 @@ if (!class_exists('GSF_Field_Image')) {
 				       value="<?php echo esc_attr($field_value['id']); ?>"/>
 				<div class="gsf-image-preview">
 					<div class="centered">
-						<img src="<?php echo esc_url($thumb_url); ?>" alt="" style="<?php echo esc_attr(empty($thumb_url) ? 'display:none' : '') ?>"/>
+						<img src="<?php echo esc_url($thumb_url); ?>" style="<?php echo esc_attr(empty($thumb_url) ? 'display:none' : '') ?>"/>
 					</div>
 				</div>
 				<div class="gsf-image-info">
 					<input data-field-control="" type="text"
-					       class="gsf-image-url" placeholder="<?php esc_html_e('No image', 'smart-framework'); ?>"
+					       class="gsf-image-url" placeholder="<?php esc_attr_e('No image', 'smart-framework'); ?>"
 					       name="<?php echo esc_attr($this->get_name()) ?>[url]"
 					       value="<?php echo esc_url($field_value['url']); ?>"/>
 					<button type="button" class="button gsf-image-choose-image"><?php esc_html_e('Choose Image', 'smart-framework'); ?></button>

@@ -27,7 +27,7 @@ if (!class_exists('ERE_Form_Edit_Property')) {
 		 */
 		public function __construct()
 		{
-			$this->property_id = !empty($_REQUEST['property_id']) ? absint($_REQUEST['property_id']) : 0;
+			$this->property_id = !empty($_REQUEST['property_id']) ? absint(wp_unslash($_REQUEST['property_id'])) : 0;
 			$ere_property = new ERE_Property();
 			if (!$ere_property->user_can_edit_property($this->property_id)) {
 				$this->property_id = 0;
@@ -74,7 +74,7 @@ if (!class_exists('ERE_Form_Edit_Property')) {
 				return;
 			}
 			try {
-				if (wp_verify_nonce($_POST['ere_submit_property_nonce_field'], 'ere_submit_property_action')) {
+				if (wp_verify_nonce(ere_clean(wp_unslash($_POST['ere_submit_property_nonce_field'])) , 'ere_submit_property_action')) {
 					$property_id = apply_filters('ere_submit_property', array());
 					if($property_id<1 || is_null($property_id))
 					{

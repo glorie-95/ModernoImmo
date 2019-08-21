@@ -507,11 +507,8 @@
 
 .single-property-area .contact-agent .agent-contact-btn {
 	-webkit-border-radius: 0;
-	-webkit-background-clip: padding-box;
 	-moz-border-radius: 0;
-	-moz-background-clip: padding;
 	border-radius: 0;
-	background-clip: padding-box;
 }
 
 .single-property-area #comments {

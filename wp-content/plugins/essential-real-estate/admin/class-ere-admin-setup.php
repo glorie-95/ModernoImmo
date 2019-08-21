@@ -73,7 +73,7 @@ if (!class_exists('ERE_Admin_Setup')) {
                     <?php esc_html_e( 'Essential Real Estate is a latest plugins of Real Estate you want. Completely all features, easy customize and override layout, functions. Supported global payment, build market, single, list propery, single agent...etc. All fields are defined dynamic, they will help you can build any kind of Real Estate website.', 'essential-real-estate' ) ?>
                 </div>
                 <div class="ere-badge">
-                    <img src="<?php echo ERE_PLUGIN_URL.'admin/assets/images/logo.png'; ?>" title="<?php esc_html_e('Logo', 'essential-real-estate' ) ?>">
+                    <img src="<?php echo ERE_PLUGIN_URL.'admin/assets/images/logo.png'; ?>" title="<?php esc_attr_e('Logo', 'essential-real-estate' ) ?>">
                 </div>
                 <a href="<?php echo admin_url( 'admin.php?page=ere_setup' )?>"
                    class="button button-primary"><?php esc_html_e( 'Setup page', 'essential-real-estate' ) ?></a>
@@ -149,10 +149,10 @@ if (!class_exists('ERE_Admin_Setup')) {
          */
         public function setup_page()
         {
-            $step = !empty($_GET['step']) ? absint($_GET['step']) : 1;
+            $step = !empty($_GET['step']) ? absint(wp_unslash($_GET['step'])) : 1;
             if (3 === $step && !empty($_POST)) {
-                $create_pages = isset($_POST['ere-create-page']) ? $_POST['ere-create-page'] : array();
-                $page_titles = isset($_POST['ere-page-title']) ? $_POST['ere-page-title'] : array();
+                $create_pages = isset($_POST['ere-create-page']) ? ere_clean(wp_unslash($_POST['ere-create-page']))  : array();
+                $page_titles = isset($_POST['ere-page-title']) ? ere_clean(wp_unslash($_POST['ere-page-title']))  : array();
                 $pages_to_create = array(
                     'submit_property' => '[ere_submit_property]',
                     'my_properties' => '[ere_my_properties]',

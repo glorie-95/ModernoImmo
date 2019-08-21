@@ -60,7 +60,7 @@ $my_invoices_columns = apply_filters('ere_my_invoices_columns', array(
                                        for="start_date"><?php esc_html_e('Start Date', 'essential-real-estate'); ?></label>
                                 <input type="text" id="start_date" value="<?php echo esc_attr($start_date); ?>"
                                        name="start_date"
-                                       placeholder="<?php esc_html_e('Start Date', 'essential-real-estate'); ?>"
+                                       placeholder="<?php esc_attr_e('Start Date', 'essential-real-estate'); ?>"
                                        class="form-control input_date">
                             </div>
                         </div>
@@ -70,7 +70,7 @@ $my_invoices_columns = apply_filters('ere_my_invoices_columns', array(
                                        for="end_date"><?php esc_html_e('End Date', 'essential-real-estate'); ?></label>
                                 <input type="text" id="end_date" value="<?php echo esc_attr($end_date); ?>"
                                        name="end_date"
-                                       placeholder="<?php esc_html_e('End Date', 'essential-real-estate'); ?>"
+                                       placeholder="<?php esc_attr_e('End Date', 'essential-real-estate'); ?>"
                                        class="form-control input_date">
                             </div>
                         </div>
@@ -109,7 +109,7 @@ $my_invoices_columns = apply_filters('ere_my_invoices_columns', array(
                         <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <input id="search_invoice" type="submit" class="btn btn-default display-block"
-                                       value="<?php esc_html_e('Search', 'essential-real-estate'); ?>">
+                                       value="<?php esc_attr_e('Search', 'essential-real-estate'); ?>">
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ $my_invoices_columns = apply_filters('ere_my_invoices_columns', array(
                         <tbody>
                         <?php if (!$invoices) : ?>
                             <tr>
-                                <td colspan="7" data-title="<?php esc_html_e('Results', 'essential-real-estate'); ?>"><?php esc_html_e('You don\'t have any invoices listed.', 'essential-real-estate'); ?></td>
+                                <td colspan="7" data-title="<?php esc_attr_e('Results', 'essential-real-estate'); ?>"><?php esc_html_e('You don\'t have any invoices listed.', 'essential-real-estate'); ?></td>
                             </tr>
                         <?php else : ?>
                             <?php foreach ($invoices as $invoice) :
@@ -158,7 +158,7 @@ $my_invoices_columns = apply_filters('ere_my_invoices_columns', array(
                                             elseif ('view' === $key):?>
                                                 <a class="btn-action" data-toggle="tooltip"
                                                    data-placement="bottom"
-                                                   title="<?php esc_html_e('Print Invoice', 'essential-real-estate'); ?>"
+                                                   title="<?php esc_attr_e('Print Invoice', 'essential-real-estate'); ?>"
                                                    href="<?php echo get_permalink($invoice->ID); ?>"><i
                                                         class="fa fa-print"></i></a>
                                             <?php endif; ?>
@@ -174,7 +174,7 @@ $my_invoices_columns = apply_filters('ere_my_invoices_columns', array(
                 <script>
                     jQuery(document).ready(function ($) {
                         if ($('.input_date').length > 0) {
-                            $(".input_date").datepicker(["<?php echo esc_html($ere_date_language); ?>"]);
+                            $(".input_date").datepicker(["<?php echo esc_js($ere_date_language); ?>"]);
                         }
                     });
                 </script>

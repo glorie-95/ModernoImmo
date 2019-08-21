@@ -50,7 +50,6 @@ if (!class_exists('ERE_Updater')) {
 				$wpdb->query( "UPDATE {$wpdb->termmeta} tm SET tm.meta_key ='agency_vimeo_url' WHERE tm.meta_key ='agencies_vimeo_url';" );
 				$wpdb->query( "UPDATE {$wpdb->termmeta} tm SET tm.meta_key ='agency_facebook_url' WHERE tm.meta_key ='agencies_facebook_url';" );
 				$wpdb->query( "UPDATE {$wpdb->termmeta} tm SET tm.meta_key ='agency_twitter_url' WHERE tm.meta_key ='agencies_twitter_url';" );
-				$wpdb->query( "UPDATE {$wpdb->termmeta} tm SET tm.meta_key ='agency_googleplus_url' WHERE tm.meta_key ='agencies_googleplus_url';" );
 				$wpdb->query( "UPDATE {$wpdb->termmeta} tm SET tm.meta_key ='agency_linkedin_url' WHERE tm.meta_key ='agencies_linkedin_url';" );
 				$wpdb->query( "UPDATE {$wpdb->termmeta} tm SET tm.meta_key ='agency_pinterest_url' WHERE tm.meta_key ='agencies_pinterest_url';" );
 				$wpdb->query( "UPDATE {$wpdb->termmeta} tm SET tm.meta_key ='agency_instagram_url' WHERE tm.meta_key ='agencies_instagram_url';" );

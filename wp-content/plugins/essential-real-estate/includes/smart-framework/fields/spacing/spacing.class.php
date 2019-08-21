@@ -47,28 +47,28 @@ if (!class_exists('GSF_Field_Spacing')) {
 				<?php if ($is_left): ?>
 					<div class="gsf-spacing-item">
 						<div class="dashicons dashicons-arrow-left-alt"></div>
-						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_html_e('Left','smart-framework'); ?>"
+						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_attr_e('Left','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[left]" value="<?php echo esc_attr($field_value['left']); ?>"/>
 					</div>
 				<?php endif;?>
 				<?php if ($is_right): ?>
 					<div class="gsf-spacing-item">
 						<div class="dashicons dashicons-arrow-right-alt"></div>
-						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_html_e('Right','smart-framework'); ?>"
+						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_attr_e('Right','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[right]" value="<?php echo esc_attr($field_value['right']); ?>"/>
 					</div>
 				<?php endif;?>
 				<?php if ($is_top): ?>
 					<div class="gsf-spacing-item">
 						<div class="dashicons dashicons-arrow-up-alt"></div>
-						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_html_e('Top','smart-framework'); ?>"
+						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_attr_e('Top','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[top]" value="<?php echo esc_attr($field_value['top']); ?>"/>
 					</div>
 				<?php endif;?>
 				<?php if ($is_bottom): ?>
 					<div class="gsf-spacing-item">
 						<div class="dashicons dashicons-arrow-down-alt"></div>
-						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_html_e('Bottom','smart-framework'); ?>"
+						<input data-field-control="" class="gsf-spacing" type="number" placeholder="<?php esc_attr_e('Bottom','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[bottom]" value="<?php echo esc_attr($field_value['bottom']); ?>"/>
 					</div>
 				<?php endif;?>

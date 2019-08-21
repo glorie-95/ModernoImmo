@@ -14,7 +14,7 @@ if (!class_exists('GSF_Field_Repeater')) {
 			$wrapper_class .= ' ' . esc_attr($this->get_layout());
 			$field_id = $this->get_id();
 			?>
-			<div <?php echo (!empty($field_id) ? 'id="' . $field_id . '"' : ''); ?> class="<?php echo ($wrapper_class); ?>" <?php $this->the_required(); ?>>
+			<div <?php echo (!empty($field_id) ? 'id="' . $field_id . '"' : ''); ?> class="<?php echo esc_attr($wrapper_class); ?>" <?php $this->the_required(); ?>>
 				<?php $this->html_label(); ?>
 			<?php
 		}
@@ -42,7 +42,7 @@ if (!class_exists('GSF_Field_Repeater')) {
 					$col = isset($this->params['col']) ? $this->params['col'] : 12;
 					$col = isset($field['col']) ? $field['col'] : $col;
 					?>
-					<div class="gsf-col gsf-col-<?php echo ($col); ?>">
+					<div class="gsf-col gsf-col-<?php echo esc_attr($col); ?>">
 						<p class="gsf-desc"><?php echo (isset($field['desc']) ? $field['desc'] : ''); ?></p>
 					</div>
 				<?php endforeach;?>
@@ -58,7 +58,7 @@ if (!class_exists('GSF_Field_Repeater')) {
 						$col = isset($this->params['col']) ? $this->params['col'] : 12;
 						$col = isset($field['col']) ? $field['col'] : $col;
 					?>
-					<div class="gsf-col gsf-col-<?php echo ($col); ?>">
+					<div class="gsf-col gsf-col-<?php echo esc_attr($col); ?>">
 						<label class="gsf-label"><?php echo (isset($field['title']) ? $field['title'] : ''); ?></label>
 					</div>
 				<?php endforeach;?>

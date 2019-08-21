@@ -574,7 +574,7 @@ if (!class_exists('ERE_Admin_Setup_Metaboxes')) {
                 update_post_meta($post_id, ERE_METABOX_PREFIX . 'property_price', $property_price);
             }
             if (isset($_POST['ere']['ere_property_country'])) {
-                $country=$_POST['ere']['ere_property_country'];
+                $country= ere_clean(wp_unslash($_POST['ere']['ere_property_country']))  ;
                 update_post_meta($post_id, ERE_METABOX_PREFIX . 'property_country', $country);
             }
             return true;
@@ -613,12 +613,12 @@ if (!class_exists('ERE_Admin_Setup_Metaboxes')) {
         {
             $payment_status = get_post_meta($object->ID, ERE_METABOX_PREFIX . 'payment_status', true);
             if ($payment_status == 'paid') {
-                echo __('Payment Status: <span class="ere-label-blue">Paid</span>', 'essential-real-estate');
+                echo wp_kses_post(__('Payment Status: <span class="ere-label-blue">Paid</span>', 'essential-real-estate'));
             } else {
                 $price_per_listing = ere_get_option('price_per_listing',0);
                 if($price_per_listing>0)
                 {
-                    echo __('Payment Status: <span class="ere-label-red">Not Paid</span>', 'essential-real-estate');
+                    echo wp_kses_post(__('Payment Status: <span class="ere-label-red">Not Paid</span>', 'essential-real-estate'));
                 }
             }
             ?>

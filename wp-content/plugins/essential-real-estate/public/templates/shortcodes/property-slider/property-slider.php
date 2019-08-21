@@ -22,7 +22,6 @@ extract( shortcode_atts( array(
 	'image_size'        => '1200x600',
 	'el_class'          => ''
 ), $atts ) );
-
 $property_item_class         = array( 'property-item' );
 $property_content_class      = array( 'property-content' );
 $property_content_attributes = array();

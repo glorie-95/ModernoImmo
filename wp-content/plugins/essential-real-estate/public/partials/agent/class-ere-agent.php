@@ -18,8 +18,8 @@ if (!class_exists('ERE_Agent')) {
             wp_get_current_user();
             $user_id = $current_user->ID;
             $user = get_user_by('id', $user_id);
-            $agent_id = $_POST['agent_id'];
-            $rating_value = $_POST['rating'];
+            $agent_id = isset($_POST['agent_id']) ? absint(wp_unslash($_POST['agent_id'])) : -1;
+            $rating_value = isset($_POST['rating']) ? ere_clean(wp_unslash($_POST['rating'])) : '';
             $my_review = $wpdb->get_row("SELECT * FROM $wpdb->comments as comment INNER JOIN $wpdb->commentmeta AS meta WHERE comment.comment_post_ID = $agent_id AND comment.user_id = $user_id  AND meta.meta_key = 'agent_rating' AND meta.comment_id = comment.comment_ID ORDER BY comment.comment_ID DESC");
             $comment_approved = 1;
             $auto_publish_review_agent = ere_get_option( 'review_agent_approved_by_admin',0 );
@@ -30,7 +30,7 @@ if (!class_exists('ERE_Agent')) {
                 $data = Array();
                 $user = $user->data;
                 $data['comment_post_ID'] = $agent_id;
-                $data['comment_content'] = $_POST['message'];
+                $data['comment_content'] = isset($_POST['message']) ? wp_filter_post_kses($_POST['message']) : '';
                 $data['comment_date'] = current_time('mysql');
                 $data['comment_approved'] = $comment_approved;
                 $data['comment_author'] = $user->user_login;
@@ -47,7 +47,7 @@ if (!class_exists('ERE_Agent')) {
                 $data = Array();
                 $data['comment_ID'] = $my_review->comment_ID;
                 $data['comment_post_ID'] = $agent_id;
-                $data['comment_content'] = $_POST['message'];
+                $data['comment_content'] = isset($_POST['message']) ? wp_filter_post_kses($_POST['message']) : '';
                 $data['comment_date'] = current_time('mysql');
                 $data['comment_approved'] = $comment_approved;
 
@@ -70,7 +70,7 @@ if (!class_exists('ERE_Agent')) {
         {
             $agent_rating = get_post_meta($agent_id, ERE_METABOX_PREFIX . 'agent_rating', true);
             if ($comment_exist == true) {
-                echo $old_rating_value;
+                echo esc_html($old_rating_value);
                 if (!empty($agent_rating)) {
                     $agent_rating[$rating_value]++;
                 } else {

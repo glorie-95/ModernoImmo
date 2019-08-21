@@ -46,13 +46,13 @@ if (!is_null($get_comments)) {
                             <span class="item-list">
                                 <?php if ($total_reviews > 0) { ?>
                                     <span
-                                        style="width: <?php echo($property_rating[$i] > 0 && $total_reviews > 0 ? (round(($property_rating[$i] / $total_reviews) * 100, 2)) : 0); ?>%"></span>
+                                        style="width: <?php echo esc_attr($property_rating[$i] > 0 && $total_reviews > 0 ? (round(($property_rating[$i] / $total_reviews) * 100, 2)) : 0) ; ?>%"></span>
                                 <?php } else { ?>
                                     <span style="width: 0%"></span>
                                 <?php } ?>
                             </span>
                             <span
-                                class="label"><?php echo(isset($property_rating[$i]) && $property_rating[$i] > 0 && $total_reviews > 0 ? (round(($property_rating[$i] / $total_reviews) * 100, 2)) : 0); ?>
+                                class="label"><?php echo esc_attr(isset($property_rating[$i]) && $property_rating[$i] > 0 && $total_reviews > 0 ? (round(($property_rating[$i] / $total_reviews) * 100, 2)) : 0); ?>
                                 %</span>
                         </li>
                     <?php endfor; ?>
@@ -150,7 +150,7 @@ if (!is_null($get_comments)) {
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" rows="5" name="message"
-                                      placeholder="<?php esc_html_e('Your review', 'essential-real-estate'); ?>"></textarea>
+                                      placeholder="<?php esc_attr_e('Your review', 'essential-real-estate'); ?>"></textarea>
                         </div>
                         <button type="submit"
                                 class="ere-submit-property-rating btn btn-default"><?php esc_html_e('Submit Review', 'essential-real-estate'); ?></button>
@@ -171,7 +171,7 @@ if (!is_null($get_comments)) {
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" rows="5" name="message"
-                                      placeholder="<?php esc_html_e('Your review', 'essential-real-estate'); ?>"><?php echo esc_html($my_review->comment_content); ?></textarea>
+                                      placeholder="<?php esc_attr_e('Your review', 'essential-real-estate'); ?>"><?php echo esc_html($my_review->comment_content); ?></textarea>
                         </div>
                         <button type="submit"
                                 class="ere-submit-property-rating btn btn-default"><?php esc_html_e('Update Review', 'essential-real-estate'); ?></button>

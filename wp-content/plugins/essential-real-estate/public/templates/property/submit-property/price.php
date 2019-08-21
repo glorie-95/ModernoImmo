@@ -27,7 +27,7 @@ global $hide_property_fields;
             <div class="<?php echo esc_attr($price_short_class); ?>">
                 <div class="form-group">
                     <label for="property_price_short"> <?php esc_html_e( 'Price', 'essential-real-estate' ); echo ere_required_field( 'property_price' );
-                        print esc_html(ere_get_option('currency_sign', '')) . ' ';?>  </label>
+                        echo esc_html(ere_get_option('currency_sign', '')) . ' ';?>  </label>
                     <input type="number" id="property_price_short" class="form-control" name="property_price_short" value="">
                 </div>
             </div>

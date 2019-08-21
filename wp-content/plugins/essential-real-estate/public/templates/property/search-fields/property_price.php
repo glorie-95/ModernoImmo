@@ -81,7 +81,7 @@ if ($property_price_slider_search_field != '') {
     }
     ?>
     <div class="<?php echo esc_attr($css_class_half_field); ?> form-group">
-        <select name="min-price" title="<?php esc_html_e('Min Price', 'essential-real-estate') ?>"
+        <select name="min-price" title="<?php esc_attr_e('Min Price', 'essential-real-estate') ?>"
                 class="search-field form-control" data-default-value="">
             <option value="">
                 <?php esc_html_e('Min Price', 'essential-real-estate') ?>
@@ -102,7 +102,7 @@ if ($property_price_slider_search_field != '') {
         </select>
     </div>
     <div class="<?php echo esc_attr($css_class_half_field); ?> form-group">
-        <select name="max-price" title="<?php esc_html_e('Max Price', 'essential-real-estate') ?>"
+        <select name="max-price" title="<?php esc_attr_e('Max Price', 'essential-real-estate') ?>"
                 class="search-field form-control" data-default-value="">
             <option value="">
                 <?php esc_html_e('Max Price', 'essential-real-estate') ?>

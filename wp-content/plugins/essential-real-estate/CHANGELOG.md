@@ -1,5 +1,31 @@
 Changelog
 =========
+
+#### 1.7.8 - July 19, 2019
+** Fix: error save "Additional Fields" in options
+
+#### 1.7.7 - July 11, 2019
+** Fix: error upload file
+
+#### 1.7.6 - July 09, 2019
+** Fix: payment with paypal method
+
+#### 1.7.5 - July 09, 2019
+** Fix: error edit property
+
+#### 1.7.4 - July 09, 2019
+** Fix: error get ajax Province / State, City / Town, Neighborhood
+** Update: Remove google plus social
+#### 1.7.3 - July 04, 2019
+** Update bootstrap to version 3.4.1
+#### 1.7.2 - July 03, 2019
+** Fix: Reflected XSS
+** Fix: Payment Stripe
+** Fix: Remove CURL code
+** Fix: Remove javascript jquery-ui
+** Update: javascript isotope to version 3.0.6
+#### 1.7.1 - June 29, 2019
+** Fix: Reflected XSS
 #### 1.7.0 - April 1, 2019
 ** Fix: Email content, agency description, thankyou page content... not respecting line break
 ** New: Allow to Input and Display Wire Transfer payment Information

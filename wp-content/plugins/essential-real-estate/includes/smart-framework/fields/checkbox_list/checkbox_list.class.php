@@ -39,7 +39,7 @@ if (!class_exists('GSF_Field_Checkbox_List')) {
 				$field_value = (array)$field_value;
 			}
 			?>
-			<div class="gsf-field-checkbox_list-inner <?php echo ($value_inline ? 'value-inline' : ''); ?>">
+			<div class="gsf-field-checkbox_list-inner <?php echo esc_attr($value_inline ? 'value-inline' : ''); ?>">
 				<?php foreach ($this->params['options'] as $key => $value): ?>
 					<label>
 						<input data-field-control="" class="gsf-checkbox_list" type="checkbox" name="<?php echo esc_attr($this->get_name()) ?>[]" value="<?php echo esc_attr($key); ?>" <?php echo (in_array($key, $field_value) ? ' checked="checked"' :''); ?>/>

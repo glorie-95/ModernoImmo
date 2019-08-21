@@ -12,11 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="<?php echo esc_attr($css_class_field); ?> form-group">
-    <select name="label" title="<?php esc_html_e('Property Label', 'essential-real-estate') ?>"
+    <select name="label" title="<?php esc_attr_e('Property Label', 'essential-real-estate') ?>"
             class="search-field form-control" data-default-value="">
         <?php ere_get_taxonomy_slug('property-label', $request_label); ?>
         <option
-            value="" <?php if (empty($request_label)) echo esc_attr('selected'); ?>>
+            value="" <?php if (empty($request_label)) echo 'selected'; ?>>
             <?php esc_html_e('All Labels', 'essential-real-estate') ?></option>
     </select>
 </div>

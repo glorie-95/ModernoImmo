@@ -1,0 +1,24 @@
+
+li#customize-control-blogpage_sidebar, li#customize-control-blogpage_layout, li#customize-control-header_layout, li#customize-control-prealoader_on_off, li#customize-control-prealoader_image {
+    cursor: not-allowed;
+    position: relative;
+}
+
+li#customize-control-blogpage_sidebar *, li#customize-control-blogpage_layout *, li#customize-control-header_layout *, li#customize-control-prealoader_on_off *, li#customize-control-prealoader_image * {
+    cursor: not-allowed;
+}
+
+li#customize-control-blogpage_sidebar:before, li#customize-control-blogpage_layout:before, li#customize-control-header_layout:before, li#customize-control-prealoader_on_off:before, li#customize-control-prealoader_image:before {
+   position: absolute;
+    width: 110%;
+    height: 100%;
+    top: 0;
+    left: -10px;
+    background: rgba(221, 221, 221, 0);
+    content: "Buy Pro Version";
+    z-index: 5;
+    text-align: center;
+    line-height: 90px;
+    font-weight: 700;
+    font-size: 30px;
+}

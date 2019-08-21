@@ -15,20 +15,20 @@ do_action('ere_property_submitted_content_before', sanitize_title($property->pos
                 case 'publish' :
                     if($action=='new')
                     {
-                        printf(__('<strong>Success!</strong> Your property was submitted successfully. To view your property listing <a class="accent-color" href="%s">click here</a>.', 'essential-real-estate'), get_permalink($property->ID));
+                        printf(wp_kses_post(__('<strong>Success!</strong> Your property was submitted successfully. To view your property listing <a class="accent-color" href="%s">click here</a>.', 'essential-real-estate')), get_permalink($property->ID));
                     }
                     else
                     {
-                        printf(__('<strong>Success!</strong> Your changes have been saved. To view your property listing <a class="accent-color" href="%s">click here</a>.', 'essential-real-estate'), get_permalink($property->ID));
+                        printf(wp_kses_post(__('<strong>Success!</strong> Your changes have been saved. To view your property listing <a class="accent-color" href="%s">click here</a>.', 'essential-real-estate')), get_permalink($property->ID));
                     }
                     break;
                 case 'pending' :
                     if($action=='new')
                     {
-                        printf(__('<strong>Success!</strong> Your property was submitted successfully. Once approved, your listing will be visible on the site.', 'essential-real-estate'), get_permalink($property->ID));
+                        printf(wp_kses_post(__('<strong>Success!</strong> Your property was submitted successfully. Once approved, your listing will be visible on the site.', 'essential-real-estate')), get_permalink($property->ID));
                     }
                     else{
-                        printf('<strong>Success!</strong> Your changes have been saved. Once approved, your listing will be visible on the site.', 'essential-real-estate');
+                        echo  wp_kses_post(__('<strong>Success!</strong> Your changes have been saved. Once approved, your listing will be visible on the site.', 'essential-real-estate'));
                     }
                     break;
                 default :

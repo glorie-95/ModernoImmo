@@ -40,7 +40,7 @@ $map_id = 'map-' . uniqid();
         </div>
         <div class="ere-directions">
             <input id="directions-input" class="controls" type="text"
-                   placeholder="<?php esc_html_e('Enter a location', 'essential-real-estate'); ?>">
+                   placeholder="<?php esc_attr_e('Enter a location', 'essential-real-estate'); ?>">
             <button type="button" id="get-direction"><i class="fa fa-search"></i></button>
             <p id="total"></p>
         </div>

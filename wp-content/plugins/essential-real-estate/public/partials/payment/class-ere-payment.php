@@ -50,24 +50,29 @@ if (!class_exists('ERE_Payment')) {
             $package_price = $package_price * 100;
             $payment_completed_link = ere_get_permalink('payment_completed');
             $stripe_processor_link = add_query_arg(array('payment_method' => 2), $payment_completed_link);
-            print '<form action="' . $stripe_processor_link . '" method="post" id="ere_stripe_per_package">
-            <div class="ere_stripe_per_package ere_payment_stripe" id="' . sanitize_title($package_name) . '">
-                <script src="https://checkout.stripe.com/checkout.js" id="stripe_script"
-                class="stripe-button"
-                data-key="' . $stripe_publishable_key . '"
-                data-amount="' . $package_price . '"
-                data-email="' . $user_email . '"
-                data-currency="' . $currency_code . '"
-                data-zip-code="true"
-                data-billing-address="true"
-                data-label="' . __('Pay with Credit Card', 'essential-real-estate') . '"
-                data-description="' . $package_name . ' ' . __('Package Payment', 'essential-real-estate') . '">
-                </script>
-            </div>
-            <input type="hidden" id="package_id" name="package_id" value="' . $package_id . '">
-            <input type="hidden" name="user_id" value="' . $user_id . '">
-            <input type="hidden" id="payment_money" name="payment_money" value="' . $package_price . '">
-            </form>';
+            wp_enqueue_script('stripe-checkout');
+            wp_localize_script('stripe-checkout','ere_stripe_vars',array(
+                 'ere_stripe_per_package' => array(
+                     'key' => $stripe_publishable_key,
+                     'params' => array(
+                         'amount' => $package_price,
+                         'email' => $user_email,
+                         'currency' => $currency_code,
+                         'zipCode' => true,
+                         'billingAddress' => true,
+                         'name' => esc_html__( 'Pay with Credit Card', 'essential-real-estate' ),
+                         'description' => wp_kses_post(sprintf(__('%s Package Payment', 'essential-real-estate'),$package_name))
+                     )
+                 )
+            ));
+            ?>
+            <form class="ere-stripe-form" action="<?php echo esc_url($stripe_processor_link)?>" method="post" id="ere_stripe_per_package">
+                <button class="ere-stripe-button" style="display: none !important;"></button>
+                <input type="hidden" id="package_id" name="package_id" value="<?php echo esc_attr($package_id)?>">
+                <input type="hidden" id="payment_money" name="payment_money" value="<?php echo esc_attr($package_price)?>">
+            </form>
+            <?php
+
         }
 
         /**
@@ -91,22 +96,33 @@ if (!class_exists('ERE_Payment')) {
             $user_id = $current_user->ID;
             $user_email = $current_user->user_email;
             $price_submission = $price_featured_submission * 100;
-            print '<div class="ere_stripe_upgrade_listing ere_payment_stripe">
-                <script src="https://checkout.stripe.com/checkout.js"
-                class="stripe-button"
-                data-key="' . $stripe_publishable_key . '"
-                data-amount="' . $price_submission . '"
-                data-email="' . $user_email . '"
-                data-zip-code="true"
-                data-currency="' . $currency_code . '"
-                data-label="' . esc_html__('Upgrade to Featured', 'essential-real-estate') . '"
-                data-description="' . esc_html__('Upgrade to Featured', 'essential-real-estate') . '">
-                </script>
-            </div>
-            <input type="hidden" id="property_id" name="property_id" value="' . $property_id . '">
-            <input type="hidden" id="payment_for" name="payment_for" value="3">
-            <input type="hidden" name="user_id" value="' . $user_id . '">
-            <input type="hidden" id="payment_money" name="payment_money" value="' . $price_submission . '">';
+
+            $payment_completed_link = ere_get_permalink('payment_completed');
+            $stripe_processor_link = add_query_arg(array('payment_method' => 2), $payment_completed_link);
+
+            wp_enqueue_script('stripe-checkout');
+            wp_localize_script('stripe-checkout','ere_stripe_vars',array(
+                'ere_stripe_upgrade_listing' => array(
+                    'key' => $stripe_publishable_key,
+                    'params' => array(
+                        'amount' => $price_submission,
+                        'email' => $user_email,
+                        'currency' => $currency_code,
+                        'zipCode' => true,
+                        'name' => esc_html__( 'Upgrade to Featured', 'essential-real-estate' ),
+                        'description' => esc_html__( 'Upgrade to Featured', 'essential-real-estate' )
+                    )
+                )
+            ));
+            ?>
+            <form class="ere-stripe-form" action="<?php echo esc_url($stripe_processor_link)?>" method="post" id="ere_stripe_upgrade_listing">
+                <button class="ere-stripe-button" style="display: none !important;"></button>
+                <input type="hidden" id="property_id" name="property_id" value="<?php echo esc_attr($property_id)?>">
+                <input type="hidden" id="payment_for" name="payment_for" value="3">
+                <input type="hidden" id="payment_money" name="payment_money" value="<?php echo esc_attr($price_submission)?>">
+            </form>
+            <?php
+
         }
 
         /**
@@ -133,97 +149,81 @@ if (!class_exists('ERE_Payment')) {
 
             $payment_completed_link = ere_get_permalink('payment_completed');
             $stripe_processor_link = add_query_arg(array('payment_method' => 2), $payment_completed_link);
-            print '<form action="' . $stripe_processor_link . '" method="post" id="ere_stripe_per_listing">
-            <div class="ere_stripe_per_listing ere_payment_stripe">
-                <script src="https://checkout.stripe.com/checkout.js"
-                class="stripe-button"
-                data-key="' . $stripe_publishable_key . '"
-                data-amount="' . $price_submission . '"
-                data-email="' . $user_email . '"
-                data-zip-code="true"
-                data-currency="' . $currency_code . '"
-                data-label="' . esc_html__('Submission Property', 'essential-real-estate') . '"
-                data-description="' . esc_html__('Submission Property', 'essential-real-estate') . '">
-                </script>
-            </div>
-            <input type="hidden" id="property_id" name="property_id" value="' . $property_id . '">
-            <input type="hidden" id="payment_for" name="payment_for" value="1">
-            <input type="hidden" name="user_id" value="' . $user_id . '">
-            <input type="hidden" id="payment_money" name="payment_money" value="' . $price_submission . '">
-             </form>';
-        }
 
-        /**
-         * Get paypal access token
-         * @param $url
-         * @param $postArgs
-         * @return mixed
-         */
-        private function get_paypal_access_token($url, $postArgs)
-        {
-            $client_id = ere_get_option('paypal_client_id');
-            $secret_key = ere_get_option('paypal_client_secret_key');
 
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_USERPWD, $client_id . ":" . $secret_key);
-            curl_setopt($curl, CURLOPT_HEADER, false);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $postArgs);
-            $response = curl_exec($curl);
-            if (empty($response)) {
-                die(curl_error($curl));
-                curl_close($curl);
-            } else {
-                $info = curl_getinfo($curl);
-                curl_close($curl);
-                if ($info['http_code'] != 200 && $info['http_code'] != 201) {
-                    echo "Received error: " . $info['http_code'] . "\n";
-                    echo "Raw response:" . $response . "\n";
-                    die();
-                }
-            }
-            $response = json_decode($response);
-            return $response->access_token;
-        }
-
-        /**
-         * Execute paypal request
-         * @param $url
-         * @param $jsonData
-         * @param $access_token
-         * @return array|mixed|object
-         */
-        private function execute_paypal_request($url, $jsonData, $access_token)
-        {
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($curl, CURLOPT_HEADER, false);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                'Authorization: Bearer ' . $access_token,
-                'Accept: application/json',
-                'Content-Type: application/json'
+            wp_enqueue_script('stripe-checkout');
+            wp_localize_script('stripe-checkout','ere_stripe_vars',array(
+                'ere_stripe_per_listing' => array(
+                    'key' => $stripe_publishable_key,
+                    'params' => array(
+                        'amount' => $price_submission,
+                        'email' => $user_email,
+                        'currency' => $currency_code,
+                        'zipCode' => true,
+                        'name' => esc_html__( 'Submission Property', 'essential-real-estate' ),
+                        'description' => esc_html__( 'Submission Property', 'essential-real-estate' )
+                    )
+                )
             ));
 
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $jsonData);
-            $response = curl_exec($curl);
-            if (empty($response)) {
-                die(curl_error($curl));
-                curl_close($curl);
-            } else {
-                $info = curl_getinfo($curl);
-                curl_close($curl);
-                if ($info['http_code'] != 200 && $info['http_code'] != 201) {
-                    echo "Received error: " . $info['http_code'] . "\n";
-                    echo "Raw response:" . $response . "\n";
-                    die();
-                }
+
+            ?>
+            <form class="ere-stripe-form" action="<?php echo esc_url($stripe_processor_link)?>" method="post" id="ere_stripe_per_listing">
+                <button class="ere-stripe-button" style="display: none !important;"></button>
+                <input type="hidden" id="property_id" name="property_id" value="<?php echo esc_attr($property_id) ?>">
+                <input type="hidden" id="payment_for" name="payment_for" value="1">
+                <input type="hidden" id="payment_money" name="payment_money" value="<?php echo esc_attr($price_submission)?>">
+            </form>
+            <?php
+        }
+
+
+        private function get_paypal_access_token()
+        {
+            $is_paypal_live = ere_get_option('paypal_api');
+            $host = 'https://api.sandbox.paypal.com';
+            if ($is_paypal_live == 'live') {
+                $host = 'https://api.paypal.com';
             }
-            $jsonResponse = json_decode($response, TRUE);
-            return $jsonResponse;
+            $url = $host . '/v1/oauth2/token';
+            $client_id = ere_get_option('paypal_client_id');
+            $secret_key = ere_get_option('paypal_client_secret_key');
+            $auth = base64_encode( $client_id . ':' . $secret_key );
+            $response = wp_remote_post($url,array(
+                'sslverify' => false,
+                'headers' => array(
+                    'Authorization' => "Basic {$auth}"
+                ),
+                'body' => 'grant_type=client_credentials'
+            ));
+            $status = wp_remote_retrieve_response_code($response);
+            if ($status === 200 || $status === 201) {
+                $content = json_decode(wp_remote_retrieve_body($response));
+                return $content->access_token;
+            }
+            return wp_remote_retrieve_response_message($response);
+        }
+
+
+
+        private function execute_paypal_request($url, $jsonData, $access_token)
+        {
+
+            $response = wp_remote_post($url,array(
+                'sslverify' => false,
+                'headers' => array(
+                     'Authorization' => "Bearer {$access_token}",
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json'
+                ),
+                'body' => $jsonData
+            ));
+            $status = wp_remote_retrieve_response_code($response);
+            if ($status === 200 || $status === 201) {
+                $content = json_decode(wp_remote_retrieve_body($response),true);
+                return $content;
+            }
+            return wp_remote_retrieve_response_message($response);
         }
 
         /**
@@ -233,11 +233,9 @@ if (!class_exists('ERE_Payment')) {
         {
             check_ajax_referer('ere_payment_ajax_nonce', 'ere_security_payment');
             global $current_user;
-            $property_id = $_POST['property_id'];
-            $property_id = intval($property_id);
+            $property_id = isset($_POST['property_id']) ? absint(wp_unslash($_POST['property_id'])) : 0;
 
-            $payment_for = $_POST['payment_for'];
-            $payment_for = intval($payment_for);
+            $payment_for = isset($_POST['payment_for']) ? absint(wp_unslash($_POST['payment_for'])) : 0;
             $price_per_submission = ere_get_option('price_per_listing', '0');
             $price_featured_submission = ere_get_option('price_featured_listing', '0');
             $currency = ere_get_option('currency_code', 'USD');
@@ -271,12 +269,8 @@ if (!class_exists('ERE_Payment')) {
             if ($is_paypal_live == 'live') {
                 $host = 'https://api.paypal.com';
             }
-
-            $url = $host . '/v1/oauth2/token';
-            $postArgs = 'grant_type=client_credentials';
-
-            $access_token = $this->get_paypal_access_token($url, $postArgs);
             $url = $host . '/v1/payments/payment';
+            $access_token = $this->get_paypal_access_token();
             $cancel_link = ere_get_permalink('my_properties');
             $payment_completed_link = ere_get_permalink('payment_completed');
             $return_link = add_query_arg(array('payment_method' => 1), $payment_completed_link);
@@ -341,7 +335,7 @@ if (!class_exists('ERE_Payment')) {
             $output['property_id'] = $property_id;
             $output['payment_for'] = $payment_for;
             update_user_meta($user_id, ERE_METABOX_PREFIX . 'paypal_transfer', $output);
-            print $payment_approval_url;
+            echo $payment_approval_url;
             wp_die();
         }
 
@@ -357,8 +351,7 @@ if (!class_exists('ERE_Payment')) {
 
             $blogInfo = esc_url(home_url());
 
-            $package_id = $_POST['package_id'];
-            $package_id = intval($package_id);
+            $package_id = isset($_POST['package_id']) ? absint(wp_unslash($_POST['package_id'])) : 0;
             $package_price = get_post_meta($package_id, ERE_METABOX_PREFIX . 'package_price', true);
             $package_name = get_the_title($package_id);
 
@@ -372,10 +365,8 @@ if (!class_exists('ERE_Payment')) {
             if ($is_paypal_live == 'live') {
                 $host = 'https://api.paypal.com';
             }
-            $url = $host . '/v1/oauth2/token';
-            $postArgs = 'grant_type=client_credentials';
-            $access_token = $this->get_paypal_access_token($url, $postArgs);
             $url = $host . '/v1/payments/payment';
+            $access_token = $this->get_paypal_access_token();
             $payment_completed_link = ere_get_permalink('payment_completed');
             $return_url = add_query_arg(array('payment_method' => 1), $payment_completed_link);
             $dash_profile_link = ere_get_permalink('my_properties');
@@ -425,8 +416,7 @@ if (!class_exists('ERE_Payment')) {
             $output['access_token'] = $access_token;
             $output['package_id'] = $package_id;
             update_user_meta($user_id, ERE_METABOX_PREFIX . 'paypal_transfer', $output);
-
-            print $payment_approval_url;
+            echo esc_url_raw($payment_approval_url) ;
             wp_die();
         }
 
@@ -445,8 +435,7 @@ if (!class_exists('ERE_Payment')) {
             $user_id = $current_user->ID;
             $user_email = $current_user->user_email;
             $admin_email = get_bloginfo('admin_email');
-            $package_id = $_POST['package_id'];
-            $package_id = intval($package_id);
+            $package_id = isset($_POST['package_id']) ? absint(wp_unslash($_POST['package_id'])) : 0;
             $total_price = get_post_meta($package_id, ERE_METABOX_PREFIX . 'package_price', true);
             $total_price = ere_get_format_money($total_price);
             $payment_method = 'Wire_Transfer';
@@ -463,7 +452,7 @@ if (!class_exists('ERE_Payment')) {
             ere_send_email($admin_email, 'admin_mail_new_wire_transfer', $args);
             $payment_completed_link = ere_get_permalink('payment_completed');
             $return_link = add_query_arg(array('payment_method' => 3, 'order_id' => $invoice_id), $payment_completed_link);
-            print $return_link;
+            echo esc_url_raw($return_link);
             wp_die();
         }
 
@@ -480,11 +469,9 @@ if (!class_exists('ERE_Payment')) {
             $user_id = $current_user->ID;
             $user_email = $current_user->user_email;
             $admin_email = get_bloginfo('admin_email');
-            $property_id = $_POST['property_id'];
-            $property_id = intval($property_id);
+            $property_id = isset($_POST['property_id']) ? absint(wp_unslash($_POST['property_id'])) : 0;
 
-            $payment_for = $_POST['payment_for'];
-            $payment_for = intval($payment_for);
+            $payment_for = isset($_POST['payment_for']) ? absint(wp_unslash($_POST['payment_for'])) : 0;
             $payment_method = 'Wire_Transfer';
             if ($payment_for == 3) {
                 $invoice_id = $this->ere_invoice->insert_invoice('Upgrade_To_Featured', $property_id, $user_id, 3, $payment_method, 0);
@@ -512,7 +499,7 @@ if (!class_exists('ERE_Payment')) {
             }
             $payment_completed_link = ere_get_permalink('payment_completed');
             $return_link = add_query_arg(array('payment_method' => 3, 'order_id' => $invoice_id), $payment_completed_link);
-            print $return_link;
+            echo esc_url_raw($return_link);
             wp_die();
         }
 
@@ -528,8 +515,7 @@ if (!class_exists('ERE_Payment')) {
                 exit('No Login');
             }
             $user_id = $current_user->ID;
-            $package_id = $_POST['package_id'];
-            $package_id = intval($package_id);
+            $package_id = isset($_POST['package_id']) ? absint(wp_unslash($_POST['package_id'])) : 0;
             $payment_method = 'Free_Package';
             // insert invoice
             $invoice_id = $this->ere_invoice->insert_invoice('Package', $package_id, $user_id, 0, $payment_method, 1);
@@ -538,7 +524,7 @@ if (!class_exists('ERE_Payment')) {
             update_user_meta($user_id, ERE_METABOX_PREFIX . 'free_package', 'yes');
             $payment_completed_link = ere_get_permalink('payment_completed');
             $return_link = add_query_arg(array('payment_method' => 3, 'free_package' => $invoice_id), $payment_completed_link);
-            print $return_link;
+            echo esc_url_raw($return_link);
             wp_die();
         }
 
@@ -548,7 +534,6 @@ if (!class_exists('ERE_Payment')) {
         public function stripe_payment_completed()
         {
             require_once(ERE_PLUGIN_DIR . 'public/partials/payment/stripe-php/init.php');
-            $allowed_html = array();
             $paid_submission_type = ere_get_option('paid_submission_type');
             $current_user = wp_get_current_user();
             $user_id = $current_user->ID;
@@ -565,13 +550,9 @@ if (!class_exists('ERE_Payment')) {
             \Stripe\Stripe::setApiKey($stripe['secret_key']);
             $stripeEmail = '';
             if (is_email($_POST['stripeEmail'])) {
-                $stripeEmail = wp_kses(esc_html($_POST['stripeEmail']), $allowed_html);
+                $stripeEmail =   sanitize_email(wp_unslash($_POST['stripeEmail']));
             } else {
                 wp_die('None Mail');
-            }
-
-            if (isset($_POST['user_id']) && !is_numeric($_POST['user_id'])) {
-                die();
             }
 
             if (isset($_POST['property_id']) && !is_numeric($_POST['property_id'])) {
@@ -592,13 +573,11 @@ if (!class_exists('ERE_Payment')) {
             $payment_for = 0;
             $paymentId = 0;
             if (isset($_POST['payment_for'])) {
-                $payment_for = $_POST['payment_for'];
-                $payment_for = intval($payment_for);
+                $payment_for = absint(wp_unslash($_POST['payment_for']));
             }
             try {
-                $token = wp_kses($_POST['stripeToken'], $allowed_html);
-                $payment_money = $_POST['payment_money'];
-                $payment_money = intval($payment_money);
+                $token = isset($_POST['stripeToken']) ? ere_clean(wp_unslash($_POST['stripeToken'])) : '';
+                $payment_money = isset($_POST['payment_money']) ? absint(wp_unslash($_POST['payment_money'])) :  0;
                 $customer = \Stripe\Customer::create(array(
                     "email" => $stripeEmail,
                     "source" => $token
@@ -623,8 +602,7 @@ if (!class_exists('ERE_Payment')) {
                         $price_featured_listing = ere_get_option('price_featured_listing', '0');
                         $price_per_listing_with_featured = intval($price_per_listing) + intval($price_featured_listing);
                         //Payment Stripe listing
-                        $property_id = $_POST['property_id'];
-                        $property_id = intval($property_id);
+                        $property_id = absint(wp_unslash($_POST['property_id'])) ;
                         if ($payment_for == 3) {
                             if ($payment_money != intval($price_featured_listing) * 100) {
                                 wp_die('No joke');
@@ -689,8 +667,7 @@ if (!class_exists('ERE_Payment')) {
                         }
                     } else if ($paid_submission_type == 'per_package') {
                         //Payment Stripe package
-                        $package_id = $_POST['package_id'];
-                        $package_id = intval($package_id);
+                        $package_id = absint(wp_unslash($_POST['package_id']));
                         $package_price = get_post_meta($package_id, ERE_METABOX_PREFIX . 'package_price', true);
                         if ($payment_money != intval($package_price) * 100) {
                             wp_die('No joke');
@@ -705,8 +682,7 @@ if (!class_exists('ERE_Payment')) {
                     $message = esc_html__('Transaction failed', 'essential-real-estate');
                     if ($paid_submission_type == 'per_listing') {
                         //Payment Stripe listing
-                        $property_id = $_POST['property_id'];
-                        $property_id = intval($property_id);
+                        $property_id = absint(wp_unslash($_POST['property_id']));
 
                         if ($payment_for == 3) {
                             $this->ere_trans_log->insert_trans_log('Upgrade_To_Featured', $property_id, $user_id, 3, $payment_method, 0, $paymentId, $payerId,0, $message);
@@ -719,17 +695,16 @@ if (!class_exists('ERE_Payment')) {
                         }
                     } else if ($paid_submission_type == 'per_package') {
                         //Payment Stripe package
-                        $package_id = $_POST['package_id'];
-                        $package_id = intval($package_id);
+                        $package_id = absint(wp_unslash($_POST['package_id']));
                         $this->ere_trans_log->insert_trans_log('Package', $package_id, $user_id, 0, $payment_method, 0, $paymentId, $payerId,0, $message);
                     }
 
-                    $error = '<div class="alert alert-danger" role="alert">' . sprintf(__('<strong>Error!</strong> Transaction failed', 'essential-real-estate')) . '</div>';
-                    print $error;
+                    $error = '<div class="alert alert-danger" role="alert">' . wp_kses_post(__('<strong>Error!</strong> Transaction failed', 'essential-real-estate')) . '</div>';
+                    echo wp_kses_post($error);
                 }
             } catch (Exception $e) {
-                $error = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> ' . $e->getMessage() . '</div>';
-                print $error;
+                $error = '<div class="alert alert-danger" role="alert"><strong>'. esc_html__( 'Error!', 'essential-real-estate' ) .' </strong> ' . $e->getMessage() . '</div>';
+                echo wp_kses_post($error);
             }
         }
 
@@ -743,13 +718,12 @@ if (!class_exists('ERE_Payment')) {
             $user_id = $current_user->ID;
             $user_email = $current_user->user_email;
             $admin_email = get_bloginfo('admin_email');
-            $allowed_html = array();
             $payment_method = 'Paypal';
             $paid_submission_type = ere_get_option('paid_submission_type', 'no');
             try {
                 if (isset($_GET['token']) && isset($_GET['PayerID'])) {
-                    $payerId = wp_kses($_GET['PayerID'], $allowed_html);
-                    $paymentId = wp_kses($_GET['paymentId'], $allowed_html);
+                    $payerId = ere_clean(wp_unslash($_GET['PayerID']));
+                    $paymentId = ere_clean(wp_unslash($_GET['paymentId']));
                     $transfered_data = get_user_meta($user_id, ERE_METABOX_PREFIX . 'paypal_transfer', true);
                     if(empty($transfered_data))
                     {
@@ -842,13 +816,13 @@ if (!class_exists('ERE_Payment')) {
                             $package_id = $transfered_data['package_id'];
                             $this->ere_trans_log->insert_trans_log('Package', $package_id, $user_id, 0, $payment_method, 0, $paymentId, $payerId,0, $message);
                         }
-                        $error = '<div class="alert alert-danger" role="alert">' . sprintf(__('<strong>Error!</strong> Transaction failed', 'essential-real-estate')) . '</div>';
-                        print $error;
+                        $error = '<div class="alert alert-danger" role="alert">' . wp_kses_post(__('<strong>Error!</strong> Transaction failed', 'essential-real-estate')) . '</div>';
+                        echo wp_kses_post($error);
                     }
                 }
             } catch (Exception $e) {
-                $error = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> ' . $e->getMessage() . '</div>';
-                print $error;
+                $error = '<div class="alert alert-danger" role="alert"><strong>'. esc_html__( 'Error!', 'essential-real-estate' ) .'</strong> ' . $e->getMessage() . '</div>';
+                echo wp_kses_post($error);
             }
         }
     }

@@ -194,13 +194,14 @@ if (!class_exists('ERE_Invoice')) {
             if ( ! isset( $_POST['invoice_id'] ) || ! is_numeric( $_POST['invoice_id'] ) ) {
                 return;
             }
-            $invoice_id = $_POST['invoice_id'];
+            $invoice_id = absint(wp_unslash($_POST['invoice_id'])) ;
             $isRTL = 'false';
             if(isset( $_POST['isRTL'] ))
             {
                 $isRTL = $_POST['isRTL'];
             }
             ere_get_template( 'invoice/invoice-print.php', array('invoice_id'=>intval($invoice_id), 'isRTL'=>$isRTL));
+            wp_die();
         }
     }
 }

@@ -191,7 +191,7 @@ if (!class_exists('GSF_SmartFramework')) {
 				if (typeof WebFontConfig === 'undefined') {
 					WebFontConfig = new Object();
 				}
-				WebFontConfig['google'] = {families: [<?php echo ($google_font_config) ?>]};
+				WebFontConfig['google'] = {families: [<?php echo esc_js($google_font_config) ?>]};
 
 				(function () {
 					var wf = document.createElement('script');

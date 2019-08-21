@@ -38,7 +38,13 @@ if (!class_exists('GSF_Field_Select')) {
 			?>
 			<div class="gsf-field-select-inner">
 				<select data-field-control="" class="gsf-select"
-				        name="<?php echo esc_attr($this->get_name()) ?><?php echo $multiple ? '[]' : ''; ?>" <?php echo ($multiple ? ' multiple="multiple"' : '' ); ?>>
+                        <?php if ($multiple): ?>
+                            name="<?php echo esc_attr($this->get_name()) ?>[]"
+                            multiple="multiple"
+                        <?php else: ?>
+                            name="<?php echo esc_attr($this->get_name()) ?>"
+                        <?php endif; ?>
+                    >
 					<?php foreach ($this->params['options'] as $key => $value): ?>
 						<?php if (is_array($value)): ?>
 							<optgroup label="<?php echo esc_attr($key); ?>">

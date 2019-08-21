@@ -16,8 +16,8 @@ extract(shortcode_atts(array(
     'status_enable' => 'true',
     'el_class' => '',
 ), $atts));
-$request_address = isset($_GET['address']) ? $_GET['address'] : '';
-$request_status = isset($_GET['status']) ? $_GET['status'] : '';
+$request_address = isset($_GET['address']) ? ere_clean(wp_unslash($_GET['address']))  : '';
+$request_status = isset($_GET['status']) ? ere_clean(wp_unslash($_GET['status']))  : '';
 
 $wrapper_class='ere-mini-search-properties clearfix';
 $wrapper_classes = array(
@@ -35,7 +35,7 @@ $advanced_search = ere_get_permalink('advanced_search');
 <div class="<?php echo join(' ', $wrapper_classes) ?>">
     <div data-href="<?php echo esc_url($advanced_search) ?>" class="ere-mini-search-properties-form">
         <?php if ($status_enable=='true'): ?>
-            <select name="status" title="<?php esc_html_e('Property Status', 'essential-real-estate') ?>"
+            <select name="status" title="<?php esc_attr_e('Property Status', 'essential-real-estate') ?>"
                     class="ere-status search-field form-control" data-default-value="">
                 <?php ere_get_property_status_search_slug($request_status); ?>
             </select>
@@ -43,7 +43,7 @@ $advanced_search = ere_get_permalink('advanced_search');
         <input type="text" class="ere-location search-field" data-default-value=""
                value="<?php echo esc_attr($request_address); ?>"
                name="address"
-               placeholder="<?php esc_html_e('Where do you like to live?', 'essential-real-estate') ?>">
+               placeholder="<?php esc_attr_e('Where do you like to live?', 'essential-real-estate') ?>">
         <button type="button" id="mini-search-btn"><i class="fa fa-search"></i>
         </button>
     </div>

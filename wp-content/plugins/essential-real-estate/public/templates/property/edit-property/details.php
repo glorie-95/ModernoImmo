@@ -38,7 +38,7 @@ $additional_feature_value = get_post_meta($property_data->ID, ERE_METABOX_PREFIX
             <div class="col-sm-4">
                 <div class="form-group">
                     <label
-                        for="property_land"><?php printf(__('Land Area (%s) %s', 'essential-real-estate'),$measurement_units_land_area, ere_required_field('property_land')); ?></label>
+                        for="property_land"><?php printf(esc_html__('Land Area (%s) %s', 'essential-real-estate'),$measurement_units_land_area, ere_required_field('property_land')); ?></label>
                     <input type="number" id="property_land" class="form-control" name="property_land"
                            value="<?php if (isset($property_meta_data[ERE_METABOX_PREFIX . 'property_land'])) {
                                echo sanitize_text_field($property_meta_data[ERE_METABOX_PREFIX . 'property_land'][0]);
@@ -102,7 +102,7 @@ $additional_feature_value = get_post_meta($property_data->ID, ERE_METABOX_PREFIX
         <?php if (!in_array("property_garage_size", $hide_property_fields)) { ?>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="property_garage_size"><?php printf(__('Garages Size (%s)', 'essential-real-estate'),$measurement_units); ?></label>
+                    <label for="property_garage_size"><?php printf(esc_html__('Garages Size (%s)', 'essential-real-estate'),$measurement_units); ?></label>
                     <input type="number" id="property_garage_size" class="form-control" name="property_garage_size"
                            value="<?php if (isset($property_meta_data[ERE_METABOX_PREFIX . 'property_garage_size'])) {
                                echo sanitize_text_field($property_meta_data[ERE_METABOX_PREFIX . 'property_garage_size'][0]);

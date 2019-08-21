@@ -28,12 +28,7 @@ if (!class_exists('ERE_Public')) {
         {
             $min_suffix = ere_get_option('enable_min_css', 0) == 1 ? '.min' : '';
             wp_enqueue_style('jquery-ui', ERE_PLUGIN_URL . 'public/assets/packages/jquery-ui/jquery-ui.min.css', array(), '1.11.4', 'all');
-            $cdn_bootstrap_css = ere_get_option('cdn_bootstrap_css', '');
-            $url_bootstrap = ERE_PLUGIN_URL . 'public/assets/packages/bootstrap/css/bootstrap.min.css';
-            if (!empty($cdn_bootstrap_css)) {
-                $url_bootstrap = $cdn_bootstrap_css;
-            }
-            wp_enqueue_style('bootstrap', $url_bootstrap, array());
+
 
             wp_enqueue_style('owl.carousel', ERE_PLUGIN_URL . 'public/assets/packages/owl-carousel/assets/owl.carousel.min.css', array(), '2.1.0', 'all');
             wp_register_style('lightgallery-all', ERE_PLUGIN_URL . 'public/assets/packages/light-gallery/css/lightgallery.min.css', array(), '1.2.18', 'all');
@@ -44,13 +39,11 @@ if (!class_exists('ERE_Public')) {
                 wp_register_style('select2_css', ERE_PLUGIN_URL . 'public/assets/packages/select2/css/select2.min.css', array(), '4.0.6-rc.1', 'all');
             }
 
+            wp_enqueue_style('font-awesome');
+
+
             wp_enqueue_style(ERE_PLUGIN_PREFIX . 'main', ERE_PLUGIN_URL . 'public/assets/css/main' . $min_suffix . '.css', array(), ERE_PLUGIN_VER, 'all');
-            $url_font_awesome = ERE_PLUGIN_URL . 'public/assets/packages/fonts-awesome/css/font-awesome.min.css';
-            $cdn_font_awesome = ere_get_option('cdn_font_awesome', '');
-            if ($cdn_font_awesome) {
-                $url_font_awesome = $cdn_font_awesome;
-            }
-            wp_enqueue_style('font-awesome', $url_font_awesome, array());
+
             // shortcode
             wp_register_style(ERE_PLUGIN_PREFIX . 'agency', ERE_PLUGIN_URL . 'public/templates/shortcodes/agency/assets/css/agency' . $min_suffix . '.css', array(), ERE_PLUGIN_VER, 'all');
             wp_register_style(ERE_PLUGIN_PREFIX . 'agent', ERE_PLUGIN_URL . 'public/templates/shortcodes/agent/assets/css/agent' . $min_suffix . '.css', array(), ERE_PLUGIN_VER, 'all');
@@ -100,14 +93,8 @@ if (!class_exists('ERE_Public')) {
         public function enqueue_scripts()
         {
             $min_suffix = ere_get_option('enable_min_js', 0) == 1 ? '.min' : '';
-            wp_enqueue_script('jquery-ui', ERE_PLUGIN_URL . 'public/assets/packages/jquery-ui/jquery-ui.min.js', array('jquery'), '1.11.4', true);
-            $cdn_bootstrap_js = ere_get_option('cdn_bootstrap_js', '');
-            $url_bootstrap = ERE_PLUGIN_URL . 'public/assets/packages/bootstrap/js/bootstrap.min.js';
-            if (!empty($cdn_bootstrap_css)) {
-                $url_bootstrap = $cdn_bootstrap_js;
-            }
-            wp_enqueue_script('bootstrap', $url_bootstrap, array('jquery'));
-
+            wp_enqueue_style('bootstrap');
+            wp_enqueue_script('bootstrap');
 
             wp_register_script('lightgallery-all', ERE_PLUGIN_URL . 'public/assets/packages/light-gallery/js/lightgallery-all.min.js', array('jquery'), '1.2.18', true);
             wp_register_script('moment', ERE_PLUGIN_URL . 'public/assets/packages/bootstrap/js/moment.min.js', array('jquery'), '2.11.1', true);
@@ -141,7 +128,7 @@ if (!class_exists('ERE_Public')) {
             $dec_point = ere_get_option('decimal_separator', '.');
             $thousands_sep = ere_get_option('thousand_separator', ',');
 
-            wp_enqueue_script(ERE_PLUGIN_PREFIX . 'main', ERE_PLUGIN_URL . 'public/assets/js/ere-main' . $min_suffix . '.js', array('jquery', 'wp-util', 'bootstrap', 'jquery-validate'), ERE_PLUGIN_VER, true);
+            wp_enqueue_script(ERE_PLUGIN_PREFIX . 'main', ERE_PLUGIN_URL . 'public/assets/js/ere-main' . $min_suffix . '.js', array('jquery', 'wp-util', 'bootstrap', 'jquery-validate','jquery-ui-core','jquery-ui-slider','jquery-ui-dialog','jquery-ui-sortable'), ERE_PLUGIN_VER, true);
             wp_localize_script(ERE_PLUGIN_PREFIX . 'main', 'ere_main_vars', array(
                 'ajax_url' => ERE_AJAX_URL,
                 'confirm_yes_text' => esc_html__('Yes', 'essential-real-estate'),
@@ -274,6 +261,42 @@ if (!class_exists('ERE_Public')) {
                 );
             }
             wp_register_script('star-rating', ERE_PLUGIN_URL . 'public/assets/js/star-rating.min.js', array('jquery'), '4.0.3', true);
+        }
+
+        public function register_assets() {
+            wp_register_script('stripe-checkout','https://checkout.stripe.com/checkout.js',array(),null,true);
+
+            $cdn_bootstrap_css = ere_get_option('cdn_bootstrap_css', '');
+            if (!empty($cdn_bootstrap_css)) {
+                wp_register_style('bootstrap', $cdn_bootstrap_css);
+            } else {
+                wp_register_style('bootstrap', ERE_PLUGIN_URL . 'public/assets/packages/bootstrap/css/bootstrap.min.css',array(),'3.4.1');
+            }
+
+            $cdn_bootstrap_js = ere_get_option('cdn_bootstrap_js', '');
+            if (!empty($cdn_bootstrap_css)) {
+                wp_register_script('bootstrap', $cdn_bootstrap_js, array('jquery'),null,true);
+            } else {
+                wp_register_script('bootstrap', ERE_PLUGIN_URL . 'public/assets/packages/bootstrap/js/bootstrap.min.js', array('jquery'),'3.4.1',true);
+            }
+
+
+
+            $url_font_awesome = ERE_PLUGIN_URL . 'public/assets/packages/fonts-awesome/css/font-awesome.min.css';
+            $cdn_font_awesome = ere_get_option('cdn_font_awesome', '');
+            if ($cdn_font_awesome) {
+                $url_font_awesome = $cdn_font_awesome;
+            }
+            wp_register_style('font-awesome', $url_font_awesome);
+
+
+
+            wp_register_style(ERE_PLUGIN_PREFIX . 'property-print', ERE_PLUGIN_URL . '/public/assets/css/property-print.css',array(),ERE_PLUGIN_VER);
+            wp_register_style(ERE_PLUGIN_PREFIX . 'property-print-rtl', ERE_PLUGIN_URL . '/public/assets/css/property-print-rtl.css',array(),ERE_PLUGIN_VER);
+
+
+            wp_register_style(ERE_PLUGIN_PREFIX . 'single-invoice', ERE_PLUGIN_URL . '/public/assets/css/single-invoice.css',array(),ERE_PLUGIN_VER);
+            wp_register_style(ERE_PLUGIN_PREFIX . 'invoice-print-rtl', ERE_PLUGIN_URL . '/public/assets/css/invoice-print-rtl.css',array(),ERE_PLUGIN_VER);
         }
 
         /**

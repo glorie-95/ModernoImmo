@@ -17,7 +17,7 @@ if($property_gallery)
     $total_image=count($property_gallery);
 }
 ?>
-<div class="property-view-gallery-wrap" data-toggle="tooltip" title="<?php echo sprintf( __( '(%s) Photos', 'essential-real-estate' ), $total_image); ?>">
+<div class="property-view-gallery-wrap" data-toggle="tooltip" title="<?php echo esc_attr(sprintf( __( '(%s) Photos', 'essential-real-estate' ), $total_image)) ; ?>">
     <a data-property-id="<?php the_ID(); ?>"
        href="javascript:void(0)" class="property-view-gallery"><i
             class="fa fa-camera"></i></a>

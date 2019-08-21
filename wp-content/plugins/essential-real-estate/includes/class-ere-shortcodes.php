@@ -171,7 +171,7 @@ class ERE_Shortcodes {
 
 		// If doing an action, show conditional content if needed....
 		if (!empty($_REQUEST['action'])) {
-			$action = sanitize_title($_REQUEST['action']);
+			$action = sanitize_title(wp_slash($_REQUEST['action']));
 			if (has_action('ere_my_properties_content_' . $action)) {
 				do_action('ere_my_properties_content_' . $action, $atts);
 				return ob_get_clean();
@@ -181,10 +181,10 @@ class ERE_Shortcodes {
 			$post_status = array('publish', 'expired', 'pending', 'hidden');
 		}
 		if (!empty($_REQUEST['post_status'])) {
-			$post_status = sanitize_title($_REQUEST['post_status']);
+			$post_status = sanitize_title(wp_unslash($_REQUEST['post_status']));
 		}
 		if (!empty($_REQUEST['property_status'])) {
-			$property_status = sanitize_title($_REQUEST['property_status']);
+			$property_status = sanitize_title(wp_slash($_REQUEST['property_status']));
 			$tax_query[] = array(
 				'taxonomy' => 'property-status',
 				'field' => 'slug',
@@ -192,7 +192,7 @@ class ERE_Shortcodes {
 			);
 		}
 		if (!empty($_REQUEST['property_identity'])) {
-			$property_identity = sanitize_text_field($_REQUEST['property_identity']);
+			$property_identity = sanitize_text_field(wp_unslash($_REQUEST['property_identity']));
 			$meta_query[] = array(
 				'key' => ERE_METABOX_PREFIX. 'property_identity',
 				'value' => $property_identity,
@@ -202,7 +202,7 @@ class ERE_Shortcodes {
 		}
 
 		if (!empty($_REQUEST['title'])) {
-			$title = sanitize_text_field($_REQUEST['title']);
+			$title = sanitize_text_field(wp_unslash($_REQUEST['title']));
 		}
 		$query_args=array(
 			'post_type' => 'property',
@@ -244,8 +244,8 @@ class ERE_Shortcodes {
 	{
 		if (!empty($_REQUEST['action']) && !empty($_REQUEST['_wpnonce']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'ere_my_properties_actions')) {
 			$ere_profile=new ERE_Profile();
-			$action = sanitize_title($_REQUEST['action']);
-			$property_id = absint($_REQUEST['property_id']);
+			$action = isset($_REQUEST['action']) ?  sanitize_title(wp_unslash($_REQUEST['action'])) : '';
+			$property_id = isset($_REQUEST['property_id']) ?  absint(wp_unslash($_REQUEST['property_id'])) : '';
 			global $current_user;
 			wp_get_current_user();
 			$user_id = $current_user->ID;
@@ -253,14 +253,14 @@ class ERE_Shortcodes {
 				$property = get_post($property_id);
 				$ere_property = new ERE_Property();
 				if (!$ere_property->user_can_edit_property($property_id)) {
-					throw new Exception(__('Invalid ID', 'essential-real-estate'));
+					throw new Exception(esc_html__('Invalid ID', 'essential-real-estate'));
 				}
 				switch ($action) {
 					case 'delete' :
 						// Trash it
 						wp_trash_post($property_id);
 						// Message
-						self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . sprintf(__('<strong>Success!</strong> %s has been deleted', 'essential-real-estate'), $property->post_title) . '</div>';
+						self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . wp_kses_post(sprintf(__('<strong>Success!</strong> %s has been deleted', 'essential-real-estate'), $property->post_title))  . '</div>';
 
 						break;
 					case 'mark_featured' :
@@ -279,9 +279,9 @@ class ERE_Shortcodes {
 									update_user_meta($user_id, ERE_METABOX_PREFIX . 'package_number_featured', $package_num_featured_listings - 1);
 								}
 								update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_featured', 1);
-								self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . sprintf(__('<strong>Success!</strong> %s has been featured', 'essential-real-estate'), $property->post_title) . '</div>';
+								self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . wp_kses_post(sprintf(__('<strong>Success!</strong> %s has been featured', 'essential-real-estate'), $property->post_title))  . '</div>';
 							} else {
-								self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . sprintf(__('<strong>Warning!</strong> %s Cannot be marked as featured. Either your package does not support featured listings, or you have use all featured listing available under your plan.', 'essential-real-estate'), $property->post_title) . '</div>';
+								self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . wp_kses_post(sprintf(__('<strong>Warning!</strong> %s Cannot be marked as featured. Either your package does not support featured listings, or you have use all featured listing available under your plan.', 'essential-real-estate'), $property->post_title))  . '</div>';
 							}
 						} elseif ($paid_submission_type == 'per_listing') {
 							$price_featured_listing = ere_get_option('price_featured_listing',0);
@@ -305,9 +305,9 @@ class ERE_Shortcodes {
 							}
 							$package_key = get_the_author_meta(ERE_METABOX_PREFIX . 'package_key', $user_id);
 							update_post_meta( $property_id, ERE_METABOX_PREFIX . 'package_key', $package_key );
-							self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . sprintf(__('<strong>Success!</strong> %s has been allow edit', 'essential-real-estate'), $property->post_title) . '</div>';
+							self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . wp_kses_post(sprintf(__('<strong>Success!</strong> %s has been allow edit', 'essential-real-estate'), $property->post_title))  . '</div>';
 						} else {
-							self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . __('<strong>Warning!</strong> Can not make "Allow Edit" this property', 'essential-real-estate') . '</div>';
+							self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . wp_kses_post(__('<strong>Warning!</strong> Can not make "Allow Edit" this property', 'essential-real-estate'))  . '</div>';
 						}
 						break;
 					case 'relist_per_package' :
@@ -338,9 +338,9 @@ class ERE_Shortcodes {
 							if ($listing_avl != -1) {
 								update_user_meta($user_id, ERE_METABOX_PREFIX . 'package_number_listings', $listing_avl - 1);
 							}
-							self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . sprintf(__('<strong>Success!</strong> %s has been reactivate', 'essential-real-estate'), $property->post_title) . '</div>';
+							self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . wp_kses_post(sprintf(__('<strong>Success!</strong> %s has been reactivate', 'essential-real-estate'), $property->post_title))  . '</div>';
 						} else {
-							self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . __('<strong>Warning!</strong> Can not relist this property', 'essential-real-estate') . '</div>';
+							self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . wp_kses_post(__('<strong>Warning!</strong> Can not relist this property', 'essential-real-estate'))  . '</div>';
 						}
 						break;
 					case 'relist_per_listing' :
@@ -381,7 +381,7 @@ class ERE_Shortcodes {
 							'post_status' => 'hidden'
 						);
 						wp_update_post($data);
-						self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . sprintf(__('<strong>Success!</strong> %s has been hidden', 'essential-real-estate'), $property->post_title) . '</div>';
+						self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . wp_kses_post(sprintf(__('<strong>Success!</strong> %s has been hidden', 'essential-real-estate'), $property->post_title))  . '</div>';
 						break;
 					case 'show' :
 						if($property->post_status=='hidden')
@@ -392,10 +392,10 @@ class ERE_Shortcodes {
 								'post_status' => 'publish'
 							);
 							wp_update_post($data);
-							self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . sprintf(__('<strong>Success!</strong> %s has been publish', 'essential-real-estate'), $property->post_title) . '</div>';
+							self::$ere_message = '<div class="ere-message alert alert-success" role="alert">' . wp_kses_post(sprintf(__('<strong>Success!</strong> %s has been publish', 'essential-real-estate'), $property->post_title))  . '</div>';
 						}
 						else{
-							self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . __('<strong>Warning!</strong> Can not publish this property', 'essential-real-estate') . '</div>';
+							self::$ere_message = '<div class="ere-message alert alert-danger" role="alert">' . wp_kses_post(__('<strong>Warning!</strong> Can not publish this property', 'essential-real-estate'))  . '</div>';
 						}
 						break;
 					default :
@@ -439,8 +439,8 @@ class ERE_Shortcodes {
 	public function my_save_search_handler()
 	{
 		if (!empty($_REQUEST['action']) && !empty($_REQUEST['_wpnonce']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'ere_my_save_search_actions')) {
-			$action = sanitize_title($_REQUEST['action']);
-			$save_id = absint($_REQUEST['save_id']);
+			$action = isset($_REQUEST['action']) ? sanitize_title(wp_unslash($_REQUEST['action'])) : '';
+			$save_id = isset($_REQUEST['save_id']) ?  absint(wp_unslash($_REQUEST['save_id'])) : '';
 			global $current_user;
 			wp_get_current_user();
 			$user_id = $current_user->ID;
@@ -614,13 +614,13 @@ class ERE_Shortcodes {
 	 */
 	public function property_gallery_fillter_ajax()
 	{
-		$property_type = str_replace('.', '', $_REQUEST['property_type']);
-		$is_carousel = $_REQUEST['is_carousel'];
-		$columns_gap = $_REQUEST['columns_gap'];
-		$columns = $_REQUEST['columns'];
-		$item_amount = $_REQUEST['item_amount'];
-		$image_size = $_REQUEST['image_size'];
-		$color_scheme = $_REQUEST['color_scheme'];
+		$property_type = isset($_REQUEST['property_type']) ? str_replace('.', '', ere_clean(wp_unslash($_REQUEST['property_type']))) : '';
+		$is_carousel = isset($_REQUEST['is_carousel']) ? ere_clean(wp_unslash($_REQUEST['is_carousel']))  : '';
+		$columns_gap = isset($_REQUEST['columns_gap']) ? absint(wp_unslash($_REQUEST['columns_gap'])) : 30;
+		$columns = isset($_REQUEST['columns']) ? absint(wp_unslash($_REQUEST['columns'])) : 4;
+		$item_amount = isset($_REQUEST['item_amount']) ? absint(wp_unslash($_REQUEST['item_amount'])) : 10;
+		$image_size = isset($_REQUEST['image_size']) ? ere_clean(wp_unslash($_REQUEST['image_size'])) : '';
+		$color_scheme = isset($_REQUEST['color_scheme']) ? ere_clean(wp_unslash($_REQUEST['color_scheme'])) : '';
 
 		$short_code = '[ere_property_gallery is_carousel="' . $is_carousel . '" color_scheme="' . $color_scheme . '"
 		columns="' . $columns . '" item_amount="' . $item_amount . '" image_size="' . $image_size . '" columns_gap="' . $columns_gap . '"
@@ -634,22 +634,22 @@ class ERE_Shortcodes {
 	 */
 	public function property_featured_fillter_city_ajax()
 	{
-		$property_city = str_replace('.', '', $_REQUEST['property_city']);
-		$layout_style= $_REQUEST['layout_style'];
-		$property_type= $_REQUEST['property_type'];
-		$property_status= $_REQUEST['property_status'];
-		$property_feature= $_REQUEST['property_feature'];
-		$property_cities= $_REQUEST['property_cities'];
-		$property_state= $_REQUEST['property_state'];
-		$property_neighborhood= $_REQUEST['property_neighborhood'];
-		$property_label= $_REQUEST['property_label'];
-		$color_scheme= $_REQUEST['color_scheme'];
-		$item_amount= $_REQUEST['item_amount'];
-		$image_size= $_REQUEST['image_size'];
-		$include_heading= $_REQUEST['include_heading'];
-		$heading_sub_title= $_REQUEST['heading_sub_title'];
-		$heading_title= $_REQUEST['heading_title'];
-		$heading_text_align= $_REQUEST['heading_text_align'];
+		$property_city = isset($_REQUEST['property_city']) ? str_replace('.', '', ere_clean(wp_unslash($_REQUEST['property_city']))) : '';
+		$layout_style= isset($_REQUEST['layout_style']) ? ere_clean(wp_unslash($_REQUEST['layout_style'])) : '';
+		$property_type= isset($_REQUEST['property_type']) ? ere_clean(wp_unslash($_REQUEST['property_type'])) : '';
+		$property_status= isset($_REQUEST['property_status']) ? ere_clean(wp_unslash($_REQUEST['property_status'])) : '';
+		$property_feature= isset($_REQUEST['property_feature']) ? ere_clean(wp_unslash($_REQUEST['property_feature'])) : '';
+		$property_cities= isset($_REQUEST['property_cities']) ? ere_clean(wp_unslash($_REQUEST['property_cities'])) : '';
+		$property_state= isset($_REQUEST['property_state']) ? ere_clean(wp_unslash($_REQUEST['property_state'])) : '';
+		$property_neighborhood= isset($_REQUEST['property_neighborhood']) ? ere_clean(wp_unslash($_REQUEST['property_neighborhood'])) : '';
+		$property_label= isset($_REQUEST['property_label']) ? ere_clean(wp_unslash($_REQUEST['property_label'])) : '';
+		$color_scheme= isset($_REQUEST['color_scheme']) ? ere_clean(wp_unslash($_REQUEST['color_scheme'])) : '';
+		$item_amount= isset($_REQUEST['item_amount']) ? absint(wp_unslash($_REQUEST['item_amount'])) : 10;
+		$image_size= isset($_REQUEST['image_size']) ? ere_clean(wp_unslash($_REQUEST['image_size'])) : '';
+		$include_heading= isset($_REQUEST['include_heading']) ?  ere_clean(wp_unslash($_REQUEST['include_heading'])) : '';
+		$heading_sub_title= isset($_REQUEST['heading_sub_title']) ? ere_clean(wp_unslash($_REQUEST['heading_sub_title'])) : '';
+		$heading_title= isset($_REQUEST['heading_title']) ? ere_clean(wp_unslash($_REQUEST['heading_title'])) : '';
+		$heading_text_align= isset($_REQUEST['heading_text_align']) ? ere_clean(wp_unslash($_REQUEST['heading_text_align'])) : '';
 		$short_code = '[ere_property_featured layout_style="' . $layout_style . '" property_type="' . $property_type . '" property_status="' . $property_status . '" property_feature="' . $property_feature . '" property_cities="' . $property_cities . '" property_state="' . $property_state . '" property_neighborhood="' . $property_neighborhood . '" property_label="' . $property_label . '" color_scheme="' . $color_scheme . '" color_scheme="' . $color_scheme . '" item_amount="' . $item_amount . '" image_size2="' . $image_size . '" include_heading="' . $include_heading . '" heading_sub_title="' . $heading_sub_title . '" heading_title="' . $heading_title . '" heading_text_align="' . $heading_text_align . '" property_city="' . $property_city . '"]';
 		echo do_shortcode($short_code);
 		wp_die();
@@ -660,25 +660,25 @@ class ERE_Shortcodes {
 	 */
 	public function property_paging_ajax()
 	{
-		$paged = $_REQUEST['paged'];
-		$layout = $_REQUEST['layout'];
-		$items_amount = $_REQUEST['items_amount'];
-		$columns = $_REQUEST['columns'];
-		$image_size = $_REQUEST['image_size'];
-		$columns_gap = $_REQUEST['columns_gap'];
-		$view_all_link = $_REQUEST['view_all_link'];
+		$paged = isset($_REQUEST['paged']) ? absint(wp_unslash($_REQUEST['paged'])) : 1;
+		$layout = isset($_REQUEST['layout']) ? ere_clean(wp_unslash($_REQUEST['layout'])) : '';
+		$items_amount = isset($_REQUEST['items_amount']) ? absint(wp_unslash($_REQUEST['items_amount'])) : 10;
+		$columns = isset($_REQUEST['columns']) ? absint(wp_unslash($_REQUEST['columns'])) :  4;
+		$image_size = isset($_REQUEST['image_size']) ? ere_clean(wp_unslash($_REQUEST['image_size'])) : '';
+		$columns_gap = isset($_REQUEST['columns_gap']) ? absint(wp_unslash($_REQUEST['columns_gap'])) : 30;
+		$view_all_link = isset($_REQUEST['view_all_link']) ? ere_clean(wp_unslash($_REQUEST['view_all_link'])) : '';
 
-		$property_type= $_REQUEST['property_type'];
-		$property_status= $_REQUEST['property_status'];
-		$property_feature= $_REQUEST['property_feature'];
-		$property_city= $_REQUEST['property_city'];
-		$property_state= $_REQUEST['property_state'];
-		$property_neighborhood= $_REQUEST['property_neighborhood'];
-		$property_label= $_REQUEST['property_label'];
-		$property_featured= $_REQUEST['property_featured'];
+		$property_type= isset($_REQUEST['property_type']) ? ere_clean(wp_unslash($_REQUEST['property_type'])) : '';
+		$property_status= isset($_REQUEST['property_status']) ? ere_clean(wp_unslash($_REQUEST['property_status'])) : '';
+		$property_feature= isset($_REQUEST['property_feature']) ? ere_clean(wp_unslash($_REQUEST['property_feature'])) : '';
+		$property_city= isset($_REQUEST['property_city']) ? ere_clean(wp_unslash($_REQUEST['property_city'])) : '';
+		$property_state= isset($_REQUEST['property_state']) ? ere_clean(wp_unslash($_REQUEST['property_state'])) : '';
+		$property_neighborhood= isset($_REQUEST['property_neighborhood']) ? ere_clean(wp_unslash($_REQUEST['property_neighborhood'])) : '';
+		$property_label= isset($_REQUEST['property_label']) ? ere_clean(wp_unslash($_REQUEST['property_label'])) : '';
+		$property_featured= isset($_REQUEST['property_featured']) ? ere_clean(wp_unslash($_REQUEST['property_featured'])) : '';
 
-		$author_id = $_REQUEST['author_id'];
-		$agent_id = $_REQUEST['agent_id'];
+		$author_id = isset($_REQUEST['author_id']) ? absint(wp_unslash($_REQUEST['author_id'])) : -1;
+		$agent_id = isset($_REQUEST['agent_id'])? absint(wp_unslash($_REQUEST['agent_id'])) : -1;
 		$short_code = '[ere_property item_amount="' . $items_amount . '" layout_style="' . $layout . '"
 					view_all_link="' . $view_all_link . '" show_paging="true" columns="' . $columns . '"
 					image_size="' . $image_size . '" columns_gap="' . $columns_gap . '" paged="' . $paged . '"
@@ -696,13 +696,13 @@ class ERE_Shortcodes {
 	 */
 	public function agent_paging_ajax()
 	{
-		$paged = $_REQUEST['paged'];
-		$layout = $_REQUEST['layout'];
-		$item_amount = $_REQUEST['item_amount'];
-		$items = $_REQUEST['items'];
-		$image_size = $_REQUEST['image_size'];
-		$show_paging = $_REQUEST['show_paging'];
-		$post_not_in = $_REQUEST['post_not_in'];
+		$paged = isset($_REQUEST['paged']) ? absint(wp_unslash($_REQUEST['paged'])) : 1;
+		$layout = isset($_REQUEST['layout']) ? ere_clean(wp_unslash($_REQUEST['layout'])) : '';
+		$item_amount = isset($_REQUEST['item_amount']) ? absint(wp_unslash($_REQUEST['item_amount'])) : 10;
+		$items = isset($_REQUEST['items']) ? ere_clean(wp_unslash($_REQUEST['items'])) : '';
+		$image_size = isset($_REQUEST['image_size']) ? ere_clean(wp_unslash($_REQUEST['image_size'])) : '';
+		$show_paging = isset($_REQUEST['show_paging']) ? ere_clean(wp_unslash($_REQUEST['show_paging'])) : '';
+		$post_not_in = isset($_REQUEST['post_not_in']) ? ere_clean(wp_unslash($_REQUEST['post_not_in'])) : '';
 
 		$short_code = '[ere_agent layout_style="' . $layout . '" item_amount="' . $item_amount . '" items ="' . $items . '" image_size="' . $image_size . '" paged="' . $paged . '" show_paging="' . $show_paging . '" post_not_in="' . $post_not_in . '"]';
 		echo do_shortcode($short_code);
@@ -710,14 +710,14 @@ class ERE_Shortcodes {
 	}
 
 	public function property_set_session_view_as_ajax() {
-		$view_as = $_REQUEST['view_as'];
+		$view_as = isset($_REQUEST['view_as']) ? ere_clean(wp_unslash($_REQUEST['view_as'])) : '';
 		if (!empty( $view_as ) && in_array($view_as, array('property-list', 'property-grid'))) {
 			$_SESSION['property_view_as'] = $view_as;
 		}
 	}
 
 	public function agent_set_session_view_as_ajax() {
-		$view_as = $_REQUEST['view_as'];
+        $view_as = isset($_REQUEST['view_as']) ? ere_clean(wp_unslash($_REQUEST['view_as'])) : '';
 		if (!empty( $view_as ) && in_array($view_as, array('agent-list', 'agent-grid'))) {
 			$_SESSION['agent_view_as'] = $view_as;
 		}

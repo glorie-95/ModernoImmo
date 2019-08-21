@@ -17,7 +17,7 @@ if (!class_exists('ERE_Captcha')) {
 				?>
 				<script type="text/javascript">
 					var ere_widget_ids = [];
-					var ere_captcha_site_key = '<?php echo $captcha_site_key; ?>';
+					var ere_captcha_site_key = '<?php echo esc_js($captcha_site_key); ?>';
 					/**
 					 * reCAPTCHA render
 					 */
@@ -48,7 +48,7 @@ if (!class_exists('ERE_Captcha')) {
 		public function verify_recaptcha() {
 			if (isset($_POST['g-recaptcha-response'])) {
 				$captcha_secret_key = ere_get_option('captcha_secret_key', '');
-				$response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=". $captcha_secret_key ."&response=". $_POST['g-recaptcha-response']);
+				$response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=". $captcha_secret_key ."&response=". ere_clean(wp_unslash($_POST['g-recaptcha-response'])));
 				$response = json_decode($response["body"], true);
 				if (true == $response["success"]) {
 				} else {

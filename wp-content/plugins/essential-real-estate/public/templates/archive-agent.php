@@ -20,7 +20,7 @@ $column_xs = ere_get_option('archive_agent_column_xs', '2');
 $column_mb = ere_get_option('archive_agent_column_mb', '1');
 
 if (isset($_SESSION["agent_view_as"]) && !empty($_SESSION["agent_view_as"]) && in_array($_SESSION["agent_view_as"], array('agent-list', 'agent-grid'))) {
-    $agent_layout_style = $_SESSION["agent_view_as"];
+    $agent_layout_style = ere_clean(wp_unslash($_SESSION["agent_view_as"]));
 }
 
 $wrapper_classes = array(
@@ -74,7 +74,7 @@ if ($agency != '') {
 }
 $keyword = '';
 if (isset ($_GET['agent_name'])) {
-    $keyword = trim($_GET['agent_name']);
+    $keyword = ere_clean(wp_unslash($_GET['agent_name']));
     if (!empty($keyword)) {
         $args['s'] = $keyword;
     }

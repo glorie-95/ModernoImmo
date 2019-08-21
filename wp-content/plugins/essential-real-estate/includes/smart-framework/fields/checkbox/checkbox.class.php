@@ -14,7 +14,10 @@ if (!class_exists('GSF_Field_Checkbox')) {
 			?>
 			<div class="gsf-field-checkbox-inner">
 				<label>
-					<input data-field-control="" class="gsf-checkbox" type="checkbox"<?php echo $field_value ? 'checked="checked"' : ''; ?>
+					<input data-field-control="" class="gsf-checkbox" type="checkbox"
+                        <?php if ($field_value): ?>
+                            checked="checked"
+                        <?php endif; ?>
 					       name="<?php echo esc_attr($this->get_name()) ?>"
 					       value="1"/>
 					<span><?php echo wp_kses_post($this->params['desc']) ?></span>

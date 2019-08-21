@@ -33,7 +33,9 @@ if (!class_exists('GSF_Field_Color')) {
 				       class="gsf-color" type="text"
 				       maxlength="<?php echo esc_attr($validate['maxlength']); ?>"
 				       pattern="<?php echo esc_attr($validate['pattern']); ?>"
-					<?php echo($alpha ? 'data-alpha="true"' : ''); ?>
+                      <?php if ($alpha): ?>
+                          data-alpha="true"
+                      <?php endif; ?>
 				       name="<?php echo esc_attr($this->get_name()) ?>"
 				       value="<?php echo esc_attr($field_value); ?>"/>
 			</div>

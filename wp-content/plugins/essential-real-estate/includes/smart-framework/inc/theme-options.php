@@ -131,7 +131,7 @@ if (!class_exists('GSF_Theme_Options')) {
 
 			settings_errors('gf-options');
 
-			$page = $_GET['page'];
+			$page = isset($_GET['page']) ? gsf_clean(wp_unslash($_GET['page'])) : '';
 			$config = &gsf_get_options_config($page);
 			$option_name = $config['option_name'];
 
@@ -237,11 +237,12 @@ if (!class_exists('GSF_Theme_Options')) {
 			try {
 
 
-				$page = $_POST['_current_page'];
+				$page = isset($_POST['_current_page']) ? gsf_clean(wp_unslash($_POST['_current_page'])) : '';
 				$configs = &gsf_get_options_config($page);
 				$options_name = $configs['option_name'];
+				$wpnonce = isset($_POST['_wpnonce']) ? gsf_clean(wp_unslash($_POST['_wpnonce'])) : '';
 
-				if (!wp_verify_nonce($_POST['_wpnonce'], $options_name)) {
+				if (!wp_verify_nonce($wpnonce, $options_name)) {
 					return;
 				}
 
@@ -252,7 +253,7 @@ if (!class_exists('GSF_Theme_Options')) {
 				foreach ($config_keys as $meta_id => $field_value) {
 					$is_clone = $field_value['clone'];
 
-					$meta_value = isset($_POST[$meta_id]) ? $_POST[$meta_id] : ($is_clone ? array() : '');
+					$meta_value = isset($_POST[$meta_id]) ? wp_unslash($_POST[$meta_id])  : ($is_clone ? array() : '');
 					if ($is_clone && is_array($meta_value)) {
 						$max = false;
 						foreach ($meta_value as $index_key => &$value) {

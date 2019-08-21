@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: real estate, agency, agent, realtor, property
 Requires at least: 4.5
 Tested up to: 5.2
-Stable tag: 1.7.0
+Stable tag: 1.7.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,36 @@ Yes! it's always will be free.
 10. Listing properties with features on frontend
 
 == Changelog ==
+
+= 1.7.8 =
+* Fix: error save "Additional Fields" in options
+
+= 1.7.7 =
+* Fix: error upload file
+
+= 1.7.6 =
+* Fix: payment with paypal method
+
+= 1.7.5 =
+* Fix: error edit property
+
+= 1.7.4 =
+* Fix: error get ajax Province / State, City / Town, Neighborhood
+* Update: Remove google plus social
+
+= 1.7.3 =
+* Update: bootstrap to version 3.4.1
+
+= 1.7.2 =
+* Fix: Reflected XSS
+* Fix: Payment Stripe
+* Fix: Remove CURL code
+* Fix: Remove javascript jquery-ui
+* Update: javascript isotope to version 3.0.6
+
+= 1.7.1 =
+* Fix: Reflected XSS
+
 = 1.7.0 =
 * Fix: Email content, agency description, thankyou page content... not respecting line break
 * New: Allow to Input and Display Wire Transfer payment Information

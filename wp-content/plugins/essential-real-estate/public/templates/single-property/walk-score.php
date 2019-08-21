@@ -29,7 +29,7 @@ if ($walkscore_api_key != '') {
                 <div class="walkscore-logo">
                     <a href="https://www.walkscore.com" target="_blank">
                         <img src="https://cdn.walk.sc/images/api-logo.png"
-                             alt="<?php esc_html_e('Walk Scores', 'essential-real-estate'); ?>">
+                             alt="<?php esc_attr_e('Walk Scores', 'essential-real-estate'); ?>">
                     </a>
                 </div>
                 <ul class="walkscore-list">

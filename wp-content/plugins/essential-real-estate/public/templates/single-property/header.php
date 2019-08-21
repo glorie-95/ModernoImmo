@@ -136,14 +136,14 @@ $property_price_postfix      = isset( $property_meta_data[ ERE_METABOX_PREFIX . 
 			if (ere_get_option('enable_compare_properties', '1') == '1'):?>
 				<a class="compare-property" href="javascript:void(0)"
 				   data-property-id="<?php the_ID() ?>" data-toggle="tooltip"
-				   title="<?php esc_html_e('Compare', 'essential-real-estate') ?>">
+				   title="<?php esc_attr_e('Compare', 'essential-real-estate') ?>">
 					<i class="fa fa-plus"></i>
 				</a>
 			<?php endif;
 			if(ere_get_option('enable_print_property','1')=='1'):?>
 			<a href="javascript:void(0)" id="property-print"
 			   data-ajax-url="<?php echo ERE_AJAX_URL; ?>" data-toggle="tooltip"
-			   data-original-title="<?php esc_html_e( 'Print', 'essential-real-estate' ); ?>"
+			   data-original-title="<?php esc_attr_e( 'Print', 'essential-real-estate' ); ?>"
 			   data-property-id="<?php echo esc_attr( $property_id ); ?>"><i class="fa fa-print"></i></a>
 			<?php endif;?>
 		</div>

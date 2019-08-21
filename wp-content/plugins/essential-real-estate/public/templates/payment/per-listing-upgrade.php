@@ -2,15 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
-$property_id = isset($_GET['property_id']) ? $_GET['property_id'] : '';
+$property_id = isset($_GET['property_id']) ? absint(wp_unslash($_GET['property_id'])) : 0;
 $terms_conditions = ere_get_option('payment_terms_condition');
-$allowed_html = array(
-    'a' => array(
-        'href' => array(),
-        'title' => array()
-    ),
-    'strong' => array()
-);
 $enable_paypal = ere_get_option('enable_paypal',1);
 $enable_stripe = ere_get_option('enable_stripe',1);
 $enable_wire_transfer = ere_get_option('enable_wire_transfer',1);
@@ -72,9 +65,9 @@ $price_featured_listing = ere_get_option('price_featured_listing',0);
                 </div>
             <?php endif; ?>
         </div>
-        <input type="hidden" id="ere_property_id" name="ere_property_id" value="<?php echo intval($property_id); ?>">
+        <input type="hidden" id="ere_property_id" name="ere_property_id" value="<?php echo esc_attr($property_id); ?>">
         <p class="terms-conditions"
-           role="alert"><?php echo sprintf(wp_kses(__('Please read <a target="_blank" href="%s"><strong>Terms & Conditions</strong></a> before click "Pay Now"', 'essential-real-estate'), $allowed_html), get_permalink($terms_conditions)); ?></p>
+           role="alert"><?php echo wp_kses_post(sprintf(__('Please read <a target="_blank" href="%s"><strong>Terms & Conditions</strong></a> before click "Pay Now"', 'essential-real-estate'), get_permalink($terms_conditions))); ?></p>
         <button id="ere_upgrade_listing" type="button"
                 class="btn btn-success btn-submit"> <?php esc_html_e('Pay Now', 'essential-real-estate'); ?> </button>
     </div>

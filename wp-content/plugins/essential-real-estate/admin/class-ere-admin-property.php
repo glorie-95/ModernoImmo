@@ -343,13 +343,15 @@ if (!class_exists('ERE_Admin_Property')) {
         public function filter_restrict_manage_property() {
             global $typenow;
             $post_type = 'property';
+            $property_author = isset($_GET['property_author'])? $_GET['property_author']:'';
+            $property_identity = isset($_GET['property_identity'])? $_GET['property_identity']:'';
             if ($typenow == $post_type) {
                 $taxonomy_arr  = array('property-status','property-type');
                 foreach($taxonomy_arr as $taxonomy){
                     $selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
                     $info_taxonomy = get_taxonomy($taxonomy);
                     wp_dropdown_categories(array(
-                        'show_option_all' => __("All {$info_taxonomy->label}"),
+                        'show_option_all' => sprintf(esc_html__('All %s','essential-real-estate'),esc_html($info_taxonomy->label)),
                         'taxonomy'        => $taxonomy,
                         'name'            => $taxonomy,
                         'orderby'         => 'name',
@@ -359,8 +361,8 @@ if (!class_exists('ERE_Admin_Property')) {
                     ));
                 }
                 ?>
-                <input type="text" placeholder="<?php esc_html_e('Author','essential-real-estate');?>" name="property_author" value="<?php echo (isset($_GET['property_author'])? $_GET['property_author']:'');?>">
-                <input type="text" placeholder="<?php esc_html_e('Property ID','essential-real-estate');?>" name="property_identity" value="<?php echo (isset($_GET['property_identity'])? $_GET['property_identity']:'');?>">
+                <input type="text" placeholder="<?php esc_attr_e('Author','essential-real-estate');?>" name="property_author" value="<?php echo esc_attr($property_author);?>">
+                <input type="text" placeholder="<?php esc_attr_e('Property ID','essential-real-estate');?>" name="property_identity" value="<?php echo esc_attr($property_identity);?>">
                 <?php
             };
         }
@@ -384,12 +386,12 @@ if (!class_exists('ERE_Admin_Property')) {
                 }
                 if(isset($_GET['property_author']) && $_GET['property_author'] != '')
                 {
-                    $q_vars['author_name'] = $_GET['property_author'];
+                    $q_vars['author_name'] = ere_clean(wp_unslash($_GET['property_author']));
                 }
                 if(isset($_GET['property_identity']) && $_GET['property_identity'] != '')
                 {
                     $q_vars['meta_key'] = ERE_METABOX_PREFIX.'property_identity';
-                    $q_vars['meta_value'] =  $_GET['property_identity'];
+                    $q_vars['meta_value'] = ere_clean(wp_unslash($_GET['property_identity']));
                     $q_vars['meta_compare'] = '=';
                 }
             }

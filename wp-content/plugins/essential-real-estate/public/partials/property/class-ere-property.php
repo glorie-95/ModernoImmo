@@ -13,7 +13,7 @@ if (!class_exists('ERE_Property')) {
          */
         public function remove_property_attachment_ajax()
         {
-            $nonce = $_POST['removeNonce'];
+            $nonce = isset($_POST['removeNonce']) ? ere_clean(wp_unslash($_POST['removeNonce'])) : '';
             if (!wp_verify_nonce($nonce, 'property_allow_upload')) {
                 $json_response = array(
                     'success' => false,
@@ -24,11 +24,9 @@ if (!class_exists('ERE_Property')) {
             }
             $success = false;
             if (isset($_POST['property_id']) && isset($_POST['attachment_id'])) {
-                $property_id = $_POST['property_id'];
-                $property_id = intval($property_id);
-                $type = $_POST['type'];
-                $attachment_id = $_POST['attachment_id'];
-                $attachment_id = intval($attachment_id);
+                $property_id = absint(wp_unslash($_POST['property_id'])) ;
+                $type = isset($_POST['type']) ? ere_clean(wp_unslash($_POST['type'])) : '';
+                $attachment_id = absint(wp_unslash($_POST['attachment_id']));
                 if ($property_id > 0) {
                     if ($type === 'gallery') {
                         delete_post_meta($property_id, ERE_METABOX_PREFIX . 'property_images', $attachment_id);
@@ -83,14 +81,15 @@ if (!class_exists('ERE_Property')) {
 
         public function property_img_upload_ajax()
         {
-            $nonce = $_REQUEST['nonce'];
+            $nonce = isset($_REQUEST['nonce']) ? ere_clean(wp_unslash($_REQUEST['nonce'])) : '';
             if (!wp_verify_nonce($nonce, 'property_allow_upload')) {
                 $ajax_response = array('success' => false, 'reason' => esc_html__('Security check failed!', 'essential-real-estate'));
                 echo json_encode($ajax_response);
                 wp_die();
             }
 
-            $submitted_file = $_FILES['property_upload_file'];
+            $submitted_file = $_FILES['property_upload_file']; // WPCS: sanitization ok, input var ok.
+
             $uploaded_image = wp_handle_upload($submitted_file, array('test_form' => false));
 
             if (isset($uploaded_image['file'])) {
@@ -128,14 +127,14 @@ if (!class_exists('ERE_Property')) {
 
         public function property_attachment_upload_ajax()
         {
-            $nonce = $_REQUEST['nonce'];
+            $nonce = isset($_REQUEST['nonce']) ? ere_clean(wp_unslash($_REQUEST['nonce'])) : '';
             if (!wp_verify_nonce($nonce, 'property_allow_upload')) {
                 $ajax_response = array('success' => false, 'reason' => esc_html__('Security check failed!', 'essential-real-estate'));
                 echo json_encode($ajax_response);
                 wp_die();
             }
 
-            $submitted_file = $_FILES['property_upload_file'];
+            $submitted_file = $_FILES['property_upload_file'];  // WPCS: sanitization ok, input var ok.
             $uploaded_image = wp_handle_upload($submitted_file, array('test_form' => false));
 
             if (isset($uploaded_image['file'])) {
@@ -192,14 +191,14 @@ if (!class_exists('ERE_Property')) {
             $paid_submission_type = ere_get_option('paid_submission_type', 'no');
 
             if (isset($_POST['property_title'])) {
-                $new_property['post_title'] = sanitize_text_field($_POST['property_title']);
+                $new_property['post_title'] = ere_clean(wp_unslash($_POST['property_title']));
             }
 
             if (isset($_POST['property_des'])) {
-                $new_property['post_content'] = wp_kses_post($_POST['property_des']);
+                $new_property['post_content'] = wp_filter_post_kses($_POST['property_des']);
             }
 
-            $submit_action = $_POST['property_form'];
+            $submit_action = isset($_POST['property_form']) ? ere_clean(wp_unslash($_POST['property_form'])) : '';
             $property_id = 0;
             if ($submit_action == 'submit-property') {
                 if ($paid_submission_type == 'per_listing') {
@@ -235,7 +234,7 @@ if (!class_exists('ERE_Property')) {
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_featured', 0);
                 }
             } else if ($submit_action == 'edit-property') {
-                $property_id = $_POST['property_id'];
+                $property_id = absint(wp_unslash($_POST['property_id'])) ;
                 $new_property['ID'] = intval($property_id);
                 if ($paid_submission_type == 'per_package') {
                     $current_package_key = get_the_author_meta(ERE_METABOX_PREFIX . 'package_key', $user_id);
@@ -264,20 +263,20 @@ if (!class_exists('ERE_Property')) {
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_postfix', '');
                 } else {
                     if (isset($_POST['property_price_unit'])) {
-                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_unit', sanitize_text_field($_POST['property_price_unit']));
+                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_unit', sanitize_text_field(wp_unslash($_POST['property_price_unit'])));
                     } else {
                         update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_unit', 1);
                     }
                     if (isset($_POST['property_price_short'])) {
-                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_short', sanitize_text_field($_POST['property_price_short']));
-                        $property_price_short = $_POST['property_price_short'];
+                        $property_price_short = ere_clean(wp_unslash($_POST['property_price_short']));
+                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_short', $property_price_short);
+
                         if (is_numeric($property_price_short)) {
                             if (isset($_POST['property_price_unit']) && is_numeric($_POST['property_price_unit'])) {
-                                $property_price_unit = $_POST['property_price_unit'];
+                                $property_price_unit = absint(wp_unslash($_POST['property_price_unit']));
                             } else {
                                 $property_price_unit = 1;
                             }
-                            $property_price_short = $_POST['property_price_short'];
                             $property_price = doubleval($property_price_short) * intval($property_price_unit);
                             update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price', $property_price);
                         } else {
@@ -285,52 +284,52 @@ if (!class_exists('ERE_Property')) {
                         }
                     }
                     if (isset($_POST['property_price_prefix'])) {
-                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_prefix', sanitize_text_field($_POST['property_price_prefix']));
+                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_prefix', sanitize_text_field(wp_unslash($_POST['property_price_prefix'])));
                     }
 
                     if (isset($_POST['property_price_postfix'])) {
-                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_postfix', sanitize_text_field($_POST['property_price_postfix']));
+                        update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_price_postfix', sanitize_text_field(wp_unslash($_POST['property_price_postfix'])));
                     }
                 }
 
 
                 if (isset($_POST['property_size'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_size', sanitize_text_field($_POST['property_size']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_size', sanitize_text_field(wp_unslash($_POST['property_size'])));
                 }
 
                 if (isset($_POST['property_land'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_land', sanitize_text_field($_POST['property_land']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_land', sanitize_text_field(wp_unslash($_POST['property_land'])));
                 }
 
                 if (isset($_POST['property_rooms'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_rooms', sanitize_text_field($_POST['property_rooms']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_rooms', sanitize_text_field(wp_unslash($_POST['property_rooms'])));
                 }
 
                 if (isset($_POST['property_bedrooms'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_bedrooms', sanitize_text_field($_POST['property_bedrooms']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_bedrooms', sanitize_text_field(wp_unslash($_POST['property_bedrooms'])));
                 }
 
                 if (isset($_POST['property_bathrooms'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_bathrooms', sanitize_text_field($_POST['property_bathrooms']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_bathrooms', sanitize_text_field(wp_unslash($_POST['property_bathrooms'])));
                 }
 
                 if (isset($_POST['property_garage'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_garage', sanitize_text_field($_POST['property_garage']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_garage', sanitize_text_field(wp_unslash($_POST['property_garage'])));
                 }
 
                 if (isset($_POST['property_garage_size'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_garage_size', sanitize_text_field($_POST['property_garage_size']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_garage_size', sanitize_text_field(wp_unslash($_POST['property_garage_size'])));
                 }
 
                 if (isset($_POST['property_year'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_year', sanitize_text_field($_POST['property_year']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_year', sanitize_text_field(wp_unslash($_POST['property_year'])));
                 }
 
                 if (isset($_POST['property_video_url'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_video_url', sanitize_text_field($_POST['property_video_url']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_video_url', sanitize_text_field(wp_unslash($_POST['property_video_url'])));
                 }
                 if (isset($_POST['property_identity']) && !empty($_POST['property_identity'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_identity', sanitize_text_field($_POST['property_identity']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_identity', sanitize_text_field(wp_unslash($_POST['property_identity'])));
                 } else {
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_identity', $property_id);
                 }
@@ -345,15 +344,15 @@ if (!class_exists('ERE_Property')) {
                                 }
                                 update_post_meta($property_id, $field['id'], $arr);
                             } else {
-                                update_post_meta($property_id, $field['id'], sanitize_text_field($_POST[$field['id']]));
+                                update_post_meta($property_id, $field['id'], sanitize_text_field(wp_unslash($_POST[$field['id']])));
                             }
                         }
                     }
                 }
                 if (isset($_POST['property_image_360_id']) && isset($_POST['property_image_360_url'])) {
                     $property_image_360 = array(
-                        'id' => $_POST['property_image_360_id'],
-                        'url' => $_POST['property_image_360_url'],
+                        'id' => absint(wp_unslash($_POST['property_image_360_id'])),
+                        'url' => esc_url_raw(wp_unslash($_POST['property_image_360_url'])),
                     );
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_image_360', $property_image_360);
                 }
@@ -368,8 +367,7 @@ if (!class_exists('ERE_Property')) {
                         $str_img_ids = substr($str_img_ids, 1);
                         update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_images', $str_img_ids);
                         if (isset($_POST['featured_image_id'])) {
-                            $featured_image_id = $_POST['featured_image_id'];
-                            $featured_image_id = intval($featured_image_id);
+                            $featured_image_id = absint(wp_unslash($_POST['featured_image_id'])) ;
                             if (in_array($featured_image_id, $property_image_ids)) {
                                 update_post_meta($property_id, '_thumbnail_id', $featured_image_id);
                                 if (!empty($_POST['property_video_url'])) {
@@ -398,8 +396,8 @@ if (!class_exists('ERE_Property')) {
                 if (isset($_POST['property_type'])) {
                     if($_POST['property_type'] != '-1')
                     {
-                        $object_id = $_POST['property_type'];
-                        wp_set_object_terms($property_id, intval($object_id), 'property-type');
+                        $object_id = absint(wp_unslash($_POST['property_type'])) ;
+                        wp_set_object_terms($property_id, $object_id, 'property-type');
                     }
                     else{
                         wp_set_object_terms($property_id, null, 'property-type');
@@ -407,15 +405,15 @@ if (!class_exists('ERE_Property')) {
                 }
 
                 if (isset($_POST['property_status'])) {
-                    $object_id = $_POST['property_status'];
-                    wp_set_object_terms($property_id, intval($object_id), 'property-status');
+                    $object_id = absint(wp_unslash($_POST['property_status'])) ;
+                    wp_set_object_terms($property_id, $object_id, 'property-status');
                 }
 
                 if (isset($_POST['property_label'])) {
                     if($_POST['property_label'] != '-1')
                     {
-                        $object_id = $_POST['property_label'];
-                        wp_set_object_terms($property_id, intval($object_id), 'property-label');
+                        $object_id = absint(wp_unslash($_POST['property_label']));
+                        wp_set_object_terms($property_id, $object_id, 'property-label');
                     }
                     else
                     {
@@ -424,25 +422,25 @@ if (!class_exists('ERE_Property')) {
                 }
 
                 if (isset($_POST['locality'])) {
-                    $property_city = sanitize_text_field($_POST['locality']);
+                    $property_city = sanitize_text_field(wp_unslash($_POST['locality']));
                     wp_set_object_terms($property_id, $property_city, 'property-city');
                 } elseif (isset($_POST['property_city'])) {
-                    $property_city = sanitize_text_field($_POST['property_city']);
+                    $property_city = sanitize_text_field(wp_unslash($_POST['property_city']));
                     wp_set_object_terms($property_id, $property_city, 'property-city');
                 }
                 if (isset($_POST['neighborhood'])) {
-                    $property_neighborhood = sanitize_text_field($_POST['neighborhood']);
+                    $property_neighborhood = sanitize_text_field(wp_unslash($_POST['neighborhood']));
                     wp_set_object_terms($property_id, $property_neighborhood, 'property-neighborhood');
                 } elseif (isset($_POST['property_neighborhood'])) {
-                    $property_neighborhood = sanitize_text_field($_POST['property_neighborhood']);
+                    $property_neighborhood = sanitize_text_field(wp_unslash($_POST['property_neighborhood']));
                     wp_set_object_terms($property_id, $property_neighborhood, 'property-neighborhood');
                 }
 
                 if (isset($_POST['administrative_area_level_1'])) {
-                    $property_state = sanitize_text_field($_POST['administrative_area_level_1']);
+                    $property_state = sanitize_text_field(wp_unslash($_POST['administrative_area_level_1']));
                     wp_set_object_terms($property_id, $property_state, 'property-state');
                 } elseif (isset($_POST['property_state'])) {
-                    $property_state = sanitize_text_field($_POST['property_state']);
+                    $property_state = sanitize_text_field(wp_unslash($_POST['property_state']));
                     wp_set_object_terms($property_id, $property_state, 'property-state');
                 }
 
@@ -455,32 +453,32 @@ if (!class_exists('ERE_Property')) {
                 }
 
                 if (isset($_POST['floors_enable'])) {
-                    $floors_enable = $_POST['floors_enable'];
+                    $floors_enable = ere_clean(wp_unslash($_POST['floors_enable']));
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'floors_enable', $floors_enable);
                 }
 
                 if (isset($_POST[ERE_METABOX_PREFIX . 'floors'])) {
-                    $floors_post = $_POST[ERE_METABOX_PREFIX . 'floors'];
+                    $floors_post = ere_clean(wp_unslash($_POST[ERE_METABOX_PREFIX . 'floors']));
                     if (!empty($floors_post)) {
                         update_post_meta($property_id, ERE_METABOX_PREFIX . 'floors', $floors_post);
                     }
                 }
 
                 if (isset($_POST['agent_display_option'])) {
-                    $property_agent_display_option = sanitize_text_field($_POST['agent_display_option']);
+                    $property_agent_display_option = sanitize_text_field(wp_unslash($_POST['agent_display_option']));
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'agent_display_option', $property_agent_display_option);
                     if ($property_agent_display_option == 'other_info') {
                         if (isset($_POST['property_other_contact_name'])) {
-                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_name', sanitize_text_field($_POST['property_other_contact_name']));
+                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_name', sanitize_text_field(wp_unslash($_POST['property_other_contact_name'])));
                         }
                         if (isset($_POST['property_other_contact_mail'])) {
-                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_mail', sanitize_text_field($_POST['property_other_contact_mail']));
+                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_mail', sanitize_email(wp_unslash($_POST['property_other_contact_mail'])));
                         }
                         if (isset($_POST['property_other_contact_phone'])) {
-                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_phone', sanitize_text_field($_POST['property_other_contact_phone']));
+                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_phone', sanitize_text_field(wp_unslash($_POST['property_other_contact_phone'])));
                         }
                         if (isset($_POST['property_other_contact_description'])) {
-                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_description', sanitize_text_field($_POST['property_other_contact_description']));
+                            update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_other_contact_description', wp_filter_post_kses($_POST['property_other_contact_description']));
                         }
                     } else {
                         update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_author', $user_id);
@@ -492,14 +490,14 @@ if (!class_exists('ERE_Property')) {
                 }
 
                 if (isset($_POST['property_map_address'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_address', sanitize_text_field($_POST['property_map_address']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_address', sanitize_text_field(wp_unslash($_POST['property_map_address'])));
                 }
 
                 if ((isset($_POST['lat']) && !empty($_POST['lat'])) && (isset($_POST['lng']) && !empty($_POST['lng']))) {
-                    $lat = sanitize_text_field($_POST['lat']);
-                    $lng = sanitize_text_field($_POST['lng']);
+                    $lat = sanitize_text_field(wp_unslash($_POST['lat']));
+                    $lng = sanitize_text_field(wp_unslash($_POST['lng']));
                     $lat_lng = $lat . ',' . $lng;
-                    $address = sanitize_text_field($_POST['property_map_address']);
+                    $address = sanitize_text_field(wp_unslash($_POST['property_map_address']));
                     $arr_location = array(
                         'location' => $lat_lng,
                         'address' => $address
@@ -507,24 +505,24 @@ if (!class_exists('ERE_Property')) {
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_location', $arr_location);
                 }
                 if (isset($_POST['country_short'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_country', sanitize_text_field($_POST['country_short']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_country', sanitize_text_field(wp_unslash($_POST['country_short'])));
                 } elseif (isset($_POST['property_country'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_country', sanitize_text_field($_POST['property_country']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_country', sanitize_text_field(wp_unslash($_POST['property_country'])));
                 }
                 if (isset($_POST['postal_code'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_zip', sanitize_text_field($_POST['postal_code']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'property_zip', sanitize_text_field(wp_unslash($_POST['postal_code'])));
                 }
 
                 if (isset($_POST['additional_feature_title']) && isset($_POST['additional_feature_value'])) {
-                    $additional_feature_title = $_POST['additional_feature_title'];
-                    $additional_feature_value = $_POST['additional_feature_value'];
+                    $additional_feature_title = ere_clean(wp_unslash($_POST['additional_feature_title'])) ;
+                    $additional_feature_value = ere_clean(wp_unslash($_POST['additional_feature_value'])) ;
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'additional_features', count($additional_feature_title));
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'additional_feature_title', $additional_feature_title);
                     update_post_meta($property_id, ERE_METABOX_PREFIX . 'additional_feature_value', $additional_feature_value);
                 }
 
                 if (isset($_POST['private_note'])) {
-                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'private_note', sanitize_text_field($_POST['private_note']));
+                    update_post_meta($property_id, ERE_METABOX_PREFIX . 'private_note', sanitize_text_field(wp_unslash($_POST['private_note'])));
                 }
                 return $property_id;
             }
@@ -607,10 +605,10 @@ if (!class_exists('ERE_Property')) {
         public function contact_agent_ajax()
         {
             check_ajax_referer('ere_contact_agent_ajax_nonce', 'ere_security_contact_agent');
-            $sender_phone = sanitize_text_field($_POST['sender_phone']);
+            $sender_phone = isset($_POST['sender_phone']) ? ere_clean(wp_unslash($_POST['sender_phone'])) : '';
 
-            $target_email = sanitize_email($_POST['target_email']);
-            $property_url = esc_url($_POST['property_url']);
+            $target_email = isset($_POST['target_email']) ?  sanitize_email(wp_unslash($_POST['target_email'])) : '';
+            $property_url = isset($_POST['property_url']) ?  esc_url_raw(wp_unslash($_POST['property_url'])) : '';
             $target_email = is_email($target_email);
             if (!$target_email) {
                 echo json_encode(array('success' => false, 'message' => esc_html__('Target Email address is not properly configured!', 'essential-real-estate')));
@@ -620,10 +618,10 @@ if (!class_exists('ERE_Property')) {
             if (ere_enable_captcha('contact_agent') || ere_enable_captcha('contact_agency')) {
                 do_action('ere_verify_recaptcha');
             }
-            $sender_email = sanitize_email($_POST['sender_email']);
+            $sender_email = isset($_POST['sender_email']) ? sanitize_email(wp_unslash($_POST['sender_email'])) : '';
 
-            $sender_name = sanitize_text_field($_POST['sender_name']);
-            $sender_msg = wp_kses_post($_POST['sender_msg']);
+            $sender_name = isset($_POST['sender_name']) ?  ere_clean(wp_unslash($_POST['sender_name'])) : '';
+            $sender_msg = isset($_POST['sender_msg']) ?  wp_filter_post_kses($_POST['sender_msg']) : '';
 
             $email_subject = sprintf(esc_html__('New message sent by %s using contact form at %s', 'essential-real-estate'), $sender_name, get_bloginfo('name'));
 
@@ -656,8 +654,7 @@ if (!class_exists('ERE_Property')) {
         public function favorite_ajax()
         {
             global $current_user;
-            $property_id = $_POST['property_id'];
-            $property_id = intval($property_id);
+            $property_id = isset($_POST['property_id']) ? absint(wp_unslash($_POST['property_id'])) : 0;
             wp_get_current_user();
             $user_id = $current_user->ID;
             $added = $removed = false;
@@ -704,8 +701,7 @@ if (!class_exists('ERE_Property')) {
          */
         public function view_gallery_ajax()
         {
-            $property_id = $_POST['property_id'];
-            $property_id = intval($property_id);
+            $property_id = isset($_POST['property_id']) ?  absint(wp_unslash($_POST['property_id'])) : 0;
             $property_gallery = get_post_meta($property_id, ERE_METABOX_PREFIX . 'property_images', true);
             $ajax_response = '';
             $index = 0;
@@ -755,13 +751,13 @@ if (!class_exists('ERE_Property')) {
             if (!isset($_POST['property_id']) || !is_numeric($_POST['property_id'])) {
                 return;
             }
-            $property_id = $_POST['property_id'];
-            $property_id = intval($property_id);
+            $property_id = absint(wp_unslash($_POST['property_id']));
             $isRTL = 'false';
             if (isset($_POST['isRTL'])) {
                 $isRTL = $_POST['isRTL'];
             }
             ere_get_template('property/property-print.php', array('property_id' => $property_id, 'isRTL' => $isRTL));
+            wp_die();
         }
 
         /**
@@ -821,8 +817,8 @@ if (!class_exists('ERE_Property')) {
             if (!isset($_POST['country'])) {
                 return;
             }
-            $country = $_POST['country'];
-            $type = $_POST['type'];
+            $country = ere_clean(wp_unslash($_POST['country'])) ;
+            $type = isset($_POST['type']) ?  ere_clean(wp_unslash($_POST['type'])) : '';
             if (!empty($country)) {
                 $taxonomy_terms = get_categories(
                     array(
@@ -872,7 +868,11 @@ if (!class_exists('ERE_Property')) {
             if ($type == 1) {
                 $html .= '<option value="" selected="selected">' . esc_html__('All States', 'essential-real-estate') . '</option>';
             }
-            echo $html;
+            echo wp_kses($html,array(
+                'option' => array(
+                 'value' => true,
+                 'selected' => true
+            )));
             wp_die();
         }
 
@@ -881,8 +881,8 @@ if (!class_exists('ERE_Property')) {
             if (!isset($_POST['state'])) {
                 return;
             }
-            $state = $_POST['state'];
-            $type = $_POST['type'];
+            $state = ere_clean(wp_unslash($_POST['state']));
+            $type = isset($_POST['type']) ? ere_clean(wp_unslash($_POST['type'])) : '';
             if (isset($_POST['is_slug']) && ($_POST['is_slug']=='0')) {
                 $property_state = get_term_by('id', $state, 'property-state');
             }
@@ -938,7 +938,11 @@ if (!class_exists('ERE_Property')) {
             if ($type == 1) {
                 $html .= '<option value="" selected="selected">' . esc_html__('All Cities', 'essential-real-estate') . '</option>';
             }
-            echo $html;
+            echo wp_kses($html,array(
+                'option' => array(
+                    'value' => true,
+                    'selected' => true
+                )));
             wp_die();
         }
 
@@ -947,8 +951,8 @@ if (!class_exists('ERE_Property')) {
             if (!isset($_POST['city'])) {
                 return;
             }
-            $city = $_POST['city'];
-            $type = $_POST['type'];
+            $city = ere_clean(wp_unslash($_POST['city']));
+            $type = isset($_POST['type']) ? ere_clean(wp_unslash($_POST['type'])) : '';
             if (isset($_POST['is_slug']) && ($_POST['is_slug']=='0')) {
                 $property_city = get_term_by('id', $city, 'property-city');
             }
@@ -1005,7 +1009,11 @@ if (!class_exists('ERE_Property')) {
             if ($type == 1) {
                 $html .= '<option value="" selected="selected">' . esc_html__('All Neighborhoods', 'essential-real-estate') . '</option>';
             }
-            echo $html;
+            echo wp_kses($html,array(
+                'option' => array(
+                    'value' => true,
+                    'selected' => true
+                )));
             wp_die();
         }
 
@@ -1019,8 +1027,8 @@ if (!class_exists('ERE_Property')) {
             wp_get_current_user();
             $user_id = $current_user->ID;
             $user = get_user_by('id', $user_id);
-            $property_id = $_POST['property_id'];
-            $rating_value = $_POST['rating'];
+            $property_id = isset($_POST['property_id']) ? ere_clean(wp_unslash($_POST['property_id'])) : '';
+            $rating_value = isset($_POST['rating']) ? ere_clean(wp_unslash($_POST['rating'])) : '';
             $my_review = $wpdb->get_row("SELECT * FROM $wpdb->comments as comment INNER JOIN $wpdb->commentmeta AS meta WHERE comment.comment_post_ID = $property_id AND comment.user_id = $user_id  AND meta.meta_key = 'property_rating' AND meta.comment_id = comment.comment_ID ORDER BY comment.comment_ID DESC");
             $comment_approved = 1;
             $auto_publish_review_property = ere_get_option( 'review_property_approved_by_admin',0 );
@@ -1031,7 +1039,7 @@ if (!class_exists('ERE_Property')) {
                 $data = Array();
                 $user = $user->data;
                 $data['comment_post_ID'] = $property_id;
-                $data['comment_content'] = $_POST['message'];
+                $data['comment_content'] = isset($_POST['message']) ?  wp_filter_post_kses($_POST['message']) : '';
                 $data['comment_date'] = current_time('mysql');
                 $data['comment_approved'] = $comment_approved;
                 $data['comment_author'] = $user->user_login;
@@ -1048,7 +1056,7 @@ if (!class_exists('ERE_Property')) {
                 $data = Array();
                 $data['comment_ID'] = $my_review->comment_ID;
                 $data['comment_post_ID'] = $property_id;
-                $data['comment_content'] = $_POST['message'];
+                $data['comment_content'] = isset($_POST['message']) ? wp_filter_post_kses($_POST['message']) : '';
                 $data['comment_date'] = current_time('mysql');
                 $data['comment_approved'] = $comment_approved;
 
@@ -1071,7 +1079,7 @@ if (!class_exists('ERE_Property')) {
         {
             $property_rating = get_post_meta($property_id, ERE_METABOX_PREFIX . 'property_rating', true);
             if ($comment_exist == true) {
-                echo $old_rating_value;
+                echo esc_html($old_rating_value);
                 if (!empty($property_rating)) {
                     $property_rating[$rating_value]++;
                 } else {

@@ -153,27 +153,24 @@ if (!class_exists('ERE_Admin_Agent')) {
             }
             $user_as_agent = ere_get_option('user_as_agent', 1);
             if ($user_as_agent) {
-                $allowed_html = array();
-
-                $agent_description = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_description'], $allowed_html);
-                $agent_position = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_position'], $allowed_html);
-                $agent_email = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_email'], $allowed_html);
-                $agent_mobile_number = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_mobile_number'], $allowed_html);
-                $agent_fax_number = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_fax_number'], $allowed_html);
-                $agent_company = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_company'], $allowed_html);
-                $agent_licenses = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_licenses'], $allowed_html);
-                $agent_office_number = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_office_number'], $allowed_html);
-                $agent_office_address = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_office_address'], $allowed_html);
-                $agent_facebook_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_facebook_url'], $allowed_html);
-                $agent_twitter_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_twitter_url'], $allowed_html);
-                $agent_googleplus_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_googleplus_url'], $allowed_html);
-                $agent_linkedin_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_linkedin_url'], $allowed_html);
-                $agent_pinterest_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_pinterest_url'], $allowed_html);
-                $agent_instagram_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_instagram_url'], $allowed_html);
-                $agent_skype = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_skype'], $allowed_html);
-                $agent_youtube_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_youtube_url'], $allowed_html);
-                $agent_vimeo_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_vimeo_url'], $allowed_html);
-                $agent_website_url = wp_kses($_POST[ERE_METABOX_PREFIX . 'agent_website_url'], $allowed_html);
+                $agent_description = isset($_POST[ERE_METABOX_PREFIX . 'agent_description']) ?  wp_filter_post_kses($_POST[ERE_METABOX_PREFIX . 'agent_description']) : '';
+                $agent_position = isset($_POST[ERE_METABOX_PREFIX . 'agent_position']) ? sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_position']) : '';
+                $agent_email = isset($_POST[ERE_METABOX_PREFIX . 'agent_email']) ? sanitize_email($_POST[ERE_METABOX_PREFIX . 'agent_email']) : '';
+                $agent_mobile_number = isset($_POST[ERE_METABOX_PREFIX . 'agent_mobile_number']) ?  sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_mobile_number']) : '';
+                $agent_fax_number = isset($_POST[ERE_METABOX_PREFIX . 'agent_fax_number']) ? sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_fax_number']) : '';
+                $agent_company = isset($_POST[ERE_METABOX_PREFIX . 'agent_company']) ? sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_company']) : '';
+                $agent_licenses = isset($_POST[ERE_METABOX_PREFIX . 'agent_licenses']) ?  sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_licenses']) : '';
+                $agent_office_number = isset($_POST[ERE_METABOX_PREFIX . 'agent_office_number']) ? sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_office_number']) : '';
+                $agent_office_address = isset($_POST[ERE_METABOX_PREFIX . 'agent_office_address']) ? sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_office_address']) : '';
+                $agent_facebook_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_facebook_url']) ? esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_facebook_url']) : '';
+                $agent_twitter_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_twitter_url']) ?  esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_twitter_url']) : '';
+                $agent_linkedin_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_linkedin_url']) ?  esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_linkedin_url']) : '';
+                $agent_pinterest_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_pinterest_url']) ?  esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_pinterest_url']) : '';
+                $agent_instagram_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_instagram_url']) ? esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_instagram_url']) : '';
+                $agent_skype = isset($_POST[ERE_METABOX_PREFIX . 'agent_skype']) ?  sanitize_text_field($_POST[ERE_METABOX_PREFIX . 'agent_skype']) : '';
+                $agent_youtube_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_youtube_url']) ? esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_youtube_url']) : '';
+                $agent_vimeo_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_vimeo_url']) ?  esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_vimeo_url']) : '';
+                $agent_website_url = isset($_POST[ERE_METABOX_PREFIX . 'agent_website_url']) ?  esc_url_raw($_POST[ERE_METABOX_PREFIX . 'agent_website_url']) : '';
 
                 $image_id = get_post_thumbnail_id($post_id);
                 $full_img = wp_get_attachment_image_src($image_id, 'full');
@@ -192,7 +189,6 @@ if (!class_exists('ERE_Admin_Agent')) {
                 update_user_meta($user_id, ERE_METABOX_PREFIX . 'author_twitter_url', $agent_twitter_url);
                 update_user_meta($user_id, ERE_METABOX_PREFIX . 'author_linkedin_url', $agent_linkedin_url);
                 update_user_meta($user_id, ERE_METABOX_PREFIX . 'author_vimeo_url', $agent_vimeo_url);
-                update_user_meta($user_id, ERE_METABOX_PREFIX . 'author_googleplus_url', $agent_googleplus_url);
                 update_user_meta($user_id, ERE_METABOX_PREFIX . 'author_youtube_url', $agent_youtube_url);
                 update_user_meta($user_id, ERE_METABOX_PREFIX . 'author_pinterest_url', $agent_pinterest_url);
                 update_user_meta($user_id, ERE_METABOX_PREFIX . 'author_instagram_url', $agent_instagram_url);
@@ -226,24 +222,26 @@ if (!class_exists('ERE_Admin_Agent')) {
          */
         public function approve_agent()
         {
-            if (!empty($_GET['approve_agent']) && wp_verify_nonce($_REQUEST['_wpnonce'], 'approve_agent') && current_user_can('publish_post', $_GET['approve_agent'])) {
-                $post_id = absint($_GET['approve_agent']);
+
+            $approve_agent = isset($_GET['approve_agent']) ? absint(wp_unslash($_GET['approve_agent'])) : '';
+            $_wpnonce = isset($_REQUEST['_wpnonce']) ? ere_clean(wp_unslash($_REQUEST['_wpnonce'])) : '';
+            if ($approve_agent !== '' && wp_verify_nonce($_wpnonce, 'approve_agent') && current_user_can('publish_post', $approve_agent)) {
                 $listing_data = array(
-                    'ID' => $post_id,
+                    'ID' => $approve_agent,
                     'post_status' => 'publish'
                 );
                 wp_update_post($listing_data);
 
-                $author_id = get_post_field('post_author', $post_id);
+                $author_id = get_post_field('post_author', $approve_agent);
                 $user = get_user_by('id', $author_id);
                 $user_email = $user->user_email;
 
                 $args = array(
-                    'agent_name' => get_the_title($post_id),
-                    'agent_url' => get_permalink($post_id)
+                    'agent_name' => get_the_title($approve_agent),
+                    'agent_url' => get_permalink($approve_agent)
                 );
                 ere_send_email($user_email, 'mail_approved_agent', $args);
-                wp_redirect(remove_query_arg('approve_agent', add_query_arg('approve_agent', $post_id, admin_url('edit.php?post_type=agent'))));
+                wp_redirect(remove_query_arg('approve_agent', add_query_arg('approve_agent', $approve_agent, admin_url('edit.php?post_type=agent'))));
                 exit;
             }
         }
@@ -255,10 +253,10 @@ if (!class_exists('ERE_Admin_Agent')) {
             $post_type = 'agent';
             if ($typenow == $post_type) {
                 $taxonomy='agency';
-                $selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+                $selected      = isset($_GET[$taxonomy]) ? ere_clean(wp_unslash($_GET[$taxonomy]))  : '';
                 $info_taxonomy = get_taxonomy($taxonomy);
                 wp_dropdown_categories(array(
-                    'show_option_all' => __("All {$info_taxonomy->label}"),
+                    'show_option_all' => sprintf(esc_html__('All %s','essential-real-estate'), esc_html($info_taxonomy->label)),
                     'taxonomy'        => $taxonomy,
                     'name'            => $taxonomy,
                     'orderby'         => 'name',

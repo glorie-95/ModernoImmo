@@ -30,7 +30,7 @@ if (!class_exists('ERE_Save_Search')) {
 
         function save_search_ajax() {
 
-            $nonce = $_REQUEST['ere_save_search_ajax'];
+            $nonce = isset($_REQUEST['ere_save_search_ajax']) ? ere_clean(wp_unslash($_REQUEST['ere_save_search_ajax'])) : '';
             if( !wp_verify_nonce( $nonce, 'ere_save_search_nonce_field' ) ) {
                 echo json_encode(array(
                     'success' => false,
@@ -40,11 +40,11 @@ if (!class_exists('ERE_Save_Search')) {
             }
             global $wpdb, $current_user;
             wp_get_current_user();
-            $query  =  $_REQUEST['ere_query'];
+            $query  =  isset($_REQUEST['ere_query']) ? ere_clean(wp_unslash($_REQUEST['ere_query'])) : '';
             $table_name         = $wpdb->prefix . 'ere_save_search';
-            $url  = $_REQUEST['ere_url'];
-            $title  = $_REQUEST['ere_title'];
-            $params  = $_REQUEST['ere_params'];
+            $url  = isset($_REQUEST['ere_url']) ? esc_url_raw(wp_unslash($_REQUEST['ere_url'])) : '';
+            $title  = isset($_REQUEST['ere_title']) ?  ere_clean(wp_unslash($_REQUEST['ere_title'])) : '';
+            $params  = isset($_REQUEST['ere_params']) ?  ere_clean(wp_unslash($_REQUEST['ere_params'])) : '';
             $wpdb->insert(
                 $table_name,
                 array(

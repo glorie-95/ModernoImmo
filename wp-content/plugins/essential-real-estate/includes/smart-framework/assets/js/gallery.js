@@ -46,7 +46,7 @@ var GSF_GalleryClass = function($container) {
 							else url_image=attachment.sizes.full.url;
 							imgHtml += '<div class="gsf-image-preview" data-id="' + attachment.id + '">';
 							imgHtml +='<div class="centered">';
-							imgHtml += '<img src="' + url_image + '" alt=""/>';
+							imgHtml += '<img src="' + url_image + '"/>';
 							imgHtml += '</div>';
 							imgHtml += '<span class="gsf-gallery-remove dashicons dashicons dashicons-no-alt"></span>';
 							imgHtml += '</div>';

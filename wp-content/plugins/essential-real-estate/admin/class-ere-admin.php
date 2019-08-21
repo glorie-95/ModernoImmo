@@ -344,7 +344,7 @@ if (!class_exists('ERE_Admin')) {
                                             'fields' => array(
                                                 array(
                                                     'id' => "{$meta_prefix}property_size",
-                                                    'title' => sprintf(__('Size (%s)', 'essential-real-estate'), $measurement_units),
+                                                    'title' => sprintf(esc_html__('Size (%s)', 'essential-real-estate'),esc_html($measurement_units)),
                                                     'desc' => esc_html__('Example Value: 200', 'essential-real-estate'),
                                                     'type' => 'text',
                                                     'pattern' => "{$format_number}",
@@ -352,7 +352,7 @@ if (!class_exists('ERE_Admin')) {
                                                 ),
                                                 array(
                                                     'id' => "{$meta_prefix}property_land",
-                                                    'title' => sprintf(__('Land Area (%s)', 'essential-real-estate'), $measurement_units_land_area),
+                                                    'title' => sprintf(esc_html__('Land Area (%s)', 'essential-real-estate'), esc_html($measurement_units_land_area)),
                                                     'desc' => esc_html__('Example Value: 2000', 'essential-real-estate'),
                                                     'type' => 'text',
                                                     'pattern' => "{$format_number}",
@@ -406,7 +406,7 @@ if (!class_exists('ERE_Admin')) {
                                                 ),
                                                 array(
                                                     'id' => "{$meta_prefix}property_garage_size",
-                                                    'title' => sprintf(__('Garages Size (%s)', 'essential-real-estate'), $measurement_units),
+                                                    'title' => sprintf(esc_html__('Garages Size (%s)', 'essential-real-estate'), esc_html($measurement_units)),
                                                     'type' => 'text',
                                                     'pattern' => "{$format_number}",
                                                     'default' => '',
@@ -652,8 +652,8 @@ if (!class_exists('ERE_Admin')) {
                                     'fields' => array(
                                         array(
                                             'id' => "{$meta_prefix}property_video_url",
-                                            'title' => __('Video URL', 'essential-real-estate'),
-                                            'desc' => __('Input only URL. YouTube, Vimeo, SWF File and MOV File', 'essential-real-estate'),
+                                            'title' => esc_html__('Video URL', 'essential-real-estate'),
+                                            'desc' => esc_html__('Input only URL. YouTube, Vimeo, SWF File and MOV File', 'essential-real-estate'),
                                             'type' => 'text',
                                             'col' => 12,
                                         ),
@@ -702,13 +702,13 @@ if (!class_exists('ERE_Admin')) {
                                     'fields' => array(
                                         array(
                                             'id' => "{$meta_prefix}agent_display_option",
-                                            'title' => __('What to display in contact information box ?', 'essential-real-estate'),
+                                            'title' => esc_html__('What to display in contact information box ?', 'essential-real-estate'),
                                             'type' => 'radio',
                                             'options' => array(
-                                                'author_info' => __('Author information', 'essential-real-estate'),
-                                                'agent_info' => __('Agent Information. (Select the agent below)', 'essential-real-estate'),
-                                                'other_info' => __('Other contact', 'essential-real-estate'),
-                                                'no' => __('Hide contact information', 'essential-real-estate'),
+                                                'author_info' => esc_html__('Author information', 'essential-real-estate'),
+                                                'agent_info' => esc_html__('Agent Information. (Select the agent below)', 'essential-real-estate'),
+                                                'other_info' => esc_html__('Other contact', 'essential-real-estate'),
+                                                'no' => esc_html__('Hide contact information', 'essential-real-estate'),
                                             ),
                                             'default' => 'agent_info',
                                         ),
@@ -817,12 +817,12 @@ if (!class_exists('ERE_Admin')) {
                                         'col' => '6',
                                         'fields' => array(
                                             array(
-                                                'title' => __('Mobile Number', 'essential-real-estate'),
+                                                'title' => esc_html__('Mobile Number', 'essential-real-estate'),
                                                 'id' => "{$meta_prefix}agent_mobile_number",
                                                 'type' => 'text',
                                             ),
                                             array(
-                                                'title' => __('Fax Number', 'essential-real-estate'),
+                                                'title' => esc_html__('Fax Number', 'essential-real-estate'),
                                                 'id' => "{$meta_prefix}agent_fax_number",
                                                 'type' => 'text',
                                             ),
@@ -902,24 +902,7 @@ if (!class_exists('ERE_Admin')) {
                                             ),
                                         )
                                     ),
-                                    array(
-                                        'type' => 'row',
-                                        'col' => '6',
-                                        'fields' => array(
-                                            array(
-                                                'title' => __('Google Plus URL', 'essential-real-estate'),
-                                                'id' => "{$meta_prefix}agent_googleplus_url",
-                                                'type' => 'text',
-                                                'input_type' => 'url',
-                                            ),
-                                            array(
-                                                'title' => __('LinkedIn URL', 'essential-real-estate'),
-                                                'id' => "{$meta_prefix}agent_linkedin_url",
-                                                'type' => 'text',
-                                                'input_type' => 'url',
-                                            ),
-                                        )
-                                    ),
+
                                     array(
                                         'type' => 'row',
                                         'col' => '6',
@@ -955,7 +938,19 @@ if (!class_exists('ERE_Admin')) {
                                                 'input_type' => 'url',
                                             )
                                         )
-                                    )
+                                    ),
+                                    array(
+                                        'type' => 'row',
+                                        'col' => '6',
+                                        'fields' => array(
+                                            array(
+                                                'title' => __('LinkedIn URL', 'essential-real-estate'),
+                                                'id' => "{$meta_prefix}agent_linkedin_url",
+                                                'type' => 'text',
+                                                'input_type' => 'url',
+                                            ),
+                                        )
+                                    ),
                                 )
                             )
                         )
@@ -1217,7 +1212,7 @@ if (!class_exists('ERE_Admin')) {
 
             <script type="text/javascript">
                 jQuery(document).ready(function($) {
-                    <?php echo $parent; ?>.remove();
+                    <?php echo esc_js($parent); ?>.remove();
                 });
             </script>
 
@@ -1494,24 +1489,7 @@ if (!class_exists('ERE_Admin')) {
                             ),
                         )
                     ),
-                    array(
-                        'type' => 'row',
-                        'col' => '6',
-                        'fields' => array(
-                            array(
-                                'title' => __('Google Plus URL', 'essential-real-estate'),
-                                'id' => "agency_googleplus_url",
-                                'type' => 'text',
-                                'input_type' => 'url',
-                            ),
-                            array(
-                                'title' => __('LinkedIn URL', 'essential-real-estate'),
-                                'id' => "agency_linkedin_url",
-                                'type' => 'text',
-                                'input_type' => 'url',
-                            ),
-                        )
-                    ),
+
                     array(
                         'type' => 'row',
                         'col' => '6',
@@ -1545,6 +1523,18 @@ if (!class_exists('ERE_Admin')) {
                                 'type' => 'text',
                                 'input_type' => 'url',
                             )
+                        )
+                    ),
+                    array(
+                        'type' => 'row',
+                        'col' => '6',
+                        'fields' => array(
+                            array(
+                                'title' => __('LinkedIn URL', 'essential-real-estate'),
+                                'id' => "agency_linkedin_url",
+                                'type' => 'text',
+                                'input_type' => 'url',
+                            ),
                         )
                     ),
                 )
@@ -1811,24 +1801,24 @@ if (!class_exists('ERE_Admin')) {
                                 array(
                                     'id' => 'cdn_bootstrap_js',
                                     'type' => 'text',
-                                    'title' => esc_html__('CDN Bootstrap Script', 'beyot-framework'),
-                                    'subtitle' => esc_html__('Url CDN Bootstrap Script', 'beyot-framework'),
+                                    'title' => esc_html__('CDN Bootstrap Script', 'essential-real-estate'),
+                                    'subtitle' => esc_html__('Url CDN Bootstrap Script', 'essential-real-estate'),
                                     'desc' => '',
                                     'default' => '',
                                 ),
                                 array(
                                     'id' => 'cdn_bootstrap_css',
                                     'type' => 'text',
-                                    'title' => esc_html__('CDN Bootstrap Stylesheet', 'beyot-framework'),
-                                    'subtitle' => esc_html__('Url CDN Bootstrap Stylesheet', 'beyot-framework'),
+                                    'title' => esc_html__('CDN Bootstrap Stylesheet', 'essential-real-estate'),
+                                    'subtitle' => esc_html__('Url CDN Bootstrap Stylesheet', 'essential-real-estate'),
                                     'desc' => '',
                                     'default' => '',
                                 ),
                                 array(
                                     'id' => 'cdn_font_awesome',
                                     'type' => 'text',
-                                    'title' => esc_html__('CDN Font Awesome', 'beyot-framework'),
-                                    'subtitle' => esc_html__('Url CDN Font Awesome', 'beyot-framework'),
+                                    'title' => esc_html__('CDN Font Awesome', 'essential-real-estate'),
+                                    'subtitle' => esc_html__('Url CDN Font Awesome', 'essential-real-estate'),
                                     'desc' => '',
                                     'default' => '',
                                 ),
@@ -2267,7 +2257,7 @@ if (!class_exists('ERE_Admin')) {
                         array(
                             'id' => 'enable_social_login',
                             'title' => esc_html__('Enable Social Login', 'essential-real-estate'),
-                            'subtitle' => sprintf(__('Please activate %s WordPress Social Login %s plugin', 'framework'),
+                            'subtitle' => sprintf(__('Please activate %s WordPress Social Login %s plugin', 'essential-real-estate'),
                                 '<a href="https://wordpress.org/plugins/wordpress-social-login/" target="_blank">',
                                 '</a>'
                             ),
@@ -2320,7 +2310,6 @@ if (!class_exists('ERE_Admin')) {
                                         'user_linkedin_url' => esc_html__('Linkedin URL', 'essential-real-estate'),
                                         'user_instagram_url' => esc_html__('Instagram URL', 'essential-real-estate'),
                                         'user_pinterest_url' => esc_html__('Pinterest URL', 'essential-real-estate'),
-                                        'user_googleplus_url' => esc_html__('Google Plus URL', 'essential-real-estate'),
                                         'user_youtube_url' => esc_html__('Youtube URL', 'essential-real-estate'),
                                         'user_vimeo_url' => esc_html__('Vimeo URL', 'essential-real-estate'),
                                     ),
@@ -3989,7 +3978,7 @@ if (!class_exists('ERE_Admin')) {
                             'id' => 'googlemap_style',
                             'type' => 'ace_editor',
                             'title' => esc_html__('Style for Google Map', 'essential-real-estate'),
-                            'subtitle' => sprintf(__('Use %s https://snazzymaps.com/ %s to create styles', 'framework'),
+                            'subtitle' => sprintf(__('Use %s https://snazzymaps.com/ %s to create styles', 'essential-real-estate'),
                                 '<a href="https://snazzymaps.com/" target="_blank">',
                                 '</a>'
                             ),
@@ -5748,5 +5737,12 @@ Thank you!', 'essential-real-estate'),
                 )
             ));
         }
+
+        public function add_meta_property_status_order_number($term_id, $tt_id ) {
+            if (!isset($_POST['property_status_order_number'])) {
+                add_term_meta($term_id,'property_status_order_number',1);
+            }
+        }
+
     }
 }

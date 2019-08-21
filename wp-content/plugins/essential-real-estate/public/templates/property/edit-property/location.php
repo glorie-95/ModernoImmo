@@ -27,8 +27,8 @@ wp_enqueue_script('select2_js');
                 <label
                     for="geocomplete"><?php echo esc_html__('Address', 'essential-real-estate') . ere_required_field('property_map_address'); ?></label>
                 <input type="text" class="form-control" name="property_map_address" id="geocomplete"
-                       value="<?php echo sanitize_text_field($property_map_address); ?>"
-                       placeholder="<?php esc_html_e('Enter property address', 'essential-real-estate'); ?>">
+                       value="<?php echo esc_attr($property_map_address); ?>"
+                       placeholder="<?php esc_attr_e('Enter property address', 'essential-real-estate'); ?>">
             </div>
         </div>
         <?php } ?>
@@ -50,7 +50,7 @@ wp_enqueue_script('select2_js');
                                value="<?php echo ere_get_country_by_code($property_meta_data[ERE_METABOX_PREFIX . 'property_country'][0]); ?>"
                                id="country">
                         <input name="country_short" type="hidden"
-                               value="<?php echo sanitize_text_field($property_meta_data[ERE_METABOX_PREFIX . 'property_country'][0]); ?>">
+                               value="<?php echo esc_attr($property_meta_data[ERE_METABOX_PREFIX . 'property_country'][0]); ?>">
                     <?php } ?>
                 </div>
             </div>
@@ -65,7 +65,7 @@ wp_enqueue_script('select2_js');
                         </select>
                     <?php } else { ?>
                         <input type="text" class="form-control"
-                               value="<?php echo ere_get_taxonomy_name_by_post_id($property_data->ID, 'property-state'); ?>"
+                               value="<?php echo esc_attr(ere_get_taxonomy_name_by_post_id($property_data->ID, 'property-state')); ?>"
                                name="administrative_area_level_1" id="state">
                     <?php } ?>
                 </div>
@@ -81,7 +81,7 @@ wp_enqueue_script('select2_js');
                         </select>
                     <?php } else { ?>
                         <input type="text" class="form-control"
-                               value="<?php echo ere_get_taxonomy_name_by_post_id($property_data->ID, 'property-city'); ?>"
+                               value="<?php echo esc_attr(ere_get_taxonomy_name_by_post_id($property_data->ID, 'property-city')); ?>"
                                name="locality" id="city">
                     <?php } ?>
                 </div>
@@ -97,7 +97,7 @@ wp_enqueue_script('select2_js');
                     </select>
                 <?php } else { ?>
                     <input type="text" class="form-control" name="neighborhood"
-                           value="<?php echo ere_get_taxonomy_name_by_post_id($property_data->ID, 'property_area'); ?>"
+                           value="<?php echo esc_attr(ere_get_taxonomy_name_by_post_id($property_data->ID, 'property_area')); ?>"
                            id="neighborhood">
                 <?php } ?>
             </div>
@@ -109,7 +109,7 @@ wp_enqueue_script('select2_js');
                 <label for="zip"><?php esc_html_e('Postal Code / Zip', 'essential-real-estate'); ?></label>
                 <input type="text" class="form-control" name="postal_code"
                        value="<?php if (isset($property_meta_data[ERE_METABOX_PREFIX . 'property_zip'][0])) {
-                           echo sanitize_text_field($property_meta_data[ERE_METABOX_PREFIX . 'property_zip'][0]);
+                           echo esc_attr($property_meta_data[ERE_METABOX_PREFIX . 'property_zip'][0]);
                        } ?>" id="zip">
             </div>
         </div>
@@ -130,15 +130,15 @@ wp_enqueue_script('select2_js');
             <div class="form-group">
                 <label for="latitude"><?php esc_html_e('Google Maps latitude', 'essential-real-estate'); ?></label>
                 <input type="text" class="form-control" name="lat" id="latitude"
-                       value="<?php echo sanitize_text_field($lat); ?>">
+                       value="<?php echo esc_attr($lat); ?>">
             </div>
             <div class="form-group">
                 <label for="longitude"><?php esc_html_e('Google Maps longitude', 'essential-real-estate'); ?></label>
                 <input type="text" class="form-control" name="lng" id="longitude"
-                       value="<?php echo sanitize_text_field($long); ?>">
+                       value="<?php echo esc_attr($long); ?>">
             </div>
             <div class="form-group">
-                <input id="find" type="button" class="btn btn-primary btn-block" title="<?php esc_html_e('Place the pin the address above', 'essential-real-estate'); ?>" value="<?php esc_html_e('Pin address', 'essential-real-estate'); ?>">
+                <input id="find" type="button" class="btn btn-primary btn-block" title="<?php esc_attr_e('Place the pin the address above', 'essential-real-estate'); ?>" value="<?php esc_attr_e('Pin address', 'essential-real-estate'); ?>">
                 <a id="reset" href="#"
                    style="display:none;"><?php esc_html_e('Reset Marker', 'essential-real-estate'); ?></a>
             </div>

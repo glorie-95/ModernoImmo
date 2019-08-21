@@ -46,7 +46,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                     type="text"
                                                     id="<?php echo ERE_METABOX_PREFIX ?>floor_name_<?php echo intval($row_num); ?>"
                                                     class="form-control"
-                                                    value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_name']); ?>">
+                                                    value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_name']); ?>">
                                             </div>
                                         </div>
 
@@ -59,7 +59,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                     type="number"
                                                     id="<?php echo ERE_METABOX_PREFIX ?>floor_price_<?php echo intval($row_num); ?>"
                                                     class="form-control"
-                                                    value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_price']); ?>">
+                                                    value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_price']); ?>">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -71,7 +71,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                     type="text"
                                                     id="<?php echo ERE_METABOX_PREFIX ?>floor_price_postfix_<?php echo intval($row_num); ?>"
                                                     class="form-control"
-                                                    value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_price_postfix']); ?>">
+                                                    value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_price_postfix']); ?>">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -83,7 +83,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                     type="number"
                                                     id="<?php echo ERE_METABOX_PREFIX ?>floor_size_<?php echo intval($row_num); ?>"
                                                     class="form-control"
-                                                    value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_size']); ?>">
+                                                    value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_size']); ?>">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -95,7 +95,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                     type="text"
                                                     id="<?php echo ERE_METABOX_PREFIX ?>floor_size_postfix_<?php echo intval($row_num); ?>"
                                                     class="form-control"
-                                                    value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_size_postfix']); ?>">
+                                                    value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_size_postfix']); ?>">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -107,7 +107,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                     type="number"
                                                     id="<?php echo ERE_METABOX_PREFIX ?>floor_bedrooms_<?php echo intval($row_num); ?>"
                                                     class="form-control"
-                                                    value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_bedrooms']); ?>">
+                                                    value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_bedrooms']); ?>">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -119,7 +119,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                     type="number"
                                                     id="<?php echo ERE_METABOX_PREFIX ?>floor_bathrooms_<?php echo intval($row_num); ?>"
                                                     class="form-control"
-                                                    value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_bathrooms']); ?>">
+                                                    value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_bathrooms']); ?>">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -133,12 +133,12 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                                         type="text"
                                                         id="<?php echo ERE_METABOX_PREFIX ?>floor_image_url_<?php echo intval($row_num); ?>"
                                                         class="ere_floor_image_url form-control"
-                                                        value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_image']['url']); ?>">
+                                                        value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_image']['url']); ?>">
                                                     <input type="hidden" class="ere_floor_image_id"
                                                            name="<?php echo ERE_METABOX_PREFIX ?>floors[<?php echo intval($row_num); ?>][<?php echo ERE_METABOX_PREFIX ?>floor_image][id]"
-                                                           value="<?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_image']['id']); ?>"
+                                                           value="<?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_image']['id']); ?>"
                                                            id="<?php echo ERE_METABOX_PREFIX ?>floor_image_id_<?php echo intval($row_num); ?>"/>
-                                                    <button type="button" id="ere-floor-<?php echo intval($row_num); ?>" style="position: absolute" title="<?php esc_html_e('Choose image','essential-real-estate') ?>" class="ere_floorsImg"><i class="fa fa-file-image-o"></i></button>
+                                                    <button type="button" id="ere-floor-<?php echo intval($row_num); ?>" style="position: absolute" title="<?php esc_attr_e('Choose image','essential-real-estate') ?>" class="ere_floorsImg"><i class="fa fa-file-image-o"></i></button>
                                                 </div>
                                                 <div id="ere-floor-errors-log-<?php echo intval($row_num); ?>"></div>
                                             </div>
@@ -150,7 +150,7 @@ $floors_enable = get_post_meta($property_data->ID, ERE_METABOX_PREFIX . 'floors_
                                         name="<?php echo ERE_METABOX_PREFIX ?>floors[<?php echo intval($row_num); ?>][<?php echo ERE_METABOX_PREFIX ?>floor_description]"
                                         rows="4"
                                         id="<?php echo ERE_METABOX_PREFIX ?>floor_description_<?php echo intval($row_num); ?>"
-                                        class="form-control"><?php echo sanitize_text_field($floor[ERE_METABOX_PREFIX . 'floor_description']); ?></textarea>
+                                        class="form-control"><?php echo esc_attr($floor[ERE_METABOX_PREFIX . 'floor_description']); ?></textarea>
                                         </div>
                                     </div>
                                 </div>

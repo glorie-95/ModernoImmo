@@ -27,21 +27,21 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'register');
     <form class="ere-register" method="post" enctype="multipart/form-data">
         <div class="form-group control-username">
             <input name="user_login" class="form-control control-icon" type="text"
-                   placeholder="<?php esc_html_e('Username', 'essential-real-estate'); ?>"/>
+                   placeholder="<?php esc_attr_e('Username', 'essential-real-estate'); ?>"/>
         </div>
         <div class="form-group control-email">
             <input name="user_email" type="email" class="form-control control-icon"
-                   placeholder="<?php esc_html_e('Email', 'essential-real-estate'); ?>"/>
+                   placeholder="<?php esc_attr_e('Email', 'essential-real-estate'); ?>"/>
         </div>
 
         <?php if ($enable_password) { ?>
             <div class="form-group control-password">
                 <input name="user_password" class="form-control control-icon"
-                       placeholder="<?php esc_html_e('Password', 'essential-real-estate'); ?>" type="password"/>
+                       placeholder="<?php esc_attr_e('Password', 'essential-real-estate'); ?>" type="password"/>
             </div>
             <div class="form-group control-ere-password">
                 <input name="user_password_retype" class="form-control control-icon"
-                       placeholder="<?php esc_html_e('Retype Password', 'essential-real-estate'); ?>" type="password"/>
+                       placeholder="<?php esc_attr_e('Retype Password', 'essential-real-estate'); ?>" type="password"/>
             </div>
         <?php } ?>
         <div class="form-group control-term-condition">

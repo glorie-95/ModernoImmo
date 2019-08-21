@@ -76,8 +76,7 @@ if (!class_exists('ERE_Compare')) {
 								<div class="compare-thumb compare-property" data-property-id="<?php echo esc_attr($key); ?>">
                                     <img class="compare-property-img" width="<?php echo esc_attr($width) ?>"
                                          height="<?php echo esc_attr($height) ?>"
-                                         src="<?php echo esc_url($image_src) ?>" onerror="this.src = '<?php echo esc_url($no_image_src) ?>';" alt=""
-                                         title="">
+                                         src="<?php echo esc_url($image_src) ?>" onerror="this.src = '<?php echo esc_url($no_image_src) ?>';">
                                     <button type="button" class="compare-property-remove"><i class="fa fa-times"></i></button>
                                 </div>
                             <?php endif; ?>

@@ -231,8 +231,11 @@ $min_suffix = ere_get_option('enable_min_css', 0) == 1 ? '.min' : '';
 wp_print_styles(ERE_PLUGIN_PREFIX . 'property-gallery');
 
 $min_suffix_js = ere_get_option('enable_min_js', 0) == 1 ? '.min' : '';
-wp_enqueue_script('isotope', ERE_PLUGIN_URL . 'public/templates/shortcodes/property-gallery/assets/js/isotope.pkgd.min.js', array('jquery'), 'v3.0.5', true);
-wp_enqueue_script('imageLoaded', ERE_PLUGIN_URL . 'public/templates/shortcodes/property-gallery/assets/js/imageLoaded.min.js', array('jquery'), 'v3.1.8', true);
+
+if ($filter_style == 'filter-isotope') {
+    wp_enqueue_script('isotope', ERE_PLUGIN_URL . 'public/templates/shortcodes/property-gallery/assets/js/isotope.pkgd.min.js', array('jquery'), '3.0.6', true);
+}
+wp_enqueue_script('imageLoaded', ERE_PLUGIN_URL . 'public/templates/shortcodes/property-gallery/assets/js/imagesloaded.pkgd.min.js', array('jquery'), '4.1.4', true);
 wp_enqueue_script(ERE_PLUGIN_PREFIX . 'owl_carousel', ERE_PLUGIN_URL . 'public/assets/js/ere-carousel' . $min_suffix_js . '.js', array('jquery'), ERE_PLUGIN_VER, true);
 wp_enqueue_script(ERE_PLUGIN_PREFIX . 'property_gallery', ERE_PLUGIN_URL . 'public/templates/shortcodes/property-gallery/assets/js/property-gallery' . $min_suffix_js . '.js', array('jquery','imageLoaded','isotope',ERE_PLUGIN_PREFIX.'owl_carousel'), ERE_PLUGIN_VER, true);
 ?>
@@ -273,7 +276,7 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'property_gallery', ERE_PLUGIN_URL . 'publ
                         } ?>
                     </div>
                     <div class="visible-mb">
-                        <select class="property-filter-mb form-control" title="">
+                        <select class="property-filter-mb form-control">
                             <?php
                             if (!empty($property_types)) {
                                 $property_type_arr = explode(',', $property_types);?>

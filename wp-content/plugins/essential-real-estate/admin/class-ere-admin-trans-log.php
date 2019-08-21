@@ -108,9 +108,9 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
                 case 'trans_log_status':
                     $trans_log_status = get_post_meta($post->ID, ERE_METABOX_PREFIX . 'trans_log_status', true);
                     if ($trans_log_status == 1) {
-                        echo '<span class="ere-label-blue">' . __('Succeeded', 'essential-real-estate') . '</span>';
+                        echo '<span class="ere-label-blue">' . esc_html__('Succeeded', 'essential-real-estate') . '</span>';
                     } else {
-                        echo '<span class="ere-label-red">' . __('Failed', 'essential-real-estate') . '</span>';
+                        echo '<span class="ere-label-red">' . esc_html__('Failed', 'essential-real-estate') . '</span>';
                     }
                     break;
             }
@@ -144,7 +144,7 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
                 ?>
                 <select name="trans_log_status">
                     <option value=""><?php _e('All Status', 'essential-real-estate'); ?></option>
-                    <?php $current_v = isset($_GET['trans_log_status'])? $_GET['trans_log_status']:'';
+                    <?php $current_v = isset($_GET['trans_log_status'])? ere_clean(wp_unslash($_GET['trans_log_status'])) :'';
                     foreach ($values as $value => $label) {
                         printf
                         (
@@ -167,7 +167,7 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
                 ?>
                 <select name="trans_log_payment_method">
                     <option value=""><?php _e('All Payment Methods', 'essential-real-estate'); ?></option>
-                    <?php $current_v = isset($_GET['trans_log_payment_method'])? $_GET['trans_log_payment_method']:'';
+                    <?php $current_v = isset($_GET['trans_log_payment_method'])? ere_clean(wp_unslash($_GET['trans_log_payment_method'])) :'';
                     foreach ($values as $value => $label) {
                         printf
                         (
@@ -190,7 +190,7 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
                 ?>
                 <select name="trans_log_payment_type">
                     <option value=""><?php _e('All Payment Types', 'essential-real-estate'); ?></option>
-                    <?php $current_v = isset($_GET['trans_log_payment_type'])? $_GET['trans_log_payment_type']:'';
+                    <?php $current_v = isset($_GET['trans_log_payment_type'])? ere_clean(wp_unslash($_GET['trans_log_payment_type'])) :'';
                     foreach ($values as $value => $label) {
                         printf
                         (
@@ -200,9 +200,10 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
                             $label
                         );
                     }
+                    $trans_log_user = isset($_GET['trans_log_user'])? ere_clean(wp_unslash($_GET['trans_log_user'])) :'';
                     ?>
                 </select>
-                <input type="text" placeholder="<?php esc_html_e('Buyer','essential-real-estate');?>" name="trans_log_user" value="<?php echo (isset($_GET['trans_log_user'])? $_GET['trans_log_user']:'');?>">
+                <input type="text" placeholder="<?php esc_attr_e('Buyer','essential-real-estate');?>" name="trans_log_user" value="<?php echo esc_attr($trans_log_user);?>">
             <?php }
         }
 
@@ -216,9 +217,10 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
             $q_vars    = &$query->query_vars;$filter_arr=array();
             if ($pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type)
             {
-                if(isset($_GET['trans_log_user']) && $_GET['trans_log_user'] != '')
+                $trans_log_user = isset($_GET['trans_log_user']) ?  ere_clean(wp_unslash($_GET['trans_log_user'])) : '';
+                if($trans_log_user !== '')
                 {
-                    $user = get_user_by('login',$_GET['trans_log_user']);
+                    $user = get_user_by('login',$trans_log_user);
                     $user_id=-1;
                     if($user)
                     {
@@ -230,10 +232,13 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
                         'compare' => 'IN',
                     );
                 }
-                if(isset($_GET['trans_log_status']) && $_GET['trans_log_status'] != '')
+
+                $_trans_log_status = isset($_GET['trans_log_status']) ?  ere_clean(wp_unslash($_GET['trans_log_status'])) : '';
+
+                if($_trans_log_status !== '')
                 {
                     $trans_log_status=0;
-                    if($_GET['trans_log_status']=='succeeded')
+                    if($_trans_log_status == 'succeeded')
                     {
                         $trans_log_status=1;
                     }
@@ -243,17 +248,23 @@ if (!class_exists('ERE_Admin_Trans_Log')) {
                         'compare' => '=',
                     );
                 }
-                if(isset($_GET['trans_log_payment_method']) && $_GET['trans_log_payment_method'] != '') {
+
+                $trans_log_payment_method = isset($_GET['trans_log_payment_method']) ? ere_clean(wp_unslash($_GET['trans_log_payment_method'])) : '';
+
+                if($trans_log_payment_method !== '') {
                     $filter_arr[] = array(
                         'key' => ERE_METABOX_PREFIX . 'trans_log_payment_method',
-                        'value' => $_GET['trans_log_payment_method'],
+                        'value' => $trans_log_payment_method,
                         'compare' => '=',
                     );
                 }
-                if(isset($_GET['trans_log_payment_type']) && $_GET['trans_log_payment_type'] != '') {
+
+                $trans_log_payment_type = isset($_GET['trans_log_payment_type']) ? ere_clean(wp_unslash($_GET['trans_log_payment_type'])) : '';
+
+                if($trans_log_payment_type !== '') {
                     $filter_arr[] = array(
                         'key' => ERE_METABOX_PREFIX . 'trans_log_payment_type',
-                        'value' => $_GET['trans_log_payment_type'],
+                        'value' => $trans_log_payment_type,
                         'compare' => '=',
                     );
                 }

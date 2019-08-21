@@ -1,0 +1,456 @@
+/*
+Theme Name: Dream House Construction
+Description: Dream House Construction is a WordPress theme special design for Construction Agency, Relate State Agency, Architecture house and overall construction and real estate sites. For a construction company, it's very important that they showcase their service in a very pleasant and distinct way to let their current clients be updated and attract more valuable customers. This WordPress theme serves that purpose. Dream House Construction included important features for presenting online presence of any company beautifully. Its a fully responsive, multi-purpose theme and SEO friendly theme. It has highly customized option and advanced widgets which lets the user design the whole look of the site without touching code. 
+Author: Cyclone Themes
+Author URI: https://cyclonethemes.com/
+Theme URI: https://cyclonethemes.com/downloads/dream-house-construction-lite/
+Template: fire-blog
+Version: 0.8
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: dream-house-construction
+Tags: blog, custom-logo, custom-menu, education, featured-images, footer-widgets, four-columns, full-width-template, left-sidebar, one-column, portfolio, right-sidebar, sticky-post, theme-options, threaded-comments, three-columns, translation-ready, two-columns
+*/
+
+body.dream-house-construction{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.dream-house-construction h1, .dream-house-construction h2, .dream-house-construction h3,
+.dream-house-construction h4, .dream-house-construction h5, .dream-house-construction h6{
+   font-family: 'Oswald', sans-serif;   
+}
+
+label{vertical-align: middle;}
+
+.tg-virtuallybuild h2 span {
+    vertical-align: unset !important;
+}
+
+.construction .btn-primary {
+    background: #111111;
+    border-color: #111111;
+}
+
+.construction .btn-primary:hover {
+    color: #111111;
+}
+
+.dream-house-construction .logo_name_description h3, .dream-house-construction .logo_name_description p,
+.dream-house-construction .construction .carousel-caption h1 a,
+.dream-house-construction .tg-service:hover .tg-border-topleft span:before,
+.dream-house-construction .tg-service:hover .tg-border-topleft h3,
+.dream-house-construction .tg-service:hover .tg-border-topleft .tg-description p,
+.dream-house-construction .team-member .team-item .team-img .normal-text .team-name,
+.dream-house-construction .single-blog-post .img-box .date{color: #fff;}
+
+.dream-house-construction  .navbar.navbar-sticky .logo img{float: left;}
+
+.dream-house-construction .portfolio .navbar-sticky.navbar-default}{top: -1px;}
+
+.dream-house-construction .portfolio .navbar-sticky.navbar-default .logo_name_description h3{
+	color: #fdad00;
+}
+
+.dream-house-construction .portfolio .navbar-sticky.navbar-default .logo_name_description p{color: #666;}
+
+.dream-house-construction .portfolio .item-hover a{font-size: 14px;}
+
+.dream-house-construction .portfolio .item-hover > a {
+    border: 1px solid #fff;
+    padding: 5px 15px;
+    margin-top: 10px;
+    background: #ffffff4d;
+    display: inline-block;
+}
+
+.dream-house-construction .construction .partner .slick-prev:before, .dream-house-construction .construction .partner .slick-next:before{
+	color: #026aab;
+}
+
+.dream-house-construction .construction .partner .slick-prev{
+	left: -30px;
+}
+
+.dream-house-construction .construction .partner .slick-next{
+	right: -30px;
+}
+
+.dream-house-construction .btn-primary:hover{
+    background: #fdad00;
+    border-color: #fdad00;
+    color: #fff;
+}
+
+.dream-house-construction .btn-primary{
+	background: transparent;
+	color: #fdad00;
+    border-color: #fdad00;
+}
+
+.dream-house-construction  p.form-submit .submit,
+.dream-house-construction  .comment-body .reply a,
+.dream-house-construction .comment-reply-title a {
+    background: #fdad00 !important;
+    border-left: 3px solid #e89f00 !important;
+}
+
+.dream-house-construction  p.form-submit .submit:hover,
+.dream-house-construction  .comment-body .reply a:hover,
+.dream-house-construction .comment-reply-title a:hover {
+    background: #e89f00 !important;
+    border-left: 3px solid #fdad00 !important;
+}
+
+.dream-house-construction .info-section .btn-primary {
+    background: #111;
+    border-color: #111;
+    color: #fff;
+}
+
+.dream-house-construction .info-section .btn-primary:hover{
+	background: transparent;
+	color: #fff;
+}
+
+.dream-house-construction .social.pull-left a:hover i{color: #fdad00;}
+
+.dream-house-construction-not-home h3{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.dream-house-construction-not-home p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+}
+
+.dream-house-construction-not-home .btn-primary{
+    border-radius: 20px;
+}
+
+.dream-house-construction-not-home .nav.navbar-nav > li.active > a, .dream-house-construction-not-home .nav.navbar-nav > li > a:hover{
+    color: #fdad00;
+}
+
+.dream-house-construction-not-home .nav.navbar-nav > li > ul{
+    border-top: 2px solid #fdad00;
+    top: 67px;
+}
+
+.dream-house-construction-not-home .nav.navbar-nav > li > ul li ul{
+    border-top: 2px solid #fdad00;
+}
+
+.dream-house-construction-not-home .nav.navbar-nav li ul li a:hover {
+    color: #fdad00;
+}
+
+.dream-house-construction-not-home .sidebar section{
+    padding: 0 2rem 20px;
+}
+
+.dream-house-construction-not-home .sidebar .widget_search form input{
+    border: 1px solid #eaeaea;
+    padding: 0 16px;
+}
+
+.dream-house-construction-not-home .widget_search a, 
+.dream-house-construction-not-home .nothing_found a {
+    color: #aeaeae !important;
+}
+
+.dream-house-construction-not-home .sidebar section {
+    background: transparent;
+}
+
+.dream-house-construction-not-home .sidebar section.widget{
+    font-size: 14px;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.dream-house-construction-not-home .sidebar section.widget a{
+    color:#111;
+}
+
+.dream-house-construction-not-home h1,
+.dream-house-construction-not-home h2,
+.dream-house-construction-not-home h3,
+.dream-house-construction-not-home h4,
+.dream-house-construction-not-home h5 {
+    font-family: 'Josefin Sans', sans-serif !important;
+}
+
+.dream-house-construction-not-home .construction .breadcrumb-wrapper {
+    padding: 8.5rem 0 4.5rem;
+}
+
+.dream-house-construction-not-home .logo_name_description a h3{
+    color: #fdad00;
+}
+
+.Block-Search input{
+    border: none;
+    padding: 6px 15px 6px;
+    color: #666;
+}
+
+.breadcrumb a,
+.breadcrumb span.active {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.dream-house-construction .breadcrumb-wrapper .breadcrumb .active{color: #fdad00;}
+
+.navigation.pagination a {
+    font-family:  'Work Sans', sans-serif;
+    font-size: 14px;
+}
+
+.dream-house-construction-not-home .navbar-sticky .logo_name_description a p {
+    color: #666;
+}
+
+.dream-house-construction .logo_name_description a p.not_home_description {
+    color: #fff;
+}
+
+.dream-house-construction-not-home .logo_name_description a p.not_home_description {
+    color: #666;
+}
+
+.blog-desc .blog-bottom{
+    margin-top: 25px;
+}
+
+.blog-desc.no_thumbnail {
+    margin-top: 25px !important;
+}
+
+.dream-house-construction .blog-meta span a:hover, .dream-house-construction .blog-desc span.cat-title a{
+    color: #fdad00;
+}
+
+.dream-house-construction .nav-links span:hover, .dream-house-construction .nav-links a:hover, .dream-house-construction .nav-links span.current,
+.dream-house-construction .socibox:hover {
+    background: #fdad00;
+    border-color: #fdad00;
+}
+
+.dream-house-construction .construction .blog-listing .red-btn .btn-primary{
+    background-color: #fdad00;
+    border-color: #e29c05;
+}
+
+.dream-house-construction .construction .blog-listing .red-btn .btn-primary:hover {
+    border-color: #fdad00;
+    background-color: #e29c05;
+}
+
+.dream-house-construction .construction .entry-title a,
+.dream-house-construction .construction .entry-date a  {
+    color: #666;
+}
+
+.dream-house-construction .construction .entry-meta a{
+    font-size: 13px;
+}
+
+.dream-house-construction .construction .blog-listing .entry-meta a:hover {
+    color: #fdad00;
+}
+
+.sticky_post {
+    border: 1px solid #fdad0073 !important;
+    box-shadow: -7px 0px 0px #fdad00;
+}
+
+.dream-house-construction .footer, .dream-house-construction .footer .widget-title h3 span{
+    background: #e89f00;
+}
+
+.dream-house-construction .footer{padding-top: 60px;}
+
+.dream-house-construction .footer section{padding: 0 0 60px;}
+
+.dream-house-construction .footer .widget a {font-size: 14px;}
+
+.dream-house-construction .copyright{background: #d08f01;}
+
+.dream-house-construction .portfolio .navbar-sticky .navbar-nav > li > ul {
+    top: 50px;
+}
+
+.dream-house-construction .footer .textwidget{color: #fff; font-size: 14px;}
+
+/*.dream-house-construction section#cyclone_instagram_loaded_widget-2{padding:60px; margin-bottom: 0; }*/
+
+.dream-house-construction .tooltip-inner{background: #fdad00; border-color:#fdad00; }
+
+.dream-house-construction .tooltip-inner:before,
+.dream-house-construction .tooltip.tooltip-bottom .tooltip-inner::before,
+.dream-house-construction .tooltip.bs-tether-element-attached-top .tooltip-inner::before{/*border-color:#fdad00;*/ background: transparent;}
+
+.partner img{ border-radius: 0; }
+
+.socibox{ padding: 4px 0; }
+
+.dream-house-construction .carousel-caption h1 a{
+    color: #fdad00 !important;
+}
+
+.dream-house-construction .about-us-contents p,
+.dream-house-construction .tg-virtuallybuild p,
+.dream-house-construction .testi-item p.description {
+    font-size: 15px !important;
+}
+
+.dream-house-construction .about-us-contents h2,
+.dream-house-construction .tg-virtuallybuild h2 {
+        padding-bottom: 15px;
+}
+
+.dream-house-construction .comment-meta .comment-author b {
+    font-size: 15px;
+    font-weight: 700;
+    padding-left: 5px;
+}
+
+.dream-house-construction .comment-metadata a:hover{
+    color: #e89f00;
+}
+
+.dream-house-construction span.edit-link {
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+.dream-house-construction .comment-metadata > a {
+    font-size: 14px;
+    color: inherit;
+}
+
+.dream-house-construction-not-home .info-section p {
+    font-size: 22px;
+}
+
+.dream-house-construction-not-home .social{
+    padding-top: 5px;
+}
+
+.dream-house-construction .single-blog-post .img-box .overlay .box .content ul li a:hover{
+    background: #fdad00;
+    color: #fff;
+}
+
+@media(max-width:1100px){
+    .dream-house-construction .construction .carousel-caption{top: 25%;}
+}
+
+@media(max-width:992px){
+
+    .dream-house-construction  .slicknav_btn.slicknav_open:before, .dream-house-construction  .slicknav_btn.slicknav_collapsed:before{color: #fdad00;}
+
+    .dream-house-construction .slicknav_nav{top: 65px;}
+    
+    .dream-house-construction .construction .carousel-caption{
+        left: 0; 
+        right: 0; 
+        width: 80%;
+        border: none; 
+        text-align: center; 
+        margin: 0 auto; 
+        position: absolute;
+    }
+
+    .dream-house-construction .construction .carousel-caption h1 a{font-size: 36px;}
+
+    .dream-house-construction .construction .carousel-caption p{font-size: 18px;}
+
+    .dream-house-construction .construction .slider-section .slick-prev, 
+    .dream-house-construction .construction .slider-section .slick-next{top: 55%;}
+
+    .dream-house-construction .construction .partner .slick-prev{left: -15px;}
+
+    .dream-house-construction .construction .partner .slick-next{right: -15px;}
+
+    .dream-house-construction .footer .widget:first-child{margin-top: 0;}
+
+    .dream-house-construction .footer .widget{padding: 0;}
+
+    .dream-house-construction .footer .widget section{padding: 0;}
+}
+
+@media(max-width: 992px) and (min-width: 813px){
+    .dream-house-construction .tg-virtuallybuild{padding-top: 0;}
+}
+
+@media(max-width: 767px){
+
+    .dream-house-construction .construction .carousel-caption h1 a{font-size: 32px;}
+
+    .dream-house-construction .construction .carousel-caption p{font-size: 15px;}
+
+    .dream-house-construction .construction .slider-section .slick-prev, 
+    .dream-house-construction .construction .slider-section .slick-next{height: 40px; width: 40px;}
+
+    .dream-house-construction .slider-section .slick-prev:before, .dream-house-construction .slider-section .slick-next:before{
+        font-size: 28px;
+    }
+
+    .dream-house-construction .about-us-contents{
+        margin-top:30px;
+    }
+
+    .dream-house-construction .tg-virtuallybuild{text-align: center;}
+
+    .dream-house-construction .tg-btn-box a{margin: 0 5px;}
+
+    .dream-house-construction .col-sm-4.tg-service.services-content.tg-haslayout, .dream-house-construction .new-step-section .col-sm-6,
+    .dream-house-construction .info-section .col-sm-5, .dream-house-construction .info-section .col-sm-7, 
+    .dream-house-construction .blog-home .col-lg-4.col-md-4.col-sm-6.col-xs-12, .dream-house-construction .team-member .col-sm-4{
+        max-width: 100%;
+        flex: 100%;
+    }
+
+    .dream-house-construction .info-section{text-align: center;}
+
+    .dream-house-construction .info-section::before{content: none;}
+
+    .dream-house-construction  .info-section h3{padding-right: 0;}
+
+    .dream-house-construction .fun-fact-contents .col-md-3.col-sm-3{max-width: 50%; flex: 50%; margin-bottom: 30px;}
+
+    .dream-house-construction .team-member .team-item, .dream-house-construction .single-blog-post{margin-bottom: 15px;}
+}
+
+@media(max-width: 639px){
+
+    .dream-house-construction .construction .carousel-caption {
+        top: inherit;
+        left: inherit;
+        right: inherit;
+        width: 100%;
+        padding: 25px;
+        position: inherit;
+        background: #000; 
+    }
+
+    .dream-house-construction .sidebar section {
+        padding: 0 0 20px;
+    }
+
+    .dream-house-construction .carousel-caption{border: none; text-align: center;}
+
+    .dream-house-construction .about-us-contents h2{margin-top: 15px;}
+
+    .dream-house-construction .tg-virtuallybuild, .dream-house-construction .info-section{text-align: center;}
+
+    .dream-house-construction .info-section::before{content: none;}
+
+    .dream-house-construction .tg-btn-box a{margin-top: 5px;}
+
+    .dream-house-construction .portfolio .about-us-contents-img:before {
+        width: 93%;
+        height: 90%;
+    }
+}

@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="<?php echo esc_attr($css_class_field); ?> form-group">
-    <select name="country" class="ere-property-country-ajax search-field form-control" title="<?php esc_html_e('Countries', 'essential-real-estate'); ?>" data-selected="<?php echo esc_attr($request_country); ?>" data-default-value="">
+    <select name="country" class="ere-property-country-ajax search-field form-control" title="<?php esc_attr_e('Countries', 'essential-real-estate'); ?>" data-selected="<?php echo esc_attr($request_country); ?>" data-default-value="">
         <?php
         $countries = ere_get_selected_countries();
         foreach ($countries as $key => $val) {

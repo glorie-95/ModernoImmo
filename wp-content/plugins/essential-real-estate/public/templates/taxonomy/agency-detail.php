@@ -19,7 +19,6 @@ $agency_website_url = get_term_meta( $agency_term->term_id, 'agency_website_url'
 $agency_vimeo_url = get_term_meta( $agency_term->term_id, 'agency_vimeo_url', true );
 $agency_facebook_url = get_term_meta( $agency_term->term_id, 'agency_facebook_url', true );
 $agency_twitter_url = get_term_meta( $agency_term->term_id, 'agency_twitter_url', true );
-$agency_googleplus_url = get_term_meta( $agency_term->term_id, 'agency_googleplus_url', true );
 $agency_linkedin_url = get_term_meta( $agency_term->term_id, 'agency_linkedin_url', true );
 $agency_pinterest_url = get_term_meta( $agency_term->term_id, 'agency_pinterest_url', true );
 $agency_instagram_url = get_term_meta( $agency_term->term_id, 'agency_instagram_url', true );
@@ -141,7 +140,7 @@ if (!empty($logo_src)) :
             <?php if (!empty($agency_website_url)): ?>
                 <div class="agency-info-item agency-website">
                     <i class="fa fa-external-link-square "></i><strong class="agency-info-title"><?php esc_html_e('Website', 'essential-real-estate') ?>: </strong>
-                    <a href="<?php echo esc_url($agency_website_url) ?>" title="" class="agency-info-value"><?php echo esc_url($agency_website_url) ?></a>
+                    <a href="<?php echo esc_url($agency_website_url) ?>"  class="agency-info-value"><?php echo esc_url($agency_website_url) ?></a>
                 </div>
             <?php endif; ?>
             <?php if (!empty($agency_email)): ?>
@@ -161,11 +160,6 @@ if (!empty($logo_src)) :
         <?php if (!empty($agency_twitter_url)): ?>
             <a title="Twitter" href="<?php echo esc_url($agency_twitter_url); ?>">
                 <i class="fa fa-twitter"></i>
-            </a>
-        <?php endif; ?>
-        <?php if (!empty($agency_googleplus_url)): ?>
-            <a title="Google Plus" href="<?php echo esc_url($agency_googleplus_url); ?>">
-                <i class="fa fa-google-plus"></i>
             </a>
         <?php endif; ?>
         <?php if (!empty($agency_skype)): ?>
@@ -209,29 +203,29 @@ if (!empty($logo_src)) :
 
             <div class="form-group">
                 <input class="form-control" name="sender_name" type="text"
-                       placeholder="<?php esc_html_e('Full Name', 'essential-real-estate'); ?> *">
+                       placeholder="<?php esc_attr_e('Full Name', 'essential-real-estate'); ?> *">
 
                 <div
                     class="hidden name-error form-error"><?php esc_html_e('Please enter your Name!', 'essential-real-estate'); ?></div>
             </div>
             <div class="form-group">
                 <input class="form-control" name="sender_phone" type="text"
-                       placeholder="<?php esc_html_e('Phone Number', 'essential-real-estate'); ?> *">
+                       placeholder="<?php esc_attr_e('Phone Number', 'essential-real-estate'); ?> *">
 
                 <div
                     class="hidden phone-error form-error"><?php esc_html_e('Please enter your Phone!', 'essential-real-estate'); ?></div>
             </div>
             <div class="form-group">
                 <input class="form-control" name="sender_email" type="email"
-                       placeholder="<?php esc_html_e('Email Adress', 'essential-real-estate'); ?> *">
+                       placeholder="<?php esc_attr_e('Email Adress', 'essential-real-estate'); ?> *">
 
                 <div class="hidden email-error form-error"
-                     data-not-valid="<?php esc_html_e('Your Email address is not Valid!', 'essential-real-estate') ?>"
-                     data-error="<?php esc_html_e('Please enter your Email!', 'essential-real-estate') ?>"><?php esc_html_e('Please enter your Email!', 'essential-real-estate'); ?></div>
+                     data-not-valid="<?php esc_attr_e('Your Email address is not Valid!', 'essential-real-estate') ?>"
+                     data-error="<?php esc_attr_e('Please enter your Email!', 'essential-real-estate') ?>"><?php esc_html_e('Please enter your Email!', 'essential-real-estate'); ?></div>
             </div>
             <div class="form-group">
                             <textarea class="form-control" name="sender_msg" rows="5"
-                                      placeholder="<?php esc_html_e('Message', 'essential-real-estate'); ?> *"></textarea>
+                                      placeholder="<?php esc_attr_e('Message', 'essential-real-estate'); ?> *"></textarea>
 
                 <div
                     class="hidden message-error form-error"><?php esc_html_e('Please enter your Message!', 'essential-real-estate'); ?></div>

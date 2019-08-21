@@ -72,7 +72,7 @@ $select_packages_link = ere_get_permalink('packages');
         <span class="badge"><?php if ($package_unlimited_listing == 1) {
                 esc_html_e('Unlimited', 'essential-real-estate');
             } else {
-                echo esc_attr($package_listings);
+                echo esc_html($package_listings);
             } ?></span><?php esc_html_e('Listing Included:', 'essential-real-estate'); ?>
 
 

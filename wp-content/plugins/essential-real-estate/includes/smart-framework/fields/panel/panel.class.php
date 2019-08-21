@@ -17,7 +17,7 @@ if (!class_exists('GSF_Field_Panel')) {
 		{
 			$field_id = $this->get_id();
 			?>
-			<div id="<?php echo ($field_id); ?>" class="gsf-field-panel gsf-field" <?php $this->the_required(); ?>>
+			<div id="<?php echo esc_attr($field_id); ?>" class="gsf-field-panel gsf-field" <?php $this->the_required(); ?>>
 				<div class="gsf-field-panel-inner">
 			<?php
 		}
@@ -35,12 +35,8 @@ if (!class_exists('GSF_Field_Panel')) {
 				$count = $count = apply_filters('gsf_'. gsf_get_config_type() . '_get_panel_count', $count, $this);
 			}
 			$isToggle = isset($this->params['toggle']) ? $this->params['toggle'] : true;
-			$attr_style = '';
-			if ($isToggle && !(isset($this->params['toggle_default']) ? $this->params['toggle_default'] : true)) {
-				$attr_style = 'style="display:none"';
-			}
 			?>
-			<div class="gsf-field-content-wrap <?php echo ($this->is_sort() ? 'gsf-field-panel-sortable' : ''); ?>">
+			<div class="gsf-field-content-wrap <?php echo esc_attr($this->is_sort() ? 'gsf-field-panel-sortable' : ''); ?>">
 				<?php
 				$content_wrap_class = 'gsf-field-content-inner gsf-field-content-inner-clone';
 				if ($this->is_sort()) {
@@ -59,15 +55,19 @@ if (!class_exists('GSF_Field_Panel')) {
 								<h4 class="gsf-field-panel-title">
 									<span class="gsf-panel-title" data-label="<?php echo esc_attr($this->params['title']); ?>"><?php echo esc_html($this->params['title']); ?></span>
 									<?php if ($isToggle): ?>
-										<?php if (empty($attr_style)): ?>
-											<span class="gsf-group-toggle dashicons dashicons-arrow-down"></span>
+										<?php if ($isToggle && !(isset($this->params['toggle_default']) ? $this->params['toggle_default'] : true)): ?>
+                                            <span class="gsf-group-toggle dashicons dashicons-arrow-up"></span>
 										<?php else: ?>
-											<span class="gsf-group-toggle dashicons dashicons-arrow-up"></span>
+                                            <span class="gsf-group-toggle dashicons dashicons-arrow-down"></span>
 										<?php endif;?>
 									<?php endif;?>
 								</h4>
 							<?php endif;?>
-							<div class="gsf-clone-field-panel-inner" <?php echo ($attr_style) ; ?>>
+							<div class="gsf-clone-field-panel-inner"
+                                <?php if ($isToggle && !(isset($this->params['toggle_default']) ? $this->params['toggle_default'] : true)): ?>
+                                style="display: none"
+                                <?php endif; ?>
+                                >
 								<?php $this->render_content($i); ?>
 							</div>
 							<?php $this->html_clone_button_remove(); ?>

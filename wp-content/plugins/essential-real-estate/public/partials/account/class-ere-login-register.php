@@ -13,12 +13,11 @@ if (!class_exists('ERE_Login_Register')) {
          */
         public function login_ajax() {
             check_ajax_referer( 'ere_login_ajax_nonce', 'ere_security_login' );
-            $allowed_html = array('strong' => array());
-            $user_login = wp_kses( $_POST['user_login'], $allowed_html );
-            $user_password = wp_kses( $_POST['user_password'], $allowed_html );
+            $user_login = isset($_POST['user_login']) ? ere_clean(wp_unslash($_POST['user_login'])) : '';
+            $user_password = isset($_POST['user_password']) ? ere_clean(wp_unslash($_POST['user_password'])) : '';
 
             if( isset( $_POST['remember'] ) ) {
-                $remember = wp_kses( $_POST['remember'], $allowed_html );
+                $remember = ere_clean( wp_unslash($_POST['remember']));
             } else {
                 $remember = '';
             }
@@ -72,12 +71,10 @@ if (!class_exists('ERE_Login_Register')) {
         public function register_ajax() {
 
             check_ajax_referer('ere_register_ajax_nonce', 'ere_register_security');
-
-            $allowed_html = array();
-            $user_login          = trim($_POST['user_login']);
+            $user_login          = isset($_POST['user_login']) ? trim(ere_clean(wp_unslash($_POST['user_login']))) : '';
             $user_pass='';
-            $email             = trim( $_POST['user_email']);
-            $term_condition    = wp_kses( $_POST['term_condition'], $allowed_html );
+            $email             = isset($_POST['user_email']) ?  trim(sanitize_email(wp_unslash($_POST['user_email']))) : '';
+            $term_condition    = isset($_POST['term_condition']) ? ere_clean(wp_unslash($_POST['term_condition'])) : '';
             $enable_password = ere_get_option('enable_password',0);
 
             $term_condition = ( $term_condition == 'on') ? true : false;
@@ -87,7 +84,6 @@ if (!class_exists('ERE_Login_Register')) {
                 wp_die();
             }
             $user_login = sanitize_user( $user_login );
-            $email= sanitize_email($email);
             if( empty( $user_login ) ) {
                 echo json_encode( array( 'success' => false, 'message' => esc_html__('The username field is empty.', 'essential-real-estate') ) );
                 wp_die();
@@ -119,8 +115,8 @@ if (!class_exists('ERE_Login_Register')) {
             //recaptcha
             if (ere_enable_captcha('register')) {do_action('ere_verify_recaptcha');}
             if( $enable_password==1){
-                $user_pass         = trim( sanitize_text_field(wp_kses( $_POST['user_password'] ,$allowed_html) ) );
-                $user_pass_retype  = trim( sanitize_text_field(wp_kses( $_POST['user_password_retype'] ,$allowed_html) ) );
+                $user_pass         = isset($_POST['user_password']) ? ere_clean(wp_unslash($_POST['user_password'])) : '';
+                $user_pass_retype  = isset($_POST['user_password_retype']) ? ere_clean(wp_unslash($_POST['user_password_retype'])) : '';
 
                 if ($user_pass == '' || $user_pass_retype == '' ) {
                     echo json_encode( array( 'success' => false, 'message' => esc_html__('The password field is empty!', 'essential-real-estate') ) );
@@ -187,8 +183,7 @@ if (!class_exists('ERE_Login_Register')) {
          */
         public function reset_password_ajax() {
             check_ajax_referer('ere_reset_password_ajax_nonce', 'ere_security_reset_password');
-            $allowed_html = array();
-            $user_login = wp_kses( $_POST['user_login'], $allowed_html );
+            $user_login = isset($_POST['user_login']) ? ere_clean(wp_unslash($_POST['user_login'])) : '';
 
             if ( empty( $user_login ) ) {
                 echo json_encode(array( 'success' => false, 'message' => esc_html__('Enter a username or email address.', 'essential-real-estate') ) );

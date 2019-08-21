@@ -15,5 +15,5 @@ if ( ! defined( 'ABSPATH' ) ) {
     <input type="text" class="form-control search-field" data-default-value=""
            value="<?php echo esc_attr($request_title); ?>"
            name="title"
-           placeholder="<?php esc_html_e('Title', 'essential-real-estate') ?>">
+           placeholder="<?php esc_attr_e('Title', 'essential-real-estate') ?>">
 </div>

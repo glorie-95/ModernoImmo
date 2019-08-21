@@ -70,16 +70,16 @@ wp_enqueue_script('google-map');
                 G5PlusGoogleMap.settingMap();
             },
             settingMap: function () {
-                var map, lat = "<?php echo esc_html($lat) ?>", lng = "<?php echo esc_html($lng) ?>", infowindow, i;
+                var map, lat = "<?php echo esc_js($lat) ?>", lng = "<?php echo esc_js($lng) ?>", infowindow, i;
                 var bounds = new google.maps.LatLngBounds();
-                var map_icons_path_marker = '<?php echo esc_url($map_icons_path_marker) ?>';
-                var PlaceArray = [<?php echo wp_kses_post($PlaceArray); ?>];
+                var map_icons_path_marker = '<?php echo esc_url_raw($map_icons_path_marker) ?>';
+                var PlaceArray = [<?php echo $PlaceArray; ?>];
                 var PlacePlaceArray = '<?php echo esc_js($nearby_places_field_type); ?>'.split(',');
                 var PlaceLabelArray = '<?php echo esc_js($nearby_places_field_label); ?>'.split(',');
                 var PlaceIconArray = '<?php echo esc_js($nearby_places_field_icon); ?>'.split(',');
-                var distance_in = '<?php echo esc_html($nearby_places_distance_in) ?>';
+                var distance_in = '<?php echo $nearby_places_distance_in ?>';
                 var Place_Counter = 0;
-                var rank_by = '<?php echo esc_html($nearby_places_rank_by) ?>';
+                var rank_by = '<?php echo $nearby_places_rank_by ?>';
                 var PlaceDetail = [];
                 for (var n = 0; n < PlacePlaceArray.length; n++) {
                     PlaceDetail[PlacePlaceArray[n]] = [PlaceLabelArray[n], PlaceIconArray[n]];
@@ -110,7 +110,7 @@ wp_enqueue_script('google-map');
                     } else {
                         request = {
                             location: myLatLng,
-                            radius: '<?php echo esc_html($nearby_places_radius) ?>',
+                            radius: '<?php echo esc_js($nearby_places_radius) ?>',
                             type: PlaceArray
                         };
                     }
@@ -168,7 +168,7 @@ wp_enqueue_script('google-map');
                         map.setOptions({styles: styles});
                     }
                     var boundsListener = google.maps.event.addListener((map), 'idle', function (event) {
-                        this.setZoom(<?php echo esc_html($googlemap_zoom_level); ?>);
+                        this.setZoom(<?php echo esc_js($googlemap_zoom_level); ?>);
                         google.maps.event.removeListener(boundsListener);
                     });
                 }

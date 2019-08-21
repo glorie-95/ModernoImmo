@@ -5,6 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <a class="compare-property" href="javascript:void(0)"
    data-property-id="<?php the_ID() ?>" data-toggle="tooltip"
-   title="<?php esc_html_e('Compare', 'essential-real-estate') ?>">
+   title="<?php esc_attr_e('Compare', 'essential-real-estate') ?>">
 	<i class="fa fa-plus"></i>
 </a>

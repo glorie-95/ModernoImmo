@@ -50,7 +50,7 @@ if (!class_exists('GSF_Field_Text')) {
 					break;
 			}
 			?>
-			<div class="gsf-field-text-inner <?php echo ($input_type == 'range'? 'range-type': ''); ?>">
+			<div class="gsf-field-text-inner <?php echo esc_attr($input_type == 'range'? 'range-type': ''); ?>">
 				<input  data-field-control="" class="gsf-text" type="<?php echo esc_attr($input_type); ?>" <?php echo join(' ', $attr); ?>
 				       name="<?php echo esc_attr($this->get_name()) ?>"
 				       <?php if (!empty($this->params['placeholder'])): ?>

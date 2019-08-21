@@ -44,32 +44,32 @@ extract(shortcode_atts(array(
 ), $atts));
 
 $status_default = ere_get_property_status_default_value();
-$request_status = isset($_GET['status']) ? $_GET['status'] : $status_default;
-$request_city = isset($_GET['city']) ? $_GET['city'] : '';
-$request_title = isset($_GET['title']) ? $_GET['title'] : '';
-$request_address = isset($_GET['address']) ? $_GET['address'] : '';
-$request_type = isset($_GET['type']) ? $_GET['type'] : '';
-$request_paged = isset($_GET['paged']) ? $_GET['paged'] : 1;
-$request_bathrooms = isset($_GET['bathrooms']) ? $_GET['bathrooms'] : '';
-$request_bedrooms = isset($_GET['bedrooms']) ? $_GET['bedrooms'] : '';
-$request_min_area = isset($_GET['min-area']) ? $_GET['min-area'] : '';
-$request_max_area = isset($_GET['max-area']) ? $_GET['max-area'] : '';
-$request_min_price = isset($_GET['min-price']) ? $_GET['min-price'] : '';
-$request_max_price = isset($_GET['max-price']) ? $_GET['max-price'] : '';
-$request_state = isset($_GET['state']) ? $_GET['state'] : '';
-$request_country = isset($_GET['country']) ? $_GET['country'] : '';
-$request_neighborhood = isset($_GET['neighborhood']) ? $_GET['neighborhood'] : '';
-$request_label = isset($_GET['label']) ? $_GET['label'] : '';
-$request_property_identity = isset($_GET['property_identity']) ? $_GET['property_identity'] : '';
-$request_garage = isset($_GET['garage']) ? $_GET['garage'] : '';
-$request_min_land_area = isset($_GET['min-land-area']) ? $_GET['min-land-area'] : '';
-$request_max_land_area = isset($_GET['max-land-area']) ? $_GET['max-land-area'] : '';
-$request_features = isset($_GET['other_features']) ? $_GET['other_features'] : '';
+$request_status = isset($_GET['status']) ? ere_clean(wp_unslash($_GET['status']))  : $status_default;
+$request_city = isset($_GET['city']) ? ere_clean(wp_unslash($_GET['city'])) : '';
+$request_title = isset($_GET['title']) ? ere_clean(wp_unslash($_GET['title'])) : '';
+$request_address = isset($_GET['address']) ? ere_clean(wp_unslash($_GET['address'])) : '';
+$request_type = isset($_GET['type']) ? ere_clean(wp_unslash($_GET['type'])) : '';
+$request_paged = isset($_GET['paged']) ? absint(wp_unslash($_GET['paged'])) : 1;
+$request_bathrooms = isset($_GET['bathrooms']) ? ere_clean(wp_unslash($_GET['bathrooms'])) : '';
+$request_bedrooms = isset($_GET['bedrooms']) ? ere_clean(wp_unslash($_GET['bedrooms'])) : '';
+$request_min_area = isset($_GET['min-area']) ? ere_clean(wp_unslash($_GET['min-area'])) : '';
+$request_max_area = isset($_GET['max-area']) ? ere_clean(wp_unslash($_GET['max-area'])) : '';
+$request_min_price = isset($_GET['min-price']) ? ere_clean(wp_unslash($_GET['min-price'])) : '';
+$request_max_price = isset($_GET['max-price']) ? ere_clean(wp_unslash($_GET['max-price'])) : '';
+$request_state = isset($_GET['state']) ? ere_clean(wp_unslash($_GET['state'])) : '';
+$request_country = isset($_GET['country']) ? ere_clean(wp_unslash($_GET['country'])) : '';
+$request_neighborhood = isset($_GET['neighborhood']) ? ere_clean(wp_unslash($_GET['neighborhood'])) : '';
+$request_label = isset($_GET['label']) ? ere_clean(wp_unslash($_GET['label'])) : '';
+$request_property_identity = isset($_GET['property_identity']) ? ere_clean(wp_unslash($_GET['property_identity'])) : '';
+$request_garage = isset($_GET['garage']) ? ere_clean(wp_unslash($_GET['garage'])) : '';
+$request_min_land_area = isset($_GET['min-land-area']) ? ere_clean(wp_unslash($_GET['min-land-area'])) : '';
+$request_max_land_area = isset($_GET['max-land-area']) ? ere_clean(wp_unslash($_GET['max-land-area'])) : '';
+$request_features = isset($_GET['other_features']) ? ere_clean(wp_unslash($_GET['other_features'])) : '';
 if (!empty($request_features)) {
     $request_features = explode(';', $request_features);
 }
-$request_advanced_search = isset($_GET['advanced']) ? $_GET['advanced'] : '0';
-$request_features_search = isset($_GET['features-search']) ? $_GET['features-search'] : '0';
+$request_advanced_search = isset($_GET['advanced']) ? ere_clean(wp_unslash($_GET['advanced'] )) : '0';
+$request_features_search = isset($_GET['features-search']) ? ere_clean(wp_unslash($_GET['features-search'])) : '0';
 $wrapper_class = 'ere-search-map-properties ere-search-properties-map ere-show-status-tab clearfix';
 
 if ($show_status_tab == 'true') {

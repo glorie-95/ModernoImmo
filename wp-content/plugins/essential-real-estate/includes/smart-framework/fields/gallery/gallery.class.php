@@ -29,7 +29,7 @@ if (!class_exists('GSF_Field_Gallery')) {
 					?>
 					<div class="gsf-image-preview" data-id="<?php echo esc_attr($image_id); ?>">
 						<div class="centered">
-							<img src="<?php echo esc_url($image_url); ?>" alt=""/>
+							<img src="<?php echo esc_url($image_url); ?>"/>
 						</div>
 						<span class="gsf-gallery-remove dashicons dashicons dashicons-no-alt"></span>
 					</div>

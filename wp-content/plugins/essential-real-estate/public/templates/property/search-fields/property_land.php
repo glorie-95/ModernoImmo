@@ -48,7 +48,7 @@ if ($land_area_is_slider=='true'):
 </div>
 <?php else: ?>
     <div class="<?php echo esc_attr($css_class_half_field); ?> form-group">
-        <select name="min-land-area" title="<?php esc_html_e('Min Land Area Size', 'essential-real-estate') ?>"
+        <select name="min-land-area" title="<?php esc_attr_e('Min Land Area Size', 'essential-real-estate') ?>"
                 class="search-field form-control" data-default-value="">
             <option value="">
                 <?php esc_html_e('Min Land Area', 'essential-real-estate') ?>
@@ -61,7 +61,7 @@ if ($land_area_is_slider=='true'):
                     ?>
                     <option
                         value="<?php echo esc_attr($n) ?>" <?php if ($n == $request_min_land_area) {
-                        echo esc_attr('selected');
+                        echo 'selected';
                     } ?>><?php echo sprintf('%s %s',ere_get_format_number($n), $measurement_units_land_area); ?>
                     </option>
                     <?php
@@ -70,7 +70,7 @@ if ($land_area_is_slider=='true'):
         </select>
     </div>
     <div class="<?php echo esc_attr($css_class_half_field); ?> form-group">
-        <select name="max-land-area" title="<?php esc_html_e('Max Land Area Size', 'essential-real-estate') ?>"
+        <select name="max-land-area" title="<?php esc_attr_e('Max Land Area Size', 'essential-real-estate') ?>"
                 class="search-field form-control" data-default-value="">
             <option value="">
                 <?php esc_html_e('Max Land Area', 'essential-real-estate') ?>
@@ -83,7 +83,7 @@ if ($land_area_is_slider=='true'):
                     ?>
                     <option
                         value="<?php echo esc_attr($n) ?>" <?php if ($n == $request_max_land_area) {
-                        echo esc_attr('selected');
+                        echo 'selected';
                     } ?>>
                         <?php echo sprintf( '%s %s',ere_get_format_number($n), $measurement_units_land_area); ?>
                     </option>

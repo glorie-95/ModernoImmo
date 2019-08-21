@@ -9,29 +9,29 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 $features = '';
-$title = isset($_GET['title']) ? $_GET['title'] : '';
-$address = isset($_GET['address']) ? $_GET['address'] : '';
-$city = isset($_GET['city']) ? $_GET['city'] : '';
+$title = isset($_GET['title']) ? ere_clean(wp_unslash($_GET['title']))  : '';
+$address = isset($_GET['address']) ? ere_clean(wp_unslash($_GET['address']))  : '';
+$city = isset($_GET['city']) ? ere_clean(wp_unslash($_GET['city']))  : '';
 $status_default=ere_get_property_status_default_value();
-$status = isset($_GET['status']) ? $_GET['status'] :$status_default;
-$type = isset($_GET['type']) ? $_GET['type'] : '';
-$bedrooms = isset($_GET['bedrooms']) ? $_GET['bedrooms'] : '';
-$bathrooms = isset($_GET['bathrooms']) ? $_GET['bathrooms'] : '';
-$min_price = isset($_GET['min-price']) ? $_GET['min-price'] : '';
-$max_price = isset($_GET['max-price']) ? $_GET['max-price'] : '';
-$min_area = isset($_GET['min-area']) ? $_GET['min-area'] : '';
-$max_area = isset($_GET['max-area']) ? $_GET['max-area'] : '';
-$country = isset($_GET['country']) ? $_GET['country'] : '';
-$state = isset($_GET['state']) ? $_GET['state'] : '';
-$neighborhood = isset($_GET['neighborhood']) ? $_GET['neighborhood'] : '';
-$garage = isset($_GET['garage']) ? $_GET['garage'] : '';
-$label = isset($_GET['label']) ? $_GET['label'] : '';
-$min_land_area = isset($_GET['min-land-area']) ? $_GET['min-land-area'] : '';
-$max_land_area = isset($_GET['max-land-area']) ? $_GET['max-land-area'] : '';
-$property_identity = isset($_GET['property_identity']) ? $_GET['property_identity'] : '';
-$featured_search = isset($_GET['features-search']) ? $_GET['features-search'] : '';
+$status = isset($_GET['status']) ? ere_clean(wp_unslash($_GET['status']))  :$status_default;
+$type = isset($_GET['type']) ? ere_clean(wp_unslash($_GET['type']))  : '';
+$bedrooms = isset($_GET['bedrooms']) ? ere_clean(wp_unslash($_GET['bedrooms']))  : '';
+$bathrooms = isset($_GET['bathrooms']) ? ere_clean(wp_unslash($_GET['bathrooms']))  : '';
+$min_price = isset($_GET['min-price']) ? ere_clean(wp_unslash($_GET['min-price']))  : '';
+$max_price = isset($_GET['max-price']) ? ere_clean(wp_unslash($_GET['max-price']))  : '';
+$min_area = isset($_GET['min-area']) ? ere_clean(wp_unslash($_GET['min-area']))  : '';
+$max_area = isset($_GET['max-area']) ? ere_clean(wp_unslash($_GET['max-area']))  : '';
+$country = isset($_GET['country']) ? ere_clean(wp_unslash($_GET['country']))  : '';
+$state = isset($_GET['state']) ? ere_clean(wp_unslash($_GET['state']))  : '';
+$neighborhood = isset($_GET['neighborhood']) ? ere_clean(wp_unslash($_GET['neighborhood']))  : '';
+$garage = isset($_GET['garage']) ? ere_clean(wp_unslash($_GET['garage'] )) : '';
+$label = isset($_GET['label']) ? ere_clean(wp_unslash($_GET['label']))  : '';
+$min_land_area = isset($_GET['min-land-area']) ? ere_clean(wp_unslash($_GET['min-land-area']))  : '';
+$max_land_area = isset($_GET['max-land-area']) ? ere_clean(wp_unslash($_GET['max-land-area']))  : '';
+$property_identity = isset($_GET['property_identity']) ? ere_clean(wp_unslash($_GET['property_identity']))  : '';
+$featured_search = isset($_GET['features-search']) ? ere_clean(wp_unslash($_GET['features-search']))  : '';
 if($featured_search == '1'){
-    $features = isset($_GET['other_features']) ? $_GET['other_features'] : '';
+    $features = isset($_GET['other_features']) ? ere_clean(wp_unslash($_GET['other_features'] )) : '';
     if(!empty($features)) {
         $features = explode( ';',$features );
     }
@@ -238,8 +238,8 @@ if (!empty($garage)) {
  * Min Max Price & Area Property
  */
 if (!empty($min_price) && !empty($max_price)) {
-    $min_price = doubleval(ere_clean($min_price));
-    $max_price = doubleval(ere_clean($max_price));
+    $min_price = doubleval(ere_clean_double_val($min_price));
+    $max_price = doubleval(ere_clean_double_val($max_price));
 
     if ($min_price >= 0 && $max_price >= $min_price) {
         $meta_query[] = array(
@@ -251,7 +251,7 @@ if (!empty($min_price) && !empty($max_price)) {
         $parameters.=sprintf( __('Price: <strong>%s - %s</strong>; ', 'essential-real-estate'), $min_price, $max_price);
     }
 } else if (!empty($min_price)) {
-    $min_price = doubleval(ere_clean($min_price));
+    $min_price = doubleval(ere_clean_double_val($min_price));
     if ($min_price >= 0) {
         $meta_query[] = array(
             'key' => ERE_METABOX_PREFIX. 'property_price',
@@ -262,7 +262,7 @@ if (!empty($min_price) && !empty($max_price)) {
         $parameters.=sprintf( __('Min Price: <strong>%s</strong>; ', 'essential-real-estate'), $min_price);
     }
 } else if (!empty($max_price)) {
-    $max_price = doubleval(ere_clean($max_price));
+    $max_price = doubleval(ere_clean_double_val($max_price));
     if ($max_price >= 0) {
         $meta_query[] = array(
             'key' => ERE_METABOX_PREFIX. 'property_price',
@@ -432,7 +432,7 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'archive-property', ERE_PLUGIN_URL . 'publ
         }
         ?>
         <div class="advanced-saved-searches">
-            <button type="button" class="btn btn-primary btn-xs btn-save-search" data-toggle="modal" data-target="<?php echo $data_target; ?>">
+            <button type="button" class="btn btn-primary btn-xs btn-save-search" data-toggle="modal" data-target="<?php echo esc_attr($data_target); ?>">
                 <?php esc_html_e( 'Save Search', 'essential-real-estate' ) ?></button>
         </div>
         <?php ere_get_template('global/save-search-modal.php',array('parameters'=>$parameters,'search_query'=>$search_query));
@@ -450,45 +450,45 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'archive-property', ERE_PLUGIN_URL . 'publ
                         <li><a data-sortby="default" href="<?php
                             $pot_link_sortby = add_query_arg( array( 'sortby' => 'default' ) );
                             echo esc_url( $pot_link_sortby ) ?>"
-                               title="<?php esc_html_e( 'Default Order', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Default Order', 'essential-real-estate' ); ?></a>
+                               title="<?php esc_attr_e( 'Default Order', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Default Order', 'essential-real-estate' ); ?></a>
                         </li>
                         <li><a data-sortby="featured" href="<?php
                             $pot_link_sortby = add_query_arg( array( 'sortby' => 'featured' ) );
                             echo esc_url( $pot_link_sortby ) ?>"
-                               title="<?php esc_html_e( 'Featured', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Featured', 'essential-real-estate' ); ?></a>
+                               title="<?php esc_attr_e( 'Featured', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Featured', 'essential-real-estate' ); ?></a>
                         </li>
                         <li><a data-sortby="most_viewed" href="<?php
                             $pot_link_sortby = add_query_arg( array( 'sortby' => 'most_viewed' ) );
                             echo esc_url( $pot_link_sortby ) ?>"
-                               title="<?php esc_html_e( 'Most Viewed', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Most Viewed', 'essential-real-estate' ); ?></a>
+                               title="<?php esc_attr_e( 'Most Viewed', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Most Viewed', 'essential-real-estate' ); ?></a>
                         </li>
                         <li><a data-sortby="a_price" href="<?php
                             $pot_link_sortby = add_query_arg( array( 'sortby' => 'a_price' ) );
                             echo esc_url( $pot_link_sortby ) ?>"
-                               title="<?php esc_html_e( 'Price (Low to High)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Price (Low to High)', 'essential-real-estate' ); ?></a>
+                               title="<?php esc_attr_e( 'Price (Low to High)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Price (Low to High)', 'essential-real-estate' ); ?></a>
                         </li>
                         <li><a data-sortby="d_price" href="<?php
                             $pot_link_sortby = add_query_arg( array( 'sortby' => 'd_price' ) );
                             echo esc_url( $pot_link_sortby ) ?>"
-                               title="<?php esc_html_e( 'Price (High to Low)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Price (High to Low)', 'essential-real-estate' ); ?></a>
+                               title="<?php esc_attr_e( 'Price (High to Low)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Price (High to Low)', 'essential-real-estate' ); ?></a>
                         </li>
                         <li><a data-sortby="a_date" href="<?php
                             $pot_link_sortby = add_query_arg( array( 'sortby' => 'a_date' ) );
                             echo esc_url( $pot_link_sortby ) ?>"
-                               title="<?php esc_html_e( 'Date (Old to New)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Date (Old to New)', 'essential-real-estate' ); ?></a>
+                               title="<?php esc_attr_e( 'Date (Old to New)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Date (Old to New)', 'essential-real-estate' ); ?></a>
                         </li>
                         <li><a data-sortby="d_date" href="<?php
                             $pot_link_sortby = add_query_arg( array( 'sortby' => 'd_date' ) );
                             echo esc_url( $pot_link_sortby ) ?>"
-                               title="<?php esc_html_e( 'Date (New to Old)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Date (New to Old)', 'essential-real-estate' ); ?></a>
+                               title="<?php esc_attr_e( 'Date (New to Old)', 'essential-real-estate' ); ?>"><?php esc_html_e( 'Date (New to Old)', 'essential-real-estate' ); ?></a>
                         </li>
                     </ul>
                 </div>
                 <div class="view-as" data-admin-url="<?php echo ERE_AJAX_URL; ?>">
-                    <span data-view-as="property-list" class="view-as-list" title="<?php esc_html_e( 'View as List', 'essential-real-estate' ) ?>">
+                    <span data-view-as="property-list" class="view-as-list" title="<?php esc_attr_e( 'View as List', 'essential-real-estate' ) ?>">
                         <i class="fa fa-list-ul"></i>
                     </span>
-                    <span data-view-as="property-grid" class="view-as-grid" title="<?php esc_html_e( 'View as Grid', 'essential-real-estate' ) ?>">
+                    <span data-view-as="property-grid" class="view-as-grid" title="<?php esc_attr_e( 'View as Grid', 'essential-real-estate' ) ?>">
                         <i class="fa fa-th-large"></i>
                     </span>
                 </div>

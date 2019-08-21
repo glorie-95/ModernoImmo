@@ -1,0 +1,606 @@
+@media only screen and (min-width: 1400px) {
+
+    .woocommerce .col2-set .col-2,
+    .woocommerce-page .col2-set .col-2 {
+        width: 48% !important;
+        max-width: inherit;
+    }
+
+    .woocommerce .col2-set .col-1,
+    .woocommerce-page .col2-set .col-1 {
+        width: 48%;
+        max-width: inherit;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .newsletter form input {
+        width: 230px
+    }
+
+    #cssmenu>ul>li>a {
+        font-size: 13px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    #cssmenu>ul>li.has-sub>a {
+        padding-right: 26px;
+    }
+
+    .woocommerce .col2-set .col-2,
+    .woocommerce-page .col2-set .col-2 {
+        width: 48% !important;
+        max-width: inherit;
+    }
+
+    .woocommerce .col2-set .col-1,
+    .woocommerce-page .col2-set .col-1 {
+        width: 48%;
+        max-width: inherit;
+    }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    .woocommerce .col2-set .col-2,
+    .woocommerce-page .col2-set .col-2 {
+        width: 100% !important;
+        max-width: inherit;
+    }
+
+    .woocommerce .col2-set .col-1,
+    .woocommerce-page .col2-set .col-1 {
+        width: 100%;
+        max-width: inherit;
+    }
+
+    h2.main-title {
+        font-size: 40px;
+        line-height: 54px;
+    }
+
+    .active-main-slider .owl-nav .owl-next {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        position: absolute;
+        right: 20px;
+        margin-top: -20px;
+    }
+
+    .active-main-slider .owl-nav .owl-prev {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        position: absolute;
+        left: 20px;
+        margin-top: -20px;
+    }
+
+    #cssmenu.small-screen #menu-button:before {
+        right: 0;
+    }
+
+    #cssmenu.small-screen #menu-button:after {
+        right: 0;
+    }
+    .header-two #cssmenu.small-screen #menu-button:before {
+        left: 0;
+    }
+    .header-two .topbar-list{
+        margin-top: 0;
+    }
+    .header-two .topbar-social{
+        margin-top: 8px;
+    }
+    .header-two #cssmenu.small-screen #menu-button:after {
+        left: 0;
+    }
+    .header-two #cssmenu.small-screen #menu-button:before{
+        background: #fff;
+    }
+    .header-two #cssmenu.small-screen #menu-button.menu-opened:after{
+        background: #fff;
+    }
+    .header-two #cssmenu.small-screen #menu-button:after{
+        border-top-color: #fff;
+        border-bottom-color: #fff
+    }
+    .header-two #cssmenu.small-screen .submenu-button:before{
+        background: #fff;
+    }
+    .header-two #cssmenu.small-screen .submenu-button:after{
+        background: #fff;
+    }
+    section.footer-area.section-padding {
+        padding-bottom: 60px;
+    }
+
+    .project-details-section.section-padding {
+        padding-bottom: 50px;
+        padding-top: 50px;
+    }
+
+    .comment-list-ul>li ul.children {
+        padding-left: 0;
+    }
+
+    .share {
+        float: left;
+        margin-bottom: 50px
+    }
+
+    .post-share-link div {
+        overflow: hidden;
+        margin-bottom: 20px;
+        float: left;
+        width: 50%
+    }
+
+    .post-share-link {
+        overflow: hidden;
+        margin-bottom: 0;
+        padding-bottom: 30px
+    }
+
+    .topbar-list {
+        font-size: 12px;
+    }
+
+    .experience-content .load-more-button {
+        padding-bottom: 70px
+    }
+
+    .dream-quote-text h2 {
+        font-size: 33px;
+        line-height: 42px;
+    }
+
+    .sub-title br {
+        display: none
+    }
+
+    .single-topbar p {
+        font-size: 12px;
+    }
+
+    .single-recent-post .recent-content {
+        padding-left: 85px;
+    }
+
+    .single-services-title h2 {
+        font-size: 28px
+    }
+
+    div#cssmenu {
+        text-align: left;
+    }
+
+    p.site-title {
+        margin-bottom: 0;
+    }
+
+    .share {
+        text-align: right;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+
+    .woocommerce .col2-set .col-2,
+    .woocommerce-page .col2-set .col-2 {
+        width: 100% !important;
+        max-width: inherit;
+    }
+
+    .woocommerce .col2-set .col-1,
+    .woocommerce-page .col2-set .col-1 {
+        width: 100%;
+        max-width: inherit;
+    }
+
+    .site-logo {
+        text-align: center;
+    }
+
+    .menu-area {
+        padding-bottom: 0
+    }
+
+    .menu-area.sticky-menu {
+        position: static;
+    }
+
+    section.experience-section.section-padding {
+        padding-bottom: 50px;
+        padding-top: 50px;
+    }
+
+    .section-title {
+        margin-bottom: 40px
+    }
+
+    .main-slider-welcome-text {
+        height: 450px
+    }
+
+    .single-topbar.selecticon {
+        width: 40%;
+        margin-bottom: 10px;
+        display: none;
+    }
+
+    .single-topbar {
+        text-align: center;
+        line-height: 30px;
+    }
+
+    h2.main-title {
+        font-size: 22px;
+        line-height: normal;
+    }
+.welcome-button a{
+    height: 40px;
+    line-height: 40px;
+}
+    h2.sub-title {
+        line-height: 26px;
+        font-size: 16px;
+    }
+
+    .active-main-slider .owl-nav .owl-next {
+        right: 24px;
+    }
+
+    .active-main-slider .owl-nav .owl-prev {
+        left: 24px;
+    }
+
+    .welcome-button a {
+        width: 130px;
+        font-size: 14px
+    }
+
+    .next-arrow.slick-arrow {
+        right: 10px;
+    }
+
+    .prev-arrow.slick-arrow {
+        left: 10px;
+    }
+
+    .experience-content h1 {
+        font-size: 27px;
+    }
+
+    .our-mission-list h4 {
+        padding-right: 50px;
+    }
+
+    .single-counter {
+        margin-bottom: 40px;
+    }
+
+    section.counter-section {
+        padding-bottom: 10px;
+    }
+
+    .section-title h2 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    section.services-section.section-padding {
+        padding-bottom: 20px;
+        padding-top: 50px;
+    }
+
+    .single-services {
+        margin-bottom: 30px;
+    }
+
+
+
+    .section-title p {
+        font-size: 16px;
+    }
+
+
+    .blog-title h3 {
+        font-size: 17px
+    }
+
+    .blog-area.section-padding {
+        padding: 50px 0;
+    }
+
+    .footer-area.section-padding {
+        padding: 50px 0;
+        padding-bottom: 0
+    }
+
+    .newsletter form input {
+        width: 240px;
+    }
+
+    .footer-area .widget-title {
+        margin-bottom: 15px;
+    }
+
+    .footer-area .widget {
+        margin-bottom: 50px;
+    }
+
+    .footer-social {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .copryright {
+        text-align: center;
+    }
+
+    section.experience-section::before {
+        width: 100%;
+        height: 300px;
+        background-size: contain;
+        background-position: center center;
+        margin-left: 0;
+        left: 0
+    }
+
+    /*start about page css*/
+    .breadcrumb {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .get-in-touch-btn {
+        text-align: center;
+    }
+
+
+    .single-services-title h2 {
+        font-size: 30px;
+    }
+
+    .blog-list-area.services-details-page.section-padding {
+
+        padding-bottom: 40px;
+        padding-top: 50px
+    }
+
+    .project-nav ul li {
+        padding-right: 13px
+    }
+
+
+    .paget-title h2 {
+        font-size: 36px;
+    }
+
+    .single-blog.list-blog-item a h2 {
+        font-size: 25px;
+    }
+
+    .single-blog.list-blog-item .news-meta a {
+        display: block;
+        font-size: 13px
+    }
+
+    .news-list-pagination {
+        overflow: hidden;
+        margin-bottom: 60px;
+    }
+
+    .blog-list-area.section-padding {
+        padding-bottom: 50px;
+        padding-top: 50px
+    }
+
+    .blog-area.blog-grid-page.section-padding .news-list-pagination {
+
+        margin-bottom: 20px;
+    }
+
+    .author-details .about-author {
+        padding-left: 0;
+    }
+
+    .author-details .author-img {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 20px
+    }
+
+    .comment-list ul li .commenter-image {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 100px
+    }
+
+    .comment-list ul li .commnenter-details {
+        padding: 0;
+        width: 100%
+    }
+
+    .comment-list ul ul.children {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .comment-form-area {
+        margin-bottom: 50px;
+    }
+
+    .share {
+        float: left;
+        margin-bottom: 50px
+    }
+
+    .post-share-link div {
+        overflow: hidden;
+        margin-bottom: 20px
+    }
+
+    p.site-title {
+        margin-bottom: 2px;
+    }
+
+    .post-share-link {
+        overflow: hidden;
+        margin-bottom: 30px;
+        padding-bottom: 0
+    }
+
+    .contact-address {
+        margin-top: 0;
+        margin-bottom: 50px;
+    }
+
+    .get-in-touch {
+        top: -51px
+    }
+
+    .contact-us-section.padding-top {
+        padding-top: 50px;
+    }
+
+    .client-feedback-area.section-padding {
+        padding-top: 50px;
+        padding-bottom: 30px;
+    }
+
+    /*star header two css*/
+    .topbar-list {
+        text-align: left;
+        font-size: 13px;
+    }
+
+    .topbar-social {
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    .topbar-social a:first-child {
+        margin-left: 0;
+    }
+
+    /*start dream quote section*/
+    .dream-quote-text h2 {
+        font-size: 28px;
+        line-height: 38px
+    }
+
+    .search-form {
+        display: none;
+    }
+
+    .experience-content .load-more-button {
+        margin-bottom: 50px;
+    }
+
+    section.blog-area.blogbg.blog-header.section-padding {
+        padding-bottom: 30px
+    }
+
+    .widget.business-hour {
+        margin-bottom: 0;
+    }
+
+    .footer-area.section-padding {
+        padding-bottom: 30px !important;
+    }
+
+    .sub-title br {
+        display: none
+    }
+
+    .topbar-list {
+        text-align: center;
+    }
+
+    .topbar-social {
+        text-align: center;
+    }
+
+    .topbar-list .single-topbar:first-child {
+        margin-right: 0
+    }
+
+    .quote-text h4 {
+        line-height: 35px
+    }
+
+    .comment-list ul ul.children .commnenter-details {
+        margin-bottom: 20px;
+    }
+
+    div#cssmenu {
+        text-align: left;
+    }
+
+    #cssmenu.small-screen #menu-button {
+        color: transparent;
+    }
+
+    .blog-slider-active {
+        padding-left: 5px;
+    }
+
+    .single-services nav.navigation.post-navigation {
+        padding-bottom: 50px;
+    }
+
+    form.woocommerce-ordering {
+        width: 100% !important;
+    }
+
+    form.woocommerce-ordering select {
+        width: 100% !important;
+    }
+    .header-two .single-topbar strong{
+        font-size: 14px;
+    }
+    .header-two #cssmenu.small-screen #menu-button:before{
+        background: #fff;
+    }
+    .header-two #cssmenu.small-screen #menu-button.menu-opened:after{
+        background: #fff;
+    }
+    .header-two #cssmenu.small-screen #menu-button:after{
+        border-top-color: #fff;
+        border-bottom-color: #fff
+    }
+    .header-two .topbar-social{
+        padding-bottom: 10px;
+    }
+    .active-main-slider .owl-nav .owl-next{
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        right: 10px;
+    }
+    .active-main-slider .owl-nav .owl-prev{
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        left: 10px;
+    }
+    .header-two #cssmenu.small-screen .submenu-button:before{
+        background: #fff;
+    }
+    .header-two #cssmenu.small-screen .submenu-button:after{
+        background: #fff;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .single-blog.list-blog-item .news-meta a {
+        display: inline-block;
+        font-size: 15px
+    }
+}

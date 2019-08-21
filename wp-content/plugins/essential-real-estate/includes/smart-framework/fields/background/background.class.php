@@ -129,7 +129,7 @@ if (!class_exists('GSF_Field_Background')) {
 				       class="gsf-background-image"
 				       name="<?php echo esc_attr($this->get_name()) ?>[background_image_id]"
 				       value="<?php echo esc_attr($field_value['background_image_id']); ?>"/>
-				<div class="gsf-background-preview <?php echo $image_preview_class; ?>"></div>
+				<div class="gsf-background-preview <?php echo esc_attr($image_preview_class); ?>"></div>
 				<div class="gsf-background-info">
 					<?php if ($is_background_color) : ?>
 					<div><input data-field-control="" type="text"  data-alpha="true"
@@ -137,7 +137,7 @@ if (!class_exists('GSF_Field_Background')) {
 					<?php endif; ?>
 					<div>
 						<input data-field-control="" type="text"
-						       placeholder="<?php esc_html_e('No background image','smart-framework'); ?>" class="gsf-background-url"
+						       placeholder="<?php esc_attr_e('No background image','smart-framework'); ?>" class="gsf-background-url"
 						       name="<?php echo esc_attr($this->get_name()) ?>[background_image_url]"
 						       value="<?php echo esc_url($field_value['background_image_url']); ?>"/>
 						<button type="button" class="button gsf-background-choose-image"><?php esc_html_e('Choose Image','smart-framework'); ?></button>

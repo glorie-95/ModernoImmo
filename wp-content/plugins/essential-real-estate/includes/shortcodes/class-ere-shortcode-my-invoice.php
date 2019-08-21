@@ -49,8 +49,8 @@ if (!class_exists('ERE_Shortcode_My_Invoice')) {
                 );
             } else {
                 if (isset($_REQUEST['start_date']) && $_REQUEST['start_date'] != '' && isset($_REQUEST['end_date']) && $_REQUEST['end_date'] != '') {
-                    $start_date = esc_html($_REQUEST['start_date']);
-                    $end_date = esc_html($_REQUEST['end_date']);
+                    $start_date = ere_clean(wp_unslash($_REQUEST['start_date']) );
+                    $end_date = ere_clean(wp_unslash($_REQUEST['end_date']));
                     $date_query = array(
                         'after' => $start_date,
                         'before' => $end_date
@@ -66,7 +66,7 @@ if (!class_exists('ERE_Shortcode_My_Invoice')) {
                 );
             } else {
                 if (isset($_REQUEST['invoice_status']) && $_REQUEST['invoice_status'] != '') {
-                    $invoice_status = esc_html($_REQUEST['invoice_status']);
+                    $invoice_status = ere_clean(wp_unslash($_REQUEST['invoice_status']));
                     $meta_query[] = array(
                         'key' => ERE_METABOX_PREFIX . 'invoice_payment_status',
                         'value' => $invoice_status,
@@ -84,7 +84,7 @@ if (!class_exists('ERE_Shortcode_My_Invoice')) {
                 );
             } else {
                 if (isset($_REQUEST['invoice_type']) && $_REQUEST['invoice_type'] != '') {
-                    $invoice_type = esc_html($_REQUEST['invoice_type']);
+                    $invoice_type = ere_clean(wp_unslash($_REQUEST['invoice_type']));
                     $meta_query[] = array(
                         'key' => ERE_METABOX_PREFIX . 'invoice_payment_type',
                         'value' => $invoice_type,

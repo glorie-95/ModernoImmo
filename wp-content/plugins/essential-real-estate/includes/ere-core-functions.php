@@ -1277,8 +1277,8 @@ if (!function_exists('ere_get_code_country_by_name')) {
         return $country_code;
     }
 }
-if (!function_exists('ere_clean')) {
-    function ere_clean($string)
+if (!function_exists('ere_clean_double_val')) {
+    function ere_clean_double_val($string)
     {
         $string = preg_replace('/&#36;/', '', $string);
         $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
@@ -1392,6 +1392,23 @@ if (!function_exists('ere_get_number_text')) {
             return $many_text;
         } else {
             return $singular_text;
+        }
+    }
+}
+
+/**
+ * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
+ * Non-scalar values are ignored.
+ *
+ * @param string|array $var Data to sanitize.
+ * @return string|array
+ */
+if (!function_exists('ere_clean')) {
+    function ere_clean( $var ) {
+        if ( is_array( $var ) ) {
+            return array_map( 'ere_clean', $var );
+        } else {
+            return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
         }
     }
 }

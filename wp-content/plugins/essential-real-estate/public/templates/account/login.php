@@ -25,11 +25,11 @@ if($redirect!='my_profile')
     <form class="ere-login" method="post" enctype="multipart/form-data">
         <div class="form-group control-username">
             <input name="user_login" class="form-control control-icon login_user_login"
-                   placeholder="<?php esc_html_e('Username', 'essential-real-estate'); ?>" type="text"/>
+                   placeholder="<?php esc_attr_e('Username', 'essential-real-estate'); ?>" type="text"/>
         </div>
         <div class="form-group control-password">
             <input name="user_password" class="form-control control-icon"
-                   placeholder="<?php esc_html_e('Password', 'essential-real-estate'); ?>" type="password"/>
+                   placeholder="<?php esc_attr_e('Password', 'essential-real-estate'); ?>" type="password"/>
         </div>
         <div class="checkbox">
             <label>

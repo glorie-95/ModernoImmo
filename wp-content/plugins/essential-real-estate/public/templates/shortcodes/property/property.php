@@ -541,7 +541,7 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'owl_carousel', ERE_PLUGIN_URL . 'public/a
                                                 <div class="property-area">
                                                     <div class="property-area-inner property-info-item-tooltip"
                                                          data-toggle="tooltip"
-                                                         title="<?php esc_html_e('Size', 'essential-real-estate'); ?>">
+                                                         title="<?php esc_attr_e('Size', 'essential-real-estate'); ?>">
                                                         <span class="fa fa-arrows"></span>
 	                                            <span class="property-info-value"><?php
                                                     $measurement_units = ere_get_measurement_units();

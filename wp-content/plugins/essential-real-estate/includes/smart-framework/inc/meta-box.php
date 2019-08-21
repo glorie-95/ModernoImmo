@@ -165,7 +165,7 @@ if (!class_exists('GSF_Meta_Boxes')) {
 			$meta_field_keys = $this->get_config_keys($meta_configs);
 			foreach ($meta_field_keys as $meta_id => $field_value) {
 				$is_clone = $field_value['clone'];
-				$meta_value = isset($_POST[$meta_id]) ? $_POST[$meta_id] : ($is_clone ? array() : '');
+				$meta_value = isset($_POST[$meta_id]) ? wp_unslash($_POST[$meta_id]) : ($is_clone ? array() : '');
 				if ($is_clone && is_array($meta_value)) {
 					$max = false;
 					foreach ($meta_value as $index_key => &$value) {

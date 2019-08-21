@@ -10,23 +10,23 @@ if (!class_exists('GSF_Field_Group')) {
 			$field_id = $this->get_id();
 			$this->params['clone'] = false;
 			$isToggle = isset($this->params['toggle']) ? $this->params['toggle'] : true;
-			$attr_style = '';
-			if ($isToggle && !(isset($this->params['toggle_default']) ? $this->params['toggle_default'] : true)) {
-				$attr_style = 'style="display:none"';
-			}
 			?>
 			<div <?php echo (!empty($field_id) ? 'id="' . esc_attr($field_id) . '"' : ''); ?> class="gsf-group gsf-field" <?php $this->the_required(); ?>>
 				<h4>
 					<?php echo esc_html($this->params['title']); ?>
 					<?php if ($isToggle): ?>
-						<?php if (empty($attr_style)): ?>
-							<span class="gsf-group-toggle dashicons dashicons-arrow-down"></span>
+						<?php if ($isToggle && !(isset($this->params['toggle_default']) ? $this->params['toggle_default'] : true)): ?>
+                            <span class="gsf-group-toggle dashicons dashicons-arrow-up"></span>
 						<?php else: ?>
-							<span class="gsf-group-toggle dashicons dashicons-arrow-up"></span>
+                            <span class="gsf-group-toggle dashicons dashicons-arrow-down"></span>
 						<?php endif;?>
 					<?php endif;?>
 				</h4>
-				<div class="gsf-group-inner" <?php echo ($attr_style) ; ?>>
+				<div class="gsf-group-inner"
+                <?php if ($isToggle && !(isset($this->params['toggle_default']) ? $this->params['toggle_default'] : true)): ?>
+                 style="display: none"
+                <?php endif; ?>
+                >
 			<?php
 		}
 		function html_end() {

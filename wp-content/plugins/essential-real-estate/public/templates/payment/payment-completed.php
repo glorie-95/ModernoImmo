@@ -3,18 +3,18 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 $ere_ayment = new ERE_Payment();
-if (isset($_GET['payment_method']) && $_GET['payment_method'] == 1) {
+$payment_method = isset($_GET['payment_method']) ? absint(wp_unslash($_GET['payment_method'])) : -1;
+if ($payment_method == 1) {
     $ere_ayment->paypal_payment_completed();
-} elseif (isset($_GET['payment_method']) && $_GET['payment_method'] == 2) {
+} elseif ($payment_method == 2) {
     $ere_ayment->stripe_payment_completed();
 }
-
 ?>
 <div class="ere-payment-completed-wrap">
     <?php
     do_action('ere_before_payment_completed');
     if (isset($_GET['order_id']) && $_GET['order_id'] != ''):
-        $order_id = $_GET['order_id'];
+        $order_id = absint(wp_unslash($_GET['order_id']));
         $ere_invoice = new ERE_Invoice();
         $invoice_meta = $ere_invoice->get_invoice_meta($order_id);
         ?>

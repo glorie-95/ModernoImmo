@@ -23,7 +23,7 @@ if ($property_attachment_arg && !empty($property_attachments[0])):?>
                     ?>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 media-thumb-wrap">
                         <figure class="media-thumb">
-                            <img src="<?php echo esc_url($thumb_url); ?>" alt="">
+                            <img src="<?php echo esc_url($thumb_url); ?>">
                         </figure>
                         <div class="media-info">
                             <strong><?php echo esc_html($file_name) ?></strong>

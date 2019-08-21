@@ -59,7 +59,6 @@
                             'user_office_address': $("#user_office_address").val(),
                             'user_facebook_url': $("#user_facebook_url").val(),
                             'user_twitter_url': $("#user_twitter_url").val(),
-                            'user_googleplus_url': $("#user_googleplus_url").val(),
                             'user_linkedin_url': $("#user_linkedin_url").val(),
                             'user_pinterest_url': $("#user_pinterest_url").val(),
                             'user_instagram_url': $("#user_instagram_url").val(),
@@ -268,7 +267,7 @@
 
                 if (response.success) {
 
-                    var profileThumbHTML = '<img src="' + response.url + '" alt="" />' +
+                    var profileThumbHTML = '<img src="' + response.url + '"/>' +
                         '<input type="hidden" class="profile-pic-id" id="profile-pic-id" name="profile-pic-id" value="' + response.attachment_id + '"/>';
 
                     document.getElementById("holder-" + file.id).innerHTML = profileThumbHTML;

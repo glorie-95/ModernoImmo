@@ -156,6 +156,9 @@ if (!class_exists('Essential_Real_Estate')) {
             $this->loader->add_filter('manage_property-neighborhood_custom_column', $admin_location,  'add_columns_property_neighborhood_content', 10, 3 );
             $this->loader->add_filter('manage_edit-property-neighborhood_sortable_columns',  $admin_location, 'add_columns_property_neighborhood_sortable' );
 
+            $this->loader->add_action('created_property-status',$plugin_admin,'add_meta_property_status_order_number',10,2);
+
+
             $widgets = new ERE_Widgets();
             $this->loader->add_action('widgets_init', $widgets, 'register_widgets');
 
@@ -283,6 +286,7 @@ if (!class_exists('Essential_Real_Estate')) {
 
             $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
             $this->loader->add_action('wp_footer', $plugin_public, 'enqueue_styles_rtl');
+            $this->loader->add_action('init', $plugin_public, 'register_assets');
             $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
             $this->loader->add_filter('template_include', $plugin_public, 'template_loader');
             $this->loader->add_action('pre_get_posts', $plugin_public, 'set_posts_per_page');

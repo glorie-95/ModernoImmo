@@ -104,8 +104,9 @@ if (!class_exists('ERE_Admin_User_Package')) {
         public function filter_restrict_manage_user_package() {
             global $typenow;
             $post_type = 'user_package';
+            $package_user = isset($_GET['package_user'])? ere_clean(wp_unslash($_GET['package_user'])) :'';
             if ($typenow == $post_type){?>
-                <input type="text" placeholder="<?php esc_html_e('Buyer','essential-real-estate');?>" name="package_user" value="<?php echo (isset($_GET['package_user'])? $_GET['package_user']:'');?>">
+                <input type="text" placeholder="<?php esc_attr_e('Buyer','essential-real-estate');?>" name="package_user" value="<?php echo esc_attr($package_user);?>">
             <?php }
         }
 
@@ -119,9 +120,10 @@ if (!class_exists('ERE_Admin_User_Package')) {
             $q_vars    = &$query->query_vars;$filter_arr=array();
             if ($pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type)
             {
-                if(isset($_GET['package_user']) && $_GET['package_user'] != '')
+                $package_user = isset($_GET['package_user']) ? ere_clean(wp_unslash($_GET['package_user'])) : '';
+                if($package_user !== '')
                 {
-                    $user = get_user_by('login',$_GET['package_user']);
+                    $user = get_user_by('login',$package_user);
                     $user_id=-1;
                     if($user)
                     {

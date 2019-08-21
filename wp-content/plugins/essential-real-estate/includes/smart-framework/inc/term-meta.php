@@ -69,6 +69,9 @@ if (!class_exists('GSF_Term_Meta')) {
 					continue;
 				}
 				$taxonomies = isset($config['taxonomy']) ? $config['taxonomy'] : array();
+				if (!is_array($taxonomies)) {
+				    $taxonomies = array($taxonomies);
+                }
 				$taxonomy_priority = isset($config['priority']) ? $config['priority'] : 10;
 				foreach ($taxonomies as $taxonomy) {
 					add_action( $taxonomy . '_add_form_fields', array($this, 'term_meta_add_display'), $taxonomy_priority, 2 );
@@ -197,7 +200,7 @@ if (!class_exists('GSF_Term_Meta')) {
 			 * Set config type: for prefix or affix filter, action
 			 */
 			gsf_set_config_type('term_meta');
-			$taxonomy = $_REQUEST['taxonomy'];
+			$taxonomy = isset($_REQUEST['taxonomy']) ? gsf_clean(wp_unslash($_REQUEST['taxonomy'])) : '';
 			$this->bind_tax_meta_form($taxonomy, true);
 			die();
 		}
@@ -231,13 +234,13 @@ if (!class_exists('GSF_Term_Meta')) {
 			 * Set config type: for prefix or affix filter, action
 			 */
 			gsf_set_config_type('term_meta');
-			$taxonomy  = isset($_POST['taxonomy']) ? $_POST['taxonomy'] : '';
+			$taxonomy  = isset($_POST['taxonomy']) ? wp_unslash($_POST['taxonomy']) : '';
 
 			$meta_configs = &gsf_get_term_meta_config();
 			$meta_field_keys = $this->get_config_keys($meta_configs, $taxonomy);
 			foreach ($meta_field_keys as $meta_id => $field_value) {
 				$is_clone = $field_value['clone'];
-				$meta_value = isset($_POST[$meta_id]) ? $_POST[$meta_id] : ($is_clone ? array() : '');
+				$meta_value = isset($_POST[$meta_id]) ? wp_unslash($_POST[$meta_id])  : ($is_clone ? array() : '');
 
 				if ($is_clone && is_array($meta_value)) {
 					$max = false;

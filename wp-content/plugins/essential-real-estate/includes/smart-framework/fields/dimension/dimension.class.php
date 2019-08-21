@@ -36,14 +36,14 @@ if (!class_exists('GSF_Field_Dimension')) {
 				<?php if ($is_width): ?>
 					<div class="gsf-dimension-item">
 						<div class="dashicons dashicons-leftright"></div>
-						<input data-field-control="" class="gsf-dimension" type="number" placeholder="<?php esc_html_e('Width','smart-framework'); ?>"
+						<input data-field-control="" class="gsf-dimension" type="number" placeholder="<?php esc_attr_e('Width','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[width]" value="<?php echo esc_attr($field_value['width']); ?>"/>
 					</div>
 				<?php endif;?>
 				<?php if ($is_height): ?>
 					<div class="gsf-dimension-item">
 						<div class="dashicons dashicons-leftright rotate-90deg" style="margin-right: 1px"></div>
-						<input data-field-control="" class="gsf-dimension" type="number" placeholder="<?php esc_html_e('Height','smart-framework'); ?>"
+						<input data-field-control="" class="gsf-dimension" type="number" placeholder="<?php esc_attr_e('Height','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[height]" value="<?php echo esc_attr($field_value['height']); ?>"/>
 					</div>
 				<?php endif;?>

@@ -33,7 +33,7 @@ $args = array(
 );
 
 if (isset ($_GET['keyword'])) {
-	$keyword = trim($_GET['keyword']);
+	$keyword = ere_clean(wp_unslash($_GET['keyword']));
 	$q1 = get_categories(array(
 		'fields' => 'ids',
 		'taxonomy'      => 'agency',
@@ -103,7 +103,7 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'agency', ERE_PLUGIN_URL . 'public/templat
 							<input type="text" name="keyword"
 																			  value="<?php echo esc_attr($keyword); ?>"
 																			  class="form-control"
-																			  placeholder="<?php esc_html_e('Name or Location', 'essential-real-estate'); ?>">
+																			  placeholder="<?php esc_attr_e('Name or Location', 'essential-real-estate'); ?>">
 							<span
 								class="input-group-btn">
 								<button type="submit" class="button"><i
@@ -117,22 +117,22 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'agency', ERE_PLUGIN_URL . 'public/templat
 						<li><a data-sortby="a_name" href="<?php
 							$pot_link_sortby = add_query_arg(array('sortby' => 'a_name'));
 							echo esc_url($pot_link_sortby) ?>"
-							   title="<?php esc_html_e('Name (A to Z)', 'essential-real-estate'); ?>"><?php esc_html_e('Name (A to Z)', 'essential-real-estate'); ?></a>
+							   title="<?php esc_attr_e('Name (A to Z)', 'essential-real-estate'); ?>"><?php esc_html_e('Name (A to Z)', 'essential-real-estate'); ?></a>
 						</li>
 						<li><a data-sortby="d_name" href="<?php
 							$pot_link_sortby = add_query_arg(array('sortby' => 'd_name'));
 							echo esc_url($pot_link_sortby) ?>"
-							   title="<?php esc_html_e('Name (Z to A)', 'essential-real-estate'); ?>"><?php esc_html_e('Name (Z to A)', 'essential-real-estate'); ?></a>
+							   title="<?php esc_attr_e('Name (Z to A)', 'essential-real-estate'); ?>"><?php esc_html_e('Name (Z to A)', 'essential-real-estate'); ?></a>
 						</li>
 						<li><a data-sortby="a_date" href="<?php
 							$pot_link_sortby = add_query_arg(array('sortby' => 'a_date'));
 							echo esc_url($pot_link_sortby) ?>"
-							   title="<?php esc_html_e('Date (Old to New)', 'essential-real-estate'); ?>"><?php esc_html_e('Date (Old to New)', 'essential-real-estate'); ?></a>
+							   title="<?php esc_attr_e('Date (Old to New)', 'essential-real-estate'); ?>"><?php esc_html_e('Date (Old to New)', 'essential-real-estate'); ?></a>
 						</li>
 						<li><a data-sortby="d_date" href="<?php
 							$pot_link_sortby = add_query_arg(array('sortby' => 'd_date'));
 							echo esc_url($pot_link_sortby) ?>"
-							   title="<?php esc_html_e('Date (New to Old)', 'essential-real-estate'); ?>"><?php esc_html_e('Date (New to Old)', 'essential-real-estate'); ?></a>
+							   title="<?php esc_attr_e('Date (New to Old)', 'essential-real-estate'); ?>"><?php esc_html_e('Date (New to Old)', 'essential-real-estate'); ?></a>
 						</li>
 					</ul>
 				</div>
@@ -157,7 +157,6 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'agency', ERE_PLUGIN_URL . 'public/templat
 					$agency_vimeo_url = get_term_meta( $agency_id, 'agency_vimeo_url', true );
 					$agency_facebook_url = get_term_meta( $agency_id, 'agency_facebook_url', true );
 					$agency_twitter_url = get_term_meta( $agency_id, 'agency_twitter_url', true );
-					$agency_googleplus_url = get_term_meta( $agency_id, 'agency_googleplus_url', true );
 					$agency_linkedin_url = get_term_meta( $agency_id, 'agency_linkedin_url', true );
 					$agency_pinterest_url = get_term_meta( $agency_id, 'agency_pinterest_url', true );
 					$agency_instagram_url = get_term_meta( $agency_id, 'agency_instagram_url', true );
@@ -207,11 +206,6 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'agency', ERE_PLUGIN_URL . 'public/templat
 										<?php if (!empty($agency_twitter_url)): ?>
 											<a title="Twitter" href="<?php echo esc_url($agency_twitter_url); ?>">
 												<i class="fa fa-twitter"></i>
-											</a>
-										<?php endif; ?>
-										<?php if (!empty($agency_googleplus_url)): ?>
-											<a title="Google Plus" href="<?php echo esc_url($agency_googleplus_url); ?>">
-												<i class="fa fa-google-plus"></i>
 											</a>
 										<?php endif; ?>
 										<?php if (!empty($agency_skype)): ?>
@@ -282,7 +276,7 @@ wp_enqueue_script(ERE_PLUGIN_PREFIX . 'agency', ERE_PLUGIN_URL . 'public/templat
 										<?php if (!empty($agency_website_url)): ?>
 											<div class="agency-info-item agency-website">
 												<i class="fa fa-external-link-square"></i><strong class="agency-info-title"> <?php esc_html_e( 'Website', 'essential-real-estate' ) ?>: </strong>
-												<a href="<?php echo esc_url($agency_website_url) ?>" title="" class="agency-info-value"><?php echo esc_url($agency_website_url) ?></a>
+												<a href="<?php echo esc_url($agency_website_url) ?>" class="agency-info-value"><?php echo esc_url($agency_website_url) ?></a>
 											</div>
 										<?php endif; ?>
 										<?php if(!empty( $agency_licenses )): ?>

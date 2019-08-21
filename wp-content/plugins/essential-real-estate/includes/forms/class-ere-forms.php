@@ -14,7 +14,7 @@ if (!class_exists('ERE_Forms')) {
 		public function load_posted_form()
 		{
 			if (!empty($_POST['property_form'])) {
-				$this->load_form_class(sanitize_title($_POST['property_form']));
+				$this->load_form_class(sanitize_title(wp_unslash($_POST['property_form'])));
 			}
 		}
 		/**

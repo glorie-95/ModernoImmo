@@ -573,7 +573,7 @@
 
                         var $html =
                             '<figure class="media-thumb">' +
-                            '<img src="' + response.url + '" alt="" />' +
+                            '<img src="' + response.url + '"/>' +
                             '<div class="media-item-actions">' +
                             '<a class="icon icon-delete" data-property-id="0"  data-attachment-id="' + response.attachment_id + '" href="javascript:;" ><i class="fa fa-trash-o"></i></a>' +
                             '<a class="icon icon-featured" data-property-id="0"  data-attachment-id="' + response.attachment_id + '" href="javascript:;" ><i class="fa fa-star-o"></i></a>' +
@@ -642,7 +642,7 @@
 
                         var $html =
                             '<figure class="media-thumb">' +
-                            '<img src="' + response.thumb_url + '" alt="" />' +
+                            '<img src="' + response.thumb_url + '"/>' +
                             '<a href="'+ response.url +'">' + response.file_name + '</a>'+
                             '<div class="media-item-actions">' +
                             '<a class="icon icon-delete" data-property-id="0"  data-attachment-id="' + response.attachment_id + '" href="javascript:;" ><i class="fa fa-trash-o"></i></a>' +

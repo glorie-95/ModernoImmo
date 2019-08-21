@@ -1870,12 +1870,12 @@ if (!class_exists('ERE_Vc_map')) {
             }
             return array(
                 'type' => 'ere_selectize',
-                'heading' => esc_html__('Narrow ', 'essential-real-estate') . $heading,
+                'heading' => sprintf(esc_html__('Narrow %s', 'essential-real-estate'),esc_html($heading)),
                 'param_name' => $param_name,
                 'value' => $taxonomies,
                 'multiple' => true,
                 'std' => '',
-                'description' => esc_html__('Enter ' . $heading . ' by names to narrow output.', 'essential-real-estate')
+                'description' => sprintf(esc_html__('Enter %s by names to narrow output.', 'essential-real-estate'), esc_html($heading))
             );
         }
     }

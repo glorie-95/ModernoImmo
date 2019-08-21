@@ -40,15 +40,15 @@ if (!is_user_logged_in()) {
                             <?php
                             $action_url = add_query_arg(array('action' => 'delete', 'save_id' => $item->id));
                             $action_url = wp_nonce_url($action_url, 'ere_my_save_search_actions'); ?>
-                            <a onclick="return confirm('<?php esc_html_e('Are you sure you want to delete this saved search?', 'essential-real-estate'); ?>')"
+                            <a onclick="return confirm('<?php esc_attr_e('Are you sure you want to delete this saved search?', 'essential-real-estate'); ?>')"
                                href="<?php echo esc_url($action_url); ?>" data-toggle="tooltip"
                                data-placement="bottom"
-                               title="<?php esc_html_e('Delete this saved search', 'essential-real-estate'); ?>"
+                               title="<?php esc_attr_e('Delete this saved search', 'essential-real-estate'); ?>"
                                class="btn-action"><?php esc_html_e('Delete', 'essential-real-estate'); ?></a>
                             <a
                                 href="<?php echo esc_url($item->url); ?>" data-toggle="tooltip"
                                 data-placement="bottom"
-                                title="<?php esc_html_e('Search', 'essential-real-estate'); ?>"
+                                title="<?php esc_attr_e('Search', 'essential-real-estate'); ?>"
                                 class="btn-action"><?php esc_html_e('Search', 'essential-real-estate'); ?></a>
                         </div>
                     <?php endforeach; ?>

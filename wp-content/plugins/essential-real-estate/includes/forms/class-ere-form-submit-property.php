@@ -46,12 +46,12 @@ if (!class_exists('ERE_Form_Submit_Property')) {
 			uasort($this->steps, array($this, 'sort_by_priority'));
 
 			if (isset($_POST['step'])) {
-				$this->step = is_numeric($_POST['step']) ? max(absint($_POST['step']), 0) : array_search($_POST['step'], array_keys($this->steps));
+				$this->step = is_numeric(wp_unslash($_POST['step'])) ? max(absint(wp_unslash($_POST['step'])), 0) : array_search(wp_unslash($_POST['step']), array_keys($this->steps));
 			} elseif (!empty($_GET['step'])) {
-				$this->step = is_numeric($_GET['step']) ? max(absint($_GET['step']), 0) : array_search($_GET['step'], array_keys($this->steps));
+				$this->step = is_numeric(wp_unslash($_GET['step']) ) ? max(absint(wp_unslash($_GET['step'])), 0) : array_search(wp_unslash($_GET['step']), array_keys($this->steps));
 			}
 
-			$this->property_id = !empty($_REQUEST['property_id']) ? absint($_REQUEST['property_id']) : 0;
+			$this->property_id = !empty($_REQUEST['property_id']) ? absint(wp_unslash($_REQUEST['property_id'])) : 0;
 			$ere_property = new ERE_Property();
 			if (!$ere_property->user_can_edit_property($this->property_id)) {
 				$this->property_id = 0;
@@ -85,8 +85,8 @@ if (!class_exists('ERE_Form_Submit_Property')) {
 		 */
 		public function submit_handler()
 		{
-			$submit_action = $_POST['property_form'];
-			if (empty($submit_action)) {
+			$submit_action = isset($_POST['property_form']) ? ere_clean(wp_unslash($_POST['property_form'])) : '';
+			if ($submit_action === '') {
 				return;
 			}
 			if (!is_user_logged_in()) {
@@ -97,7 +97,7 @@ if (!class_exists('ERE_Form_Submit_Property')) {
 				$paid_submission_type = ere_get_option('paid_submission_type','no');
 				$payment_page_link = ere_get_permalink('payment');
 				wp_get_current_user();
-				if (wp_verify_nonce($_POST['ere_submit_property_nonce_field'], 'ere_submit_property_action')) {
+				if (wp_verify_nonce(ere_clean(wp_unslash($_POST['ere_submit_property_nonce_field'])), 'ere_submit_property_action')) {
 					$property_id = apply_filters('ere_submit_property', array());
 					$this->property_id = $property_id;
 					if ($paid_submission_type == 'per_listing') {

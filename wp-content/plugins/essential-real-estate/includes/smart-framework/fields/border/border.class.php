@@ -68,7 +68,7 @@ if (!class_exists('GSF_Field_Border')) {
 					<div class="gsf-border-width-info">
 						<span class="dashicons dashicons-move"></span>
 						<input data-field-control="" type="number" class="gsf-border-width"
-						       min="0" placeholder="<?php esc_html_e('All','smart-framework'); ?>"
+						       min="0" placeholder="<?php esc_attr_e('All','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[border_width]"
 						       value="<?php echo esc_attr($field_value['border_width']); ?>" />
 					</div>
@@ -77,7 +77,7 @@ if (!class_exists('GSF_Field_Border')) {
 					<div class="gsf-border-width-info">
 						<span class="dashicons dashicons-arrow-up-alt"></span>
 						<input data-field-control="" type="number" class="gsf-border-top-width"
-						       min="0" placeholder="<?php esc_html_e('Top','smart-framework'); ?>"
+						       min="0" placeholder="<?php esc_attr_e('Top','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[border_top_width]"
 						       value="<?php echo esc_attr($field_value['border_top_width']); ?>" />
 					</div>
@@ -86,7 +86,7 @@ if (!class_exists('GSF_Field_Border')) {
 					<div class="gsf-border-width-info">
 						<span class="dashicons dashicons-arrow-right-alt"></span>
 						<input data-field-control="" type="number" class="gsf-border-top-width" min="0"
-						       placeholder="<?php esc_html_e('Right','smart-framework'); ?>"
+						       placeholder="<?php esc_attr_e('Right','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[border_right_width]"
 						       value="<?php echo esc_attr($field_value['border_right_width']); ?>" />
 					</div>
@@ -95,7 +95,7 @@ if (!class_exists('GSF_Field_Border')) {
 					<div class="gsf-border-width-info">
 						<span class="dashicons dashicons-arrow-down-alt"></span>
 						<input data-field-control="" type="number" class="gsf-border-top-width" min="0"
-						       placeholder="<?php esc_html_e('Bottom','smart-framework'); ?>"
+						       placeholder="<?php esc_attr_e('Bottom','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[border_bottom_width]"
 						       value="<?php echo esc_attr($field_value['border_bottom_width']); ?>" />
 					</div>
@@ -104,7 +104,7 @@ if (!class_exists('GSF_Field_Border')) {
 					<div class="gsf-border-width-info">
 						<span class="dashicons dashicons-arrow-left-alt"></span>
 						<input data-field-control="" type="number" class="gsf-border-top-width" min="0"
-						       placeholder="<?php esc_html_e('Left','smart-framework'); ?>"
+						       placeholder="<?php esc_attr_e('Left','smart-framework'); ?>"
 						       name="<?php echo esc_attr($this->get_name()) ?>[border_left_width]"
 						       value="<?php echo esc_attr($field_value['border_left_width']); ?>"/>
 					</div>

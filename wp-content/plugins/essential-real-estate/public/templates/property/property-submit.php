@@ -128,15 +128,15 @@ wp_print_styles(ERE_PLUGIN_PREFIX . 'submit-property');
                 <?php
                 if($prev_key!=''):?>
                     <button class="ere-btn-prev" aria-controls="step-<?php echo esc_attr($prev_key); ?>"
-                        type="button" title="<?php esc_html_e('Previous', 'essential-real-estate') ?>"><i class="fa fa-angle-left"></i><span><?php esc_html_e('Previous', 'essential-real-estate') ?></span></button>
+                        type="button" title="<?php esc_attr_e('Previous', 'essential-real-estate') ?>"><i class="fa fa-angle-left"></i><span><?php esc_html_e('Previous', 'essential-real-estate') ?></span></button>
                 <?php endif; ?>
-                    <button class="ere-btn-edit" type="button" title="<?php esc_html_e('Show All Fields', 'essential-real-estate') ?>"><?php esc_html_e('Show All', 'essential-real-estate') ?></button>
+                    <button class="ere-btn-edit" type="button" title="<?php esc_attr_e('Show All Fields', 'essential-real-estate') ?>"><?php esc_html_e('Show All', 'essential-real-estate') ?></button>
                 <?php if($next_key!=''):?>
                     <button class="ere-btn-next" aria-controls="step-<?php echo esc_attr($next_key); ?>"
-                        type="button" title="<?php esc_html_e('Next', 'essential-real-estate') ?>"><span><?php esc_html_e('Next', 'essential-real-estate') ?></span><i class="fa fa-angle-right"></i></button>
+                        type="button" title="<?php esc_attr_e('Next', 'essential-real-estate') ?>"><span><?php esc_html_e('Next', 'essential-real-estate') ?></span><i class="fa fa-angle-right"></i></button>
                 <?php else:?>
                     <input type="submit" name="submit_property" class="button btn-submit-property"
-                           value="<?php esc_attr_e($submit_button_text); ?>"/>
+                           value="<?php echo esc_attr($submit_button_text); ?>"/>
                 <?php endif;?>
                 </div>
             </fieldset>

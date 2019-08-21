@@ -2,16 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
-$property_id = isset($_GET['property_id']) ? $_GET['property_id'] : '';
+$property_id = isset($_GET['property_id']) ? absint(wp_unslash($_GET['property_id']))  : 0;
 $terms_conditions = ere_get_option('payment_terms_condition');
-$allowed_html = array(
-    'a' => array(
-        'href' => array(),
-        'title' => array(),
-        'target' => array()
-    ),
-    'strong' => array()
-);
 $enable_paypal = ere_get_option('enable_paypal',1);
 $enable_stripe = ere_get_option('enable_stripe',1);
 $enable_wire_transfer = ere_get_option('enable_wire_transfer',1);
@@ -95,9 +87,9 @@ $price_per_listing_with_featured = intval($price_per_listing) + intval($price_fe
                 </div>
             <?php endif; ?>
         </div>
-        <input type="hidden" id="ere_property_id" name="ere_property_id" value="<?php echo intval($property_id); ?>">
+        <input type="hidden" id="ere_property_id" name="ere_property_id" value="<?php echo esc_attr($property_id); ?>">
 
-        <p class="terms-conditions"><i class="fa fa-hand-o-right"></i> <?php echo sprintf(wp_kses(__('Please read <a target="_blank" href="%s"><strong>Terms & Conditions</strong></a> first', 'essential-real-estate'), $allowed_html), get_permalink($terms_conditions)); ?></p>
+        <p class="terms-conditions"><i class="fa fa-hand-o-right"></i> <?php echo (wp_kses_post(sprintf(__('Please read <a target="_blank" href="%s"><strong>Terms & Conditions</strong></a> first', 'essential-real-estate'),get_permalink($terms_conditions)))); ?></p>
         <button id="ere_payment_listing" type="button"
                 class="btn btn-success btn-submit"> <?php esc_html_e('Pay Now', 'essential-real-estate'); ?> </button>
     </div>
@@ -106,13 +98,13 @@ $price_per_listing_with_featured = intval($price_per_listing) + intval($price_fe
     jQuery(document).ready(function(){
         jQuery('.ere_payment_for').change(function(){
             if( jQuery(this).val() == 1 ){
-                jQuery("#ere_stripe_per_listing script").attr("data-amount","<?php echo intval($price_per_listing*100); ?>");
-                jQuery("#ere_stripe_per_listing input[name='payment_money']").val("<?php echo intval($price_per_listing*100); ?>");
+                jQuery("#ere_stripe_per_listing script").attr("data-amount","<?php echo esc_js(intval($price_per_listing*100)); ?>");
+                jQuery("#ere_stripe_per_listing input[name='payment_money']").val("<?php echo esc_js(intval($price_per_listing*100)); ?>");
                 jQuery("#ere_stripe_per_listing input[name='payment_for']").val("1");
             }
             if( jQuery(this).val() == 2 ){
-                jQuery("#ere_stripe_per_listing script").attr("data-amount","<?php echo intval($price_per_listing_with_featured*100); ?>");
-                jQuery("#ere_stripe_per_listing input[name='payment_money']").val("<?php echo intval($price_per_listing_with_featured*100); ?>");
+                jQuery("#ere_stripe_per_listing script").attr("data-amount","<?php echo esc_js(intval($price_per_listing_with_featured*100)); ?>");
+                jQuery("#ere_stripe_per_listing input[name='payment_money']").val("<?php echo esc_js(intval($price_per_listing_with_featured*100)) ; ?>");
                 jQuery("#ere_stripe_per_listing input[name='payment_for']").val("2");
             }
         });

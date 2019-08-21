@@ -164,13 +164,13 @@ $total_price = ere_get_format_money( $invoice_meta['invoice_item_price'] );
 	<div class="single-invoice-action">
 		<?php if(ere_get_option('enable_print_invoice','1')=='1'):?>
 		<a href="javascript:void(0)" id="invoice-print" data-toggle="tooltip"
-		   title="<?php esc_html_e( 'Print', 'essential-real-estate' ); ?>"
+		   title="<?php esc_attr_e( 'Print', 'essential-real-estate' ); ?>"
 		   data-invoice-id="<?php echo esc_attr( $invoice_id ); ?>"
 		   data-ajax-url="<?php echo ERE_AJAX_URL; ?>">
 			<i class="fa fa-print"></i>
 		</a>
 		<?php endif;?>
-		<a href="<?php echo esc_url( ere_get_permalink( 'my_invoices' ) ); ?>" data-toggle="tooltip" title="<?php esc_html_e( 'Back to My Invoices', 'essential-real-estate' ) ?>">
+		<a href="<?php echo esc_url( ere_get_permalink( 'my_invoices' ) ); ?>" data-toggle="tooltip" title="<?php esc_attr_e( 'Back to My Invoices', 'essential-real-estate' ) ?>">
 			<i class="fa fa-reply-all"></i>
 		</a>
 	</div>

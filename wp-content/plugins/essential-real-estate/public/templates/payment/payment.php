@@ -12,9 +12,9 @@ if (!$allow_submit)
     echo ere_get_template_html('global/access-denied.php',array('type'=>'not_permission'));
     return;
 }
-$package_id = isset($_GET['package_id']) ? $_GET['package_id'] : '';
-$property_id = isset($_GET['property_id']) ? $_GET['property_id'] : '';
-$is_upgrade = isset($_GET['is_upgrade']) ? $_GET['is_upgrade'] : '';
+$package_id = isset($_GET['package_id']) ? absint(wp_unslash($_GET['package_id']))  : '';
+$property_id = isset($_GET['property_id']) ? absint(wp_unslash($_GET['property_id']))  : '';
+$is_upgrade = isset($_GET['is_upgrade']) ? absint(wp_unslash($_GET['is_upgrade']))  : '';
 if ($is_upgrade == 1) {
     $prop_featured = get_post_meta($property_id, ERE_METABOX_PREFIX . 'property_featured', true);
     if ($prop_featured == 1) {

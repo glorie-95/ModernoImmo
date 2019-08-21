@@ -64,7 +64,7 @@
                         $field_type = $field['type'];
                         $field_name = $field['name'];
                         $field_title = $field['title'];
-                        $placeholder = (isset ($field['placeholder'])) ? esc_attr($field['placeholder']) : esc_html__('Title', 'g5plus-pasco');
+                        $placeholder = (isset ($field['placeholder'])) ? esc_attr($field['placeholder']) : esc_html__('Title', 'essential-real-estate');
                         $field_output_id = $this->widget->get_field_id($field_name) . '_' . $x;
                         $field_output_name = $this->widget->get_field_name('fields') . '[' . $x . ']' . '[' . $field_name . ']';
                         $is_title_block = isset($field['is_title_block']) && $field['is_title_block'] == '1' ? 1 : 0;

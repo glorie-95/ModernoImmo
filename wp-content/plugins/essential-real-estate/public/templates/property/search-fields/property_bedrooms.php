@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="<?php echo esc_attr($css_class_field); ?> form-group">
-    <select name="bedrooms" title="<?php esc_html_e('Property Bedrooms', 'essential-real-estate') ?>"
+    <select name="bedrooms" title="<?php esc_attr_e('Property Bedrooms', 'essential-real-estate') ?>"
             class="search-field form-control" data-default-value="">
         <option value="">
             <?php esc_html_e('Any Bedrooms', 'essential-real-estate') ?>

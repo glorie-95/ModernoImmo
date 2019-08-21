@@ -118,7 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                             <input type="hidden" class="ere_floor_image_id"
                                                    name="<?php echo ERE_METABOX_PREFIX ?>floors[0][<?php echo ERE_METABOX_PREFIX ?>floor_image][id]"
                                                    value="" id="<?php echo ERE_METABOX_PREFIX ?>floor_image_id_0"/>
-                                            <button type="button" id="ere-floor-0" style="position: absolute" title="<?php esc_html_e('Choose image','essential-real-estate') ?>" class="ere_floorsImg"><i class="fa fa-file-image-o"></i></button>
+                                            <button type="button" id="ere-floor-0" style="position: absolute" title="<?php esc_attr_e('Choose image','essential-real-estate') ?>" class="ere_floorsImg"><i class="fa fa-file-image-o"></i></button>
                                         </div>
                                         <div id="ere-floor-errors-log-0"></div>
                                     </div>

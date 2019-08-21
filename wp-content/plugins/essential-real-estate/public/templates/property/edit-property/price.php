@@ -27,8 +27,8 @@ global $hide_property_fields,$property_data, $property_meta_data;
             <div class="<?php echo esc_attr($price_short_class); ?>">
                 <div class="form-group">
                     <label for="property_price_short"> <?php esc_html_e( 'Price', 'essential-real-estate' ); echo ere_required_field( 'property_price' );
-                        print esc_html(ere_get_option('currency_sign', '')) . ' ';?>  </label>
-                    <input type="number" id="property_price_short" class="form-control" name="property_price_short" value="<?php if( isset( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_short'] ) ) { echo sanitize_text_field( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_short'][0] ); } ?>">
+                        echo esc_html(ere_get_option('currency_sign', '')) . ' ';?>  </label>
+                    <input type="number" id="property_price_short" class="form-control" name="property_price_short" value="<?php if( isset( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_short'] ) ) { echo esc_attr( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_short'][0] ); } ?>">
                 </div>
             </div>
             <?php if($enable_price_unit=='1'){?>
@@ -52,7 +52,7 @@ global $hide_property_fields,$property_data, $property_meta_data;
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="property_price_prefix"><?php esc_html_e( 'Before Price Label (ex: Start From)', 'essential-real-estate' ); echo ere_required_field( 'property_price_prefix' ); ?></label>
-                    <input type="text" id="property_price_prefix" value="<?php if( isset( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_prefix'] ) ) { echo sanitize_text_field( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_prefix'][0] ); } ?>" class="form-control" name="property_price_prefix">
+                    <input type="text" id="property_price_prefix" value="<?php if( isset( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_prefix'] ) ) { echo esc_attr( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_prefix'][0] ); } ?>" class="form-control" name="property_price_prefix">
                 </div>
             </div>
         <?php } ?>
@@ -62,7 +62,7 @@ global $hide_property_fields,$property_data, $property_meta_data;
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="property_price_postfix"><?php esc_html_e( 'After Price Label (ex: Per Month)', 'essential-real-estate' ); echo ere_required_field( 'property_price_postfix' ); ?></label>
-                    <input type="text" id="property_price_postfix" value="<?php if( isset( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_postfix'] ) ) { echo sanitize_text_field( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_postfix'][0] ); } ?>" class="form-control" name="property_price_postfix">
+                    <input type="text" id="property_price_postfix" value="<?php if( isset( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_postfix'] ) ) { echo esc_attr( $property_meta_data[ERE_METABOX_PREFIX. 'property_price_postfix'][0] ); } ?>" class="form-control" name="property_price_postfix">
                 </div>
             </div>
         <?php } ?>

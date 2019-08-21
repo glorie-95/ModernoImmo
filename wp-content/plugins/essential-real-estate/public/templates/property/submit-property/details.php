@@ -21,7 +21,7 @@ $measurement_units_land_area = ere_get_measurement_units_land_area();
             <div class="col-sm-4">
                 <div class="form-group">
                     <label
-                        for="property_size"><?php printf(__('Size (%s) %s', 'essential-real-estate'), $measurement_units, ere_required_field('property_size')); ?></label>
+                        for="property_size"><?php echo wp_kses_post(sprintf(__('Size (%s) %s', 'essential-real-estate'), $measurement_units, ere_required_field('property_size'))); ?></label>
                     <input type="number" id="property_size" class="form-control" name="property_size" value="">
                 </div>
             </div>
@@ -79,7 +79,7 @@ $measurement_units_land_area = ere_get_measurement_units_land_area();
             <div class="col-sm-4">
                 <div class="form-group">
                     <label
-                        for="property_garage_size"><?php printf(__('Garages Size (%s)', 'essential-real-estate'), $measurement_units); ?></label>
+                        for="property_garage_size"><?php echo wp_kses_post(printf(__('Garages Size (%s)', 'essential-real-estate'), $measurement_units)) ; ?></label>
                     <input type="number" id="property_garage_size" class="form-control" name="property_garage_size"
                            value="">
                 </div>

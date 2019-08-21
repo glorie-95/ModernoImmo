@@ -31,14 +31,14 @@ if (!empty($package_id)) :
                 class="badge"><?php echo esc_html($package_title) ?></span><?php esc_html_e('Package Name ', 'essential-real-estate') ?>
         </li>
         <li class="list-group-item"><span class="badge"><?php if ($package_unlimited_listing == 1) {
-                    echo($package_remaining_listings);
+                    echo wp_kses_post($package_remaining_listings);
                 } else {
                     echo esc_html($package_listings);
                 }
                 ?>
             </span><?php esc_html_e('Listings Included ', 'essential-real-estate') ?></li>
         <li class="list-group-item"><span
-                class="badge"><?php echo($package_remaining_listings); ?></span><?php esc_html_e('Listings Remaining ', 'essential-real-estate') ?>
+                class="badge"><?php echo wp_kses_post($package_remaining_listings); ?></span><?php esc_html_e('Listings Remaining ', 'essential-real-estate') ?>
         </li>
 
         <li class="list-group-item"><span

@@ -121,8 +121,8 @@ if (!function_exists('gsf_ajax_get_posts')) {
 	function gsf_ajax_get_posts()
 	{
 		add_filter('posts_where', 'gsf_title_like_posts_where', 10, 2);
-		$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
-		$post_type = isset($_GET['post_type']) ? $_GET['post_type'] : 'post';
+		$keyword = isset($_GET['keyword']) ? gsf_clean(wp_unslash($_GET['keyword'])) : '';
+		$post_type =  isset($_GET['post_type']) ? gsf_clean(wp_unslash(($_GET['post_type']))) : 'post';
 		$search_query = array(
 			'post_title_like' => $keyword,
 			'order'           => 'ASC',
@@ -614,7 +614,7 @@ if (!function_exists('gsf_ajax_select_default_image')) {
 						<div class="gsf-image-default-popup-item">
 							<div class="thumbnail">
 								<div class="centered">
-									<img title="<?php echo esc_attr($file); ?>" src="<?php echo esc_url($imageDefaultDir['url'] . $file); ?>" alt=""/>
+									<img title="<?php echo esc_attr($file); ?>" src="<?php echo esc_url($imageDefaultDir['url'] . $file); ?>"/>
 								</div>
 							</div>
 						</div>
@@ -640,16 +640,20 @@ if (!function_exists('gsf_ajax_select_default_image')) {
  */
 if (!function_exists('gsf_ajax_import_theme_options')) {
 	function gsf_ajax_import_theme_options() {
-		$page = $_POST['_current_page'];
+		$page = isset($_POST['_current_page']) ? gsf_clean(wp_unslash($_POST['_current_page'])) : '';
 		$configs = &gsf_get_options_config($page);
 		$options_name = $configs['option_name'];
-		if ( ! wp_verify_nonce( $_POST['wpnonce'], $options_name ) ) {
+		$wpnonce = isset($_POST['wpnonce']) ? gsf_clean(wp_unslash($_POST['wpnonce'])) : '';
+		if ( ! wp_verify_nonce( $wpnonce, $options_name ) ) {
 			return;
 		}
-		if (!isset($_POST['backup_data'])) {
+
+		$backup_data = isset($_POST['backup_data']) ? gsf_clean(wp_unslash($_POST['backup_data'])) : '';
+
+		if (empty($backup_data)) {
 			return;
 		}
-		$backup = json_decode(base64_decode($_POST['backup_data']), true);
+		$backup = json_decode(base64_decode($backup_data), true);
 		$options = get_option($options_name);
 
 		foreach ($backup as $key => $value) {
@@ -688,10 +692,11 @@ if (!function_exists('gsf_ajax_import_theme_options')) {
  */
 if (!function_exists('gsf_ajax_export_theme_options')) {
 	function gsf_ajax_export_theme_options() {
-		$page = $_GET['_current_page'];
+		$page = isset($_GET['_current_page']) ? gsf_clean(wp_unslash($_GET['_current_page'])) : '';
 		$configs = &gsf_get_options_config($page);
 		$options_name = $configs['option_name'];
-		if ( ! wp_verify_nonce( $_GET['wpnonce'], $options_name ) ) {
+		$wpnonce = isset($_GET['wpnonce']) ?  gsf_clean(wp_unslash($_GET['wpnonce'])) : '';
+		if ( ! wp_verify_nonce( $wpnonce, $options_name ) ) {
 			return;
 		}
 
@@ -723,10 +728,11 @@ if (!function_exists('gsf_ajax_export_theme_options')) {
  */
 if (!function_exists('gsf_ajax_reset_theme_options')) {
 	function gsf_ajax_reset_theme_options() {
-		$page = $_POST['_current_page'];
+		$page = isset($_POST['_current_page']) ? gsf_clean(wp_unslash($_POST['_current_page'])) : '';
 		$configs = &gsf_get_options_config($page);
 		$options_name = $configs['option_name'];
-		if ( ! wp_verify_nonce( $_POST['wpnonce'], $options_name ) ) {
+		$wpnonce = isset($_POST['wpnonce']) ?  gsf_clean(wp_unslash($_POST['wpnonce'])) : '';
+		if ( ! wp_verify_nonce( $wpnonce, $options_name ) ) {
 			return;
 		}
 
@@ -765,14 +771,14 @@ if (!function_exists('gsf_ajax_reset_theme_options')) {
  */
 if (!function_exists('gsf_ajax_reset_section_options')) {
 	function gsf_ajax_reset_section_options() {
-		$page = $_POST['_current_page'];
+		$page = isset($_POST['_current_page']) ? sanitize_text_field(wp_unslash($_POST['_current_page']))  : '';
 		$configs = &gsf_get_options_config($page);
 		$options_name = $configs['option_name'];
-
-		if ( ! wp_verify_nonce( $_POST['wpnonce'], $options_name ) ) {
+        $wpnonce = isset($_POST['wpnonce']) ?  gsf_clean(wp_unslash($_POST['wpnonce'])) : '';
+		if ( ! wp_verify_nonce( $wpnonce, $options_name ) ) {
 			return;
 		}
-		$section = $_POST['section'];
+		$section = isset($_POST['section']) ?  gsf_clean(wp_unslash($_POST['section'])) : '';
 		if (!empty($section)) {
 			$section = substr($section, 8);
 		}
@@ -856,4 +862,22 @@ if (!function_exists('gsf_get_term_meta_config')) {
 		}
 		return $GLOBALS['gsf_term_meta_config'];
 	}
+}
+
+
+/**
+ * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
+ * Non-scalar values are ignored.
+ *
+ * @param string|array $var Data to sanitize.
+ * @return string|array
+ */
+if (!function_exists('gsf_clean')) {
+    function gsf_clean( $var ) {
+        if ( is_array( $var ) ) {
+            return array_map( 'gsf_clean', $var );
+        } else {
+            return is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
+        }
+    }
 }

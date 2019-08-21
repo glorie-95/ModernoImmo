@@ -25,11 +25,11 @@ if (!$allow_submit) {
     echo ere_get_template_html('global/access-denied.php', array('type' => 'not_permission'));
     return;
 }
-$request_new_id = isset($_GET['new_id']) ? $_GET['new_id'] : '';
+$request_new_id = isset($_GET['new_id']) ? ere_clean(wp_unslash($_GET['new_id'])) : '';
 if (!empty($request_new_id)) {
     ere_get_template('property/property-submitted.php', array('property' => get_post($request_new_id), 'action' => 'new'));
 }
-$request_edit_id = isset($_GET['edit_id']) ? $_GET['edit_id'] : '';
+$request_edit_id = isset($_GET['edit_id']) ? ere_clean(wp_unslash($_GET['edit_id']))  : '';
 if (!empty($request_edit_id)) {
     ere_get_template('property/property-submitted.php', array('property' => get_post($request_edit_id), 'action' => 'edit'));
 }
@@ -78,7 +78,7 @@ $user_id = $current_user->ID;
                                 <label class="sr-only"
                                        for="property_status"><?php esc_html_e('Property Status', 'essential-real-estate'); ?></label>
                                 <select name="property_status" id="property_status" class="form-control"
-                                        title="<?php esc_html_e('Property Status', 'essential-real-estate') ?>">
+                                        title="<?php esc_attr_e('Property Status', 'essential-real-estate') ?>">
                                     <?php ere_get_property_status_search_slug($property_status); ?>
                                     <option
                                         value="" <?php if (empty($property_status)) echo esc_attr('selected'); ?>>
@@ -94,7 +94,7 @@ $user_id = $current_user->ID;
                                 <input type="text" name="property_identity" id="property_identity"
                                        value="<?php echo esc_attr($property_identity); ?>"
                                        class="form-control"
-                                       placeholder="<?php esc_html_e('Property ID', 'essential-real-estate'); ?>">
+                                       placeholder="<?php esc_attr_e('Property ID', 'essential-real-estate'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -104,19 +104,19 @@ $user_id = $current_user->ID;
                                 <input type="text" name="title" id="title"
                                        value="<?php echo esc_attr($title); ?>"
                                        class="form-control"
-                                       placeholder="<?php esc_html_e('Title', 'essential-real-estate'); ?>">
+                                       placeholder="<?php esc_attr_e('Title', 'essential-real-estate'); ?>">
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <?php
                                 if (!empty($_REQUEST['post_status'])):
-                                    $post_status = sanitize_title($_REQUEST['post_status']); ?>
+                                    $post_status = sanitize_title(wp_unslash($_REQUEST['post_status'])); ?>
                                     <input type="hidden" name="post_status"
                                            value="<?php echo esc_attr($post_status); ?>"/>
                                 <?php endif; ?>
                                 <input type="submit" id="search_property" class="btn btn-default display-block"
-                                       value="<?php esc_html_e('Search', 'essential-real-estate'); ?>">
+                                       value="<?php esc_attr_e('Search', 'essential-real-estate'); ?>">
                             </div>
                         </div>
                     </div>
@@ -317,7 +317,7 @@ $user_id = $current_user->ID;
                                                 href="<?php echo esc_url($action_url); ?>"
                                                 data-toggle="tooltip"
                                                 data-placement="bottom"
-                                                title="<?php echo esc_html($value['tooltip']); ?>"
+                                                title="<?php echo esc_attr($value['tooltip']); ?>"
                                                 class="btn-action ere-dashboard-action-<?php echo esc_attr($action); ?>"><?php echo esc_html($value['label']); ?></a>
                                         </li>
                                         <?php

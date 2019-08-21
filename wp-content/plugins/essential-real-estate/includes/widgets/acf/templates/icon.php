@@ -9,7 +9,7 @@
 		       id="<?php echo esc_attr($field_output_id); ?>"
 		       name="<?php echo esc_attr($field_output_name); ?>"
 		       type="text" value="<?php if(isset($field_value)){ echo esc_attr($field_value) ;}else{echo '';}  ?>"/>
-		<button type="button" style="float: right" class="browse-icon button-secondary"><?php echo esc_html__('Browse...','g5plus-pasco') ?></button>
+		<button type="button" style="float: right" class="browse-icon button-secondary"><?php echo esc_html__('Browse...','essential-real-estate') ?></button>
 		<span style="vertical-align: top;width: 30px; height: 30px" class="icon-preview"><i class="<?php if(isset($field_value)){ echo esc_attr($field_value) ;}else{echo '';}  ?>"></i></span>
 	</div>
 

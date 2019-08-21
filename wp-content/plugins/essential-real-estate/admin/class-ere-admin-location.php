@@ -38,8 +38,8 @@ if (!class_exists('ERE_Admin_Location')) {
                     foreach($countries as $key => $value):
                         ?>
                         <div class="form-group">
-                            <input type="checkbox" name="country_list[]" <?php if($countries_selected) echo in_array($key, $countries_selected) ? 'checked' : ''; ?> value="<?php echo $key;?>" id="<?php echo $key;?>"/>
-                            <label for="<?php echo $key;?>"><?php echo $value;?></label>
+                            <input type="checkbox" name="country_list[]" <?php if($countries_selected) echo in_array($key, $countries_selected) ? 'checked' : ''; ?> value="<?php echo esc_attr($key);?>" id="<?php echo esc_attr($key);?>"/>
+                            <label for="<?php echo esc_attr($key);?>"><?php echo esc_html($value);?></label>
                         </div>
                     <?php endforeach;?>
                     <?php submit_button(); ?>
@@ -86,11 +86,11 @@ if (!class_exists('ERE_Admin_Location')) {
 
         public function save_property_city_meta( $term_id, $tt_id ){
             if( isset( $_POST['property_city_country'] ) && !empty($_POST['property_city_country']) ){
-                $property_city_country = sanitize_title( $_POST['property_city_country'] );
+                $property_city_country = sanitize_title(wp_unslash($_POST['property_city_country'] ) );
                 add_term_meta( $term_id, 'property_city_country', strtoupper($property_city_country), true );
             }
             if( isset( $_POST['property_city_state'] ) && !empty($_POST['property_city_state']) ){
-                $property_city_state = sanitize_title( $_POST['property_city_state'] );
+                $property_city_state = sanitize_title(wp_unslash($_POST['property_city_state'])  );
                 add_term_meta( $term_id, 'property_city_state', $property_city_state, true );
             }
         }
@@ -112,7 +112,7 @@ if (!class_exists('ERE_Admin_Location')) {
             </tr>
             <tr id="property-state" class="form-field term-group-wrap ere-property-select-meta-box-wrap">
                 <th scope="row"><label for="property_city_state"><?php esc_html_e('Province / State', 'essential-real-estate'); ?></label></th>
-                <td><select data-selected="<?php echo $property_city_state; ?>" data-slug="0" class="postform ere-property-state-ajax" id="property_city_state" name="property_city_state">
+                <td><select data-selected="<?php echo esc_attr($property_city_state); ?>" data-slug="0" class="postform ere-property-state-ajax" id="property_city_state" name="property_city_state">
                         <option value=""><?php esc_html_e('None', 'essential-real-estate'); ?></option>
                         <?php
                         $terms = get_categories(
@@ -134,11 +134,11 @@ if (!class_exists('ERE_Admin_Location')) {
 
         public function update_property_city_meta( $term_id, $tt_id ){
             if( isset( $_POST['property_city_country'] ) && !empty($_POST['property_city_country']) ){
-                $property_city_country = sanitize_title( $_POST['property_city_country'] );
+                $property_city_country = sanitize_title(wp_unslash($_POST['property_city_country'])  );
                 update_term_meta( $term_id, 'property_city_country', strtoupper($property_city_country));
             }
             if( isset( $_POST['property_city_state'] ) && !empty($_POST['property_city_state'])){
-                $property_city_state = sanitize_title( $_POST['property_city_state'] );
+                $property_city_state = sanitize_title( wp_unslash($_POST['property_city_state']) );
                 update_term_meta( $term_id, 'property_city_state', $property_city_state);
             }
         }
@@ -240,15 +240,15 @@ if (!class_exists('ERE_Admin_Location')) {
 
         public function save_property_neighborhood_meta( $term_id, $tt_id ){
             if( isset( $_POST['property_neighborhood_country'] ) && !empty($_POST['property_neighborhood_country']) ){
-                $property_neighborhood_country = sanitize_title( $_POST['property_neighborhood_country'] );
+                $property_neighborhood_country = sanitize_title( wp_unslash($_POST['property_neighborhood_country'] ) );
                 add_term_meta( $term_id, 'property_neighborhood_country', strtoupper($property_neighborhood_country), true );
             }
             if( isset( $_POST['property_neighborhood_state'] ) && !empty($_POST['property_neighborhood_state']) ){
-                $property_neighborhood_state = sanitize_title( $_POST['property_neighborhood_state'] );
+                $property_neighborhood_state = sanitize_title( wp_unslash($_POST['property_neighborhood_state']) );
                 add_term_meta( $term_id, 'property_neighborhood_state', $property_neighborhood_state, true );
             }
             if( isset( $_POST['property_neighborhood_city'] ) && !empty($_POST['property_neighborhood_city']) ){
-                $property_neighborhood_city = sanitize_title( $_POST['property_neighborhood_city'] );
+                $property_neighborhood_city = sanitize_title(wp_unslash($_POST['property_neighborhood_city'])  );
                 add_term_meta( $term_id, 'property_neighborhood_city', $property_neighborhood_city, true );
             }
         }
@@ -271,7 +271,7 @@ if (!class_exists('ERE_Admin_Location')) {
             </tr>
             <tr id="property-state" class="form-field term-group-wrap ere-property-select-meta-box-wrap">
                 <th scope="row"><label for="property_neighborhood_state"><?php esc_html_e('Province / State', 'essential-real-estate'); ?></label></th>
-                <td><select data-selected="<?php echo $property_neighborhood_state; ?>" data-slug="0" class="postform ere-property-state-ajax" id="property_neighborhood_state" name="property_neighborhood_state">
+                <td><select data-selected="<?php echo esc_attr($property_neighborhood_state); ?>" data-slug="0" class="postform ere-property-state-ajax" id="property_neighborhood_state" name="property_neighborhood_state">
                         <option value=""><?php esc_html_e('None', 'essential-real-estate'); ?></option>
                         <?php
                         $terms_state = get_categories(
@@ -290,7 +290,7 @@ if (!class_exists('ERE_Admin_Location')) {
             </tr>
             <tr id="property-city" class="form-field term-group-wrap ere-property-select-meta-box-wrap">
                 <th scope="row"><label for="property_neighborhood_city"><?php esc_html_e('City', 'essential-real-estate'); ?></label></th>
-                <td><select data-selected="<?php echo $property_neighborhood_city; ?>" data-slug="0" class="postform ere-property-city-ajax" id="property_neighborhood_city" name="property_neighborhood_city">
+                <td><select data-selected="<?php echo esc_attr($property_neighborhood_city); ?>" data-slug="0" class="postform ere-property-city-ajax" id="property_neighborhood_city" name="property_neighborhood_city">
                         <option value=""><?php esc_html_e('None', 'essential-real-estate'); ?></option>
                         <?php
                         $terms_city = get_categories(
@@ -312,15 +312,15 @@ if (!class_exists('ERE_Admin_Location')) {
 
         public function update_property_neighborhood_meta( $term_id, $tt_id ){
             if( isset( $_POST['property_neighborhood_country'] ) && !empty($_POST['property_neighborhood_country']) ){
-                $property_neighborhood_country = sanitize_title( $_POST['property_neighborhood_country'] );
+                $property_neighborhood_country = sanitize_title(wp_unslash($_POST['property_neighborhood_country']));
                 update_term_meta( $term_id, 'property_neighborhood_country', strtoupper($property_neighborhood_country));
             }
             if( isset( $_POST['property_neighborhood_state'] ) && !empty($_POST['property_neighborhood_state'])){
-                $property_neighborhood_state = sanitize_title( $_POST['property_neighborhood_state'] );
+                $property_neighborhood_state = sanitize_title(wp_unslash($_POST['property_neighborhood_state'])  );
                 update_term_meta( $term_id, 'property_neighborhood_state', $property_neighborhood_state);
             }
             if( isset( $_POST['property_neighborhood_city'] ) && !empty($_POST['property_neighborhood_city'])){
-                $property_neighborhood_city = sanitize_title( $_POST['property_neighborhood_city'] );
+                $property_neighborhood_city = sanitize_title(wp_unslash($_POST['property_neighborhood_city'])  );
                 update_term_meta( $term_id, 'property_neighborhood_city', $property_neighborhood_city);
             }
         }

@@ -89,13 +89,13 @@ global $property_data,$hide_property_fields,$property_meta_data;
                                 $file_name          = basename($attach_url);
                                 echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 media-thumb-wrap">';
                                 echo '<figure class="media-thumb">';
-                                echo '<img src="'. $thumb_url .'" alt="">';
-                                echo '<a href="'. $attach_url .'">'.  $file_name .'</a>';
+                                echo '<img src="'. esc_url($thumb_url)  .'">';
+                                echo '<a href="'. esc_url($attach_url) .'">'.  $file_name .'</a>';
                                 echo '<div class="media-item-actions">';
-                                echo '<a class="icon icon-delete" data-property-id="' . intval($property_data->ID) . '" data-attachment-id="' . intval($attach_id) . '" href="javascript:void(0)">';
+                                echo '<a class="icon icon-delete" data-property-id="' . esc_attr(intval($property_data->ID))  . '" data-attachment-id="' . esc_attr(intval($attach_id))  . '" href="javascript:void(0)">';
                                 echo '<i class="fa fa-trash-o"></i>';
                                 echo '</a>';
-                                echo '<input type="hidden" class="property_attachment_ids" name="property_attachment_ids[]" value="' . intval($attach_id) . '">';
+                                echo '<input type="hidden" class="property_attachment_ids" name="property_attachment_ids[]" value="' . esc_attr(intval($attach_id))  . '">';
                                 echo '<span style="display: none;" class="icon icon-loader">';
                                 echo '<i class="fa fa-spinner fa-spin"></i>';
                                 echo '</span>';
@@ -117,7 +117,7 @@ global $property_data,$hide_property_fields,$property_meta_data;
                         class="btn btn-primary"><?php esc_html_e('Select Files', 'essential-real-estate'); ?></button>
                 <p><?php
                     $attachment_file_type=ere_get_option('attachment_file_type','pdf,txt,doc,docx');
-                    echo sprintf(__('Allowed Extensions: <span class="attachment-file-type">%s</span>','essential-real-estate'),$attachment_file_type);
+                    echo wp_kses_post(sprintf(__('Allowed Extensions: <span class="attachment-file-type">%s</span>','essential-real-estate'),$attachment_file_type));
                     ?></p>
             </div>
             <div id="ere_attachments_errors_log"></div>
@@ -128,9 +128,9 @@ global $property_data,$hide_property_fields,$property_meta_data;
                 <div class="property-video-url col-sm-6">
                     <label for="property_video_url"><?php esc_html_e('Video URL', 'essential-real-estate'); ?></label>
                     <input type="text" class="form-control" name="property_video_url" id="property_video_url"
-                           placeholder="<?php esc_html_e('YouTube, Vimeo, SWF File, MOV File', 'essential-real-estate'); ?>"
+                           placeholder="<?php esc_attr_e('YouTube, Vimeo, SWF File, MOV File', 'essential-real-estate'); ?>"
                            value="<?php if (isset($property_meta_data[ERE_METABOX_PREFIX . 'property_video_url'])) {
-                               echo sanitize_text_field($property_meta_data[ERE_METABOX_PREFIX . 'property_video_url'][0]);
+                               echo esc_attr($property_meta_data[ERE_METABOX_PREFIX . 'property_video_url'][0]);
                            } ?>">
                 </div>
             <?php endif; ?>
@@ -147,7 +147,7 @@ global $property_data,$hide_property_fields,$property_meta_data;
                         type="text"
                         id="image_360_url"
                         class="ere_image_360_url form-control" value="<?php echo esc_url($property_image_360_url); ?>">
-                    <button type="button" id="ere_select_images_360" style="position: absolute" title="<?php esc_html_e('Choose image','essential-real-estate') ?>" class="ere_image360"><i class="fa fa-file-image-o"></i></button>
+                    <button type="button" id="ere_select_images_360" style="position: absolute" title="<?php esc_attr_e('Choose image','essential-real-estate') ?>" class="ere_image360"><i class="fa fa-file-image-o"></i></button>
                     <input type="hidden" class="ere_image_360_id"
                            name="property_image_360_id"
                            value="<?php echo esc_attr($property_image_360_id); ?>" id="ere_image_360_id"/>
@@ -155,7 +155,7 @@ global $property_data,$hide_property_fields,$property_meta_data;
                 </div>
                 <div id="ere_image_360_errors_log"></div>
                 <?php if(!empty($property_image_360_url)):?>
-                <div id="ere_property_image_360_view" data-plugin-url="<?php echo ERE_PLUGIN_URL; ?>">
+                <div id="ere_property_image_360_view" data-plugin-url="<?php echo esc_url(ERE_PLUGIN_URL); ?>">
                     <iframe width="100%" height="200" scrolling="no" allowfullscreen src="<?php echo ERE_PLUGIN_URL."public/assets/packages/vr-view/index.html?image=".esc_url($property_image_360_url); ?>"></iframe>
                 </div>
                 <?php endif;?>

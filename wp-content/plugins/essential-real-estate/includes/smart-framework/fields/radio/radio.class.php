@@ -36,10 +36,13 @@ if (!class_exists('GSF_Field_Radio')) {
 			$field_value = $this->get_value();
 			$value_inline = isset($this->params['value_inline']) ? $this->params['value_inline'] : true;
 			?>
-			<div class="gsf-field-radio-inner <?php echo ($value_inline ? 'value-inline' : ''); ?>">
+			<div class="gsf-field-radio-inner <?php echo esc_attr($value_inline ? 'value-inline' : ''); ?>">
 				<?php foreach ($this->params['options'] as $key => $value): ?>
 					<label>
-						<input data-field-control="" type="radio" <?php echo ($key === $field_value ? ' checked="checked"' :''); ?>
+						<input data-field-control="" type="radio"
+                            <?php if ($key === $field_value): ?>
+                                checked="checked"
+                            <?php endif; ?>
 							   class="gsf-radio"
 						       name="<?php echo esc_attr($this->get_name()) ?>"
 						       value="<?php echo esc_attr($key); ?>" />

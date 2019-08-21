@@ -28,5 +28,5 @@ if ($key !== false) {
 ?>
 <a href="javascript:void(0)" class="property-favorite" data-property-id="<?php echo intval($property_id) ?>"
    data-toggle="tooltip"
-   title="<?php echo($title) ?>" data-title-not-favorite="<?php esc_attr_e('Add to Favorite', 'essential-real-estate') ?>" data-title-favorited="<?php esc_attr_e('It is my favorite', 'essential-real-estate'); ?>" data-icon-not-favorite="fa fa-star-o" data-icon-favorited="fa fa-star"><i
+   title="<?php echo esc_attr($title) ?>" data-title-not-favorite="<?php esc_attr_e('Add to Favorite', 'essential-real-estate') ?>" data-title-favorited="<?php esc_attr_e('It is my favorite', 'essential-real-estate'); ?>" data-icon-not-favorite="fa fa-star-o" data-icon-favorited="fa fa-star"><i
         class="<?php echo esc_attr($css_class); ?>"></i></a>

@@ -109,9 +109,9 @@ if (!class_exists('ERE_Admin_Invoice')) {
                 case 'invoice_status':
                     $invoice_status = get_post_meta($post->ID, ERE_METABOX_PREFIX . 'invoice_payment_status', true);
                     if ($invoice_status == 0) {
-                        echo '<span class="ere-label-red">' . __('Not Paid', 'essential-real-estate') . '</span>';
+                        echo '<span class="ere-label-red">' . esc_html__('Not Paid', 'essential-real-estate') . '</span>';
                     } else {
-                        echo '<span class="ere-label-blue">' . __('Paid', 'essential-real-estate') . '</span>';
+                        echo '<span class="ere-label-blue">' . esc_html__('Paid', 'essential-real-estate') . '</span>';
                     }
                     break;
             }
@@ -148,7 +148,7 @@ if (!class_exists('ERE_Admin_Invoice')) {
                 foreach ($invoices as $invoice):
                     if ($invoice->ID > 0):
                         ?>
-                        <a title="<?php esc_html_e('Click to view invoice', 'essential-real-estate') ?>"
+                        <a title="<?php esc_attr_e('Click to view invoice', 'essential-real-estate') ?>"
                            href="<?php echo get_edit_post_link($invoice->ID) ?>"><?php echo esc_html($invoice->ID); ?></a>
                         <?php
                     endif;
@@ -184,8 +184,8 @@ if (!class_exists('ERE_Admin_Invoice')) {
                 );
                 ?>
                 <select name="invoice_status">
-                    <option value=""><?php _e('All Status', 'essential-real-estate'); ?></option>
-                    <?php $current_v = isset($_GET['invoice_status'])? $_GET['invoice_status']:'';
+                    <option value=""><?php esc_html_e('All Status', 'essential-real-estate'); ?></option>
+                    <?php $current_v = isset($_GET['invoice_status'])? ere_clean(wp_unslash($_GET['invoice_status'])) :'';
                     foreach ($values as $value => $label) {
                         printf
                         (
@@ -207,8 +207,8 @@ if (!class_exists('ERE_Admin_Invoice')) {
                 );
                 ?>
                 <select name="invoice_payment_method">
-                    <option value=""><?php _e('All Payment Methods', 'essential-real-estate'); ?></option>
-                    <?php $current_v = isset($_GET['invoice_payment_method'])? $_GET['invoice_payment_method']:'';
+                    <option value=""><?php esc_html_e('All Payment Methods', 'essential-real-estate'); ?></option>
+                    <?php $current_v = isset($_GET['invoice_payment_method'])? wp_unslash(ere_clean($_GET['invoice_payment_method'])) :'';
                     foreach ($values as $value => $label) {
                         printf
                         (
@@ -230,8 +230,8 @@ if (!class_exists('ERE_Admin_Invoice')) {
                 );
                 ?>
                 <select name="invoice_payment_type">
-                    <option value=""><?php _e('All Payment Types', 'essential-real-estate'); ?></option>
-                    <?php $current_v = isset($_GET['invoice_payment_type'])? $_GET['invoice_payment_type']:'';
+                    <option value=""><?php esc_html_e('All Payment Types', 'essential-real-estate'); ?></option>
+                    <?php $current_v = isset($_GET['invoice_payment_type'])? ere_clean(wp_unslash($_GET['invoice_payment_type'])) :'';
                     foreach ($values as $value => $label) {
                         printf
                         (
@@ -241,9 +241,10 @@ if (!class_exists('ERE_Admin_Invoice')) {
                             $label
                         );
                     }
+                    $invoice_user = isset($_GET['invoice_user'])? ere_clean(wp_unslash($_GET['invoice_user'])) :'';
                     ?>
                 </select>
-                <input type="text" placeholder="<?php esc_html_e('Buyer','essential-real-estate');?>" name="invoice_user" value="<?php echo (isset($_GET['invoice_user'])? $_GET['invoice_user']:'');?>">
+                <input type="text" placeholder="<?php esc_attr_e('Buyer','essential-real-estate');?>" name="invoice_user" value="<?php echo esc_attr($invoice_user);?>">
             <?php }
         }
 
@@ -257,9 +258,10 @@ if (!class_exists('ERE_Admin_Invoice')) {
             $q_vars    = &$query->query_vars;$filter_arr=array();
             if ($pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type)
             {
-                if(isset($_GET['invoice_user']) && $_GET['invoice_user'] != '')
+                $invoice_user = isset($_GET['invoice_user']) ? ere_clean(wp_unslash($_GET['invoice_user'])) : '';
+                if($invoice_user !== '')
                 {
-                    $user = get_user_by('login',$_GET['invoice_user']);
+                    $user = get_user_by('login',$invoice_user);
                     $user_id=-1;
                     if($user)
                     {
@@ -271,10 +273,13 @@ if (!class_exists('ERE_Admin_Invoice')) {
                         'compare' => 'IN',
                     );
                 }
-                if(isset($_GET['invoice_status']) && $_GET['invoice_status'] != '')
+
+                $_invoice_status = isset($_GET['invoice_status']) ? ere_clean(wp_unslash($_GET['invoice_status'])) : '';
+
+                if($_invoice_status !== '')
                 {
                     $invoice_status=0;
-                    if($_GET['invoice_status']=='paid')
+                    if($_invoice_status=='paid')
                     {
                         $invoice_status=1;
                     }
@@ -284,17 +289,23 @@ if (!class_exists('ERE_Admin_Invoice')) {
                         'compare' => '=',
                     );
                 }
-                if(isset($_GET['invoice_payment_method']) && $_GET['invoice_payment_method'] != '') {
+
+                $invoice_payment_method = isset($_GET['invoice_payment_method']) ? ere_clean(wp_unslash($_GET['invoice_payment_method'])) : '';
+
+                if($invoice_payment_method !== '') {
                     $filter_arr[] = array(
                         'key' => ERE_METABOX_PREFIX . 'invoice_payment_method',
-                        'value' => $_GET['invoice_payment_method'],
+                        'value' => $invoice_payment_method,
                         'compare' => '=',
                     );
                 }
-                if(isset($_GET['invoice_payment_type']) && $_GET['invoice_payment_type'] != '') {
+
+                $invoice_payment_type = isset($_GET['invoice_payment_type']) ? ere_clean(wp_unslash($_GET['invoice_payment_type'])) : '';
+
+                if($invoice_payment_type !== '') {
                     $filter_arr[] = array(
                         'key' => ERE_METABOX_PREFIX . 'invoice_payment_type',
-                        'value' => $_GET['invoice_payment_type'],
+                        'value' => $invoice_payment_type,
                         'compare' => '=',
                     );
                 }

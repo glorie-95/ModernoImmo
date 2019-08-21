@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="<?php echo esc_attr($css_class_field); ?> form-group">
-    <select name="city" class="ere-property-city-ajax search-field form-control" title="<?php esc_html_e('Cities', 'essential-real-estate'); ?>" data-selected="<?php echo esc_attr($request_city); ?>" data-default-value="">
+    <select name="city" class="ere-property-city-ajax search-field form-control" title="<?php esc_attr_e('Cities', 'essential-real-estate'); ?>" data-selected="<?php echo esc_attr($request_city); ?>" data-default-value="">
         <?php if(!empty($request_city)):?>
             <?php ere_get_taxonomy_slug('property-city', $request_city); ?>
             <option value="" >

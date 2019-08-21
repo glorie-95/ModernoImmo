@@ -49,10 +49,9 @@ if (!class_exists('ERE_Vc_Param_Selectize')) {
 			}
 
 			if ((($multiple === true) || ($tags === true)) && !empty($settings['value'])) {
-				$attributes[] = "data-value='". (is_array($value) ? json_encode($value) : $value)  ."'";
+				$attributes[] = "data-value='". esc_attr((is_array($value) ? json_encode($value) : $value)) ."'";
 			}
 
-			$attributes = implode(' ', array_filter($attributes));
 
 			$options = array();
 			if (!empty($settings['value'])) {
@@ -65,9 +64,9 @@ if (!class_exists('ERE_Vc_Param_Selectize')) {
 			?>
 			<div class="ere-vc-selectize-wrapper">
 				<?php if (($tags === true) && empty($settings['value'])): ?>
-					<input class="<?php echo esc_attr($field_class) ?>" <?php echo ($attributes); ?> value="<?php echo esc_attr($value); ?>" type="text" name="<?php echo esc_attr($settings['param_name']) ?>" id="<?php echo esc_attr($settings['param_name']) ?>">
+					<input class="<?php echo esc_attr($field_class) ?>" <?php echo implode(' ', array_filter($attributes)); ?> value="<?php echo esc_attr($value); ?>" type="text" name="<?php echo esc_attr($settings['param_name']) ?>" id="<?php echo esc_attr($settings['param_name']) ?>">
 				<?php else: ?>
-					<select class="<?php echo esc_attr($field_class) ?>" <?php echo ($attributes); ?> name="<?php echo esc_attr($settings['param_name']) ?>" id="<?php echo esc_attr($settings['param_name']) ?>">
+					<select class="<?php echo esc_attr($field_class) ?>" <?php echo implode(' ', array_filter($attributes)); ?> name="<?php echo esc_attr($settings['param_name']) ?>" id="<?php echo esc_attr($settings['param_name']) ?>">
 						<?php foreach ($options as $index => $data): ?>
 							<?php
 							if (is_numeric($index) && (is_string($data) || is_numeric($data))) {
@@ -80,16 +79,16 @@ if (!class_exists('ERE_Vc_Param_Selectize')) {
 								$option_value = $data;
 								$option_label = $index;
 							}
-							$selected = '';
 							if (!is_array($value)) {
 								$option_value_string = (string) $option_value;
 								$value_string = (string) $value;
-								if ( '' !== $value && $option_value_string === $value_string ) {
-									$selected = ' selected="selected"';
-								}
 							}
 							?>
-							<option value="<?php echo esc_attr($option_value) ?>" <?php echo ($selected) ?>><?php echo esc_html($option_label) ?></option>
+							<option value="<?php echo esc_attr($option_value) ?>"
+                                <?php if ('' !== $value && $option_value_string === $value_string): ?>
+                                    selected="selected"
+                                <?php endif; ?>
+                                ><?php echo esc_html($option_label) ?></option>
 						<?php endforeach; ?>
 					</select>
 				<?php endif; ?>

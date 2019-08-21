@@ -239,7 +239,7 @@ if($property_featured)
                     <?php if (!empty($property_size)): ?>
                         <div class="property-area">
                             <div class="property-area-inner property-info-item-tooltip" data-toggle="tooltip"
-                                 title="<?php esc_html_e('Size', 'essential-real-estate'); ?>">
+                                 title="<?php esc_attr_e('Size', 'essential-real-estate'); ?>">
                                 <span class="fa fa-arrows"></span>
 	                            <span class="property-info-value"><?php
                                     $measurement_units = ere_get_measurement_units();

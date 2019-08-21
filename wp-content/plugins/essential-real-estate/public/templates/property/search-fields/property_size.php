@@ -47,7 +47,7 @@ if ($area_is_slider=='true'):
     </div>
 <?php else: ?>
     <div class="<?php echo esc_attr($css_class_half_field); ?> form-group">
-        <select name="min-area" title="<?php esc_html_e('Min Size', 'essential-real-estate') ?>"
+        <select name="min-area" title="<?php esc_attr_e('Min Size', 'essential-real-estate') ?>"
                 class="search-field form-control" data-default-value="">
             <option value="">
                 <?php esc_html_e('Min Size', 'essential-real-estate') ?>
@@ -60,9 +60,9 @@ if ($area_is_slider=='true'):
                     ?>
                     <option
                         value="<?php echo esc_attr($n) ?>" <?php if ($n == $request_min_area) {
-                        echo esc_attr('selected');
+                        echo 'selected';
                     } ?>>
-                        <?php echo sprintf( '%s %s',ere_get_format_number($n), $measurement_units); ?>
+                        <?php echo wp_kses_post(sprintf( '%s %s',ere_get_format_number($n), $measurement_units)); ?>
                     </option>
                     <?php
                 }
@@ -70,7 +70,7 @@ if ($area_is_slider=='true'):
         </select>
     </div>
     <div class="<?php echo esc_attr($css_class_half_field); ?> form-group">
-        <select name="max-area" title="<?php esc_html_e('Max Size', 'essential-real-estate') ?>"
+        <select name="max-area" title="<?php esc_attr_e('Max Size', 'essential-real-estate') ?>"
                 class="search-field form-control" data-default-value="">
             <option value="">
                 <?php esc_html_e('Max Size', 'essential-real-estate') ?>
@@ -83,9 +83,9 @@ if ($area_is_slider=='true'):
                     ?>
                     <option
                         value="<?php echo esc_attr($n) ?>" <?php if ($n == $request_max_area) {
-                        echo esc_attr('selected');
+                        echo 'selected';
                     } ?>>
-                        <?php echo sprintf('%s %s',ere_get_format_number($n), $measurement_units); ?>
+                        <?php echo wp_kses_post(sprintf('%s %s',ere_get_format_number($n), $measurement_units)); ?>
                     </option>
                     <?php
                 }

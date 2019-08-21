@@ -40,31 +40,31 @@ if (!class_exists('ERE_Search')) {
             $meta_query = array();
             $tax_query = array();
 
-            $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
-            $address = isset($_REQUEST['address']) ? $_REQUEST['address'] : '';
-            $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : '';
-            $city = (isset($_REQUEST['city'])&&!empty($_REQUEST['city'])) ? $_REQUEST['city'] : '';
+            $title = isset($_REQUEST['title']) ? ere_clean(wp_unslash($_REQUEST['title']))  : '';
+            $address = isset($_REQUEST['address']) ? ere_clean(wp_unslash($_REQUEST['address']))  : '';
+            $type = isset($_REQUEST['type']) ?  ere_clean(wp_unslash($_REQUEST['type'])) : '';
+            $city = isset($_REQUEST['city']) ? ere_clean(wp_unslash($_REQUEST['city']))  : '';
             $status_default=ere_get_property_status_default_value();
-            $status = (isset($_REQUEST['status'])&&!empty($_REQUEST['status'])) ? $_REQUEST['status'] : $status_default;
-            $bathrooms = isset($_REQUEST['bathrooms']) ? $_REQUEST['bathrooms'] : '';
-            $bedrooms = isset($_REQUEST['bedrooms']) ? $_REQUEST['bedrooms'] : '';
-            $min_area = isset($_REQUEST['min_area']) ? $_REQUEST['min_area'] : '';
-            $max_area = isset($_REQUEST['max_area']) ? $_REQUEST['max_area'] : '';
-            $min_price = isset($_REQUEST['min_price']) ? $_REQUEST['min_price'] : '';
-            $max_price = isset($_REQUEST['max_price']) ? $_REQUEST['max_price'] : '';
-            $state = isset($_REQUEST['state']) ? $_REQUEST['state'] : '';
-            $country = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
-            $neighborhood = isset($_REQUEST['neighborhood']) ? $_REQUEST['neighborhood'] : '';
-            $label = isset($_REQUEST['label']) ? $_REQUEST['label'] : '';
-            $garage = isset($_REQUEST['garage']) ? $_REQUEST['garage'] : '';
-            $min_land_area = isset($_REQUEST['min_land_area']) ? $_REQUEST['min_land_area'] : '';
-            $max_land_area = isset($_REQUEST['max_land_area']) ? $_REQUEST['max_land_area'] : '';
-            $property_identity = isset($_REQUEST['property_identity']) ? $_REQUEST['property_identity'] : '';
-            $features = isset($_REQUEST['features']) ? $_REQUEST['features'] : '';
+            $status = isset($_REQUEST['status']) ? ere_clean(wp_unslash($_REQUEST['status']))  : $status_default;
+            $bathrooms = isset($_REQUEST['bathrooms']) ? ere_clean(wp_unslash($_REQUEST['bathrooms']))  : '';
+            $bedrooms = isset($_REQUEST['bedrooms']) ? ere_clean(wp_unslash($_REQUEST['bedrooms']))  : '';
+            $min_area = isset($_REQUEST['min_area']) ? ere_clean(wp_unslash($_REQUEST['min_area']))  : '';
+            $max_area = isset($_REQUEST['max_area']) ? ere_clean(wp_unslash($_REQUEST['max_area']))  : '';
+            $min_price = isset($_REQUEST['min_price']) ? ere_clean(wp_unslash($_REQUEST['min_price']))  : '';
+            $max_price = isset($_REQUEST['max_price']) ? ere_clean(wp_unslash($_REQUEST['max_price']))  : '';
+            $state = isset($_REQUEST['state']) ? ere_clean(wp_unslash($_REQUEST['state']))  : '';
+            $country = isset($_REQUEST['country']) ? ere_clean(wp_unslash($_REQUEST['country']))  : '';
+            $neighborhood = isset($_REQUEST['neighborhood']) ? ere_clean(wp_unslash($_REQUEST['neighborhood']))  : '';
+            $label = isset($_REQUEST['label']) ? ere_clean(wp_unslash($_REQUEST['label']))  : '';
+            $garage = isset($_REQUEST['garage']) ? ere_clean(wp_unslash($_REQUEST['garage']))  : '';
+            $min_land_area = isset($_REQUEST['min_land_area']) ? ere_clean(wp_unslash($_REQUEST['min_land_area']))  : '';
+            $max_land_area = isset($_REQUEST['max_land_area']) ? ere_clean(wp_unslash($_REQUEST['max_land_area'])) : '';
+            $property_identity = isset($_REQUEST['property_identity']) ? ere_clean(wp_unslash($_REQUEST['property_identity']))  : '';
+            $features = isset($_REQUEST['features']) ? ere_clean(wp_unslash($_REQUEST['features']))  : '';
             if($features != '') {
                 $features = explode( ';',$features );
             }
-            $search_type = isset($_REQUEST['search_type']) ? $_REQUEST['search_type'] : '';
+            $search_type = isset($_REQUEST['search_type']) ? ere_clean(wp_unslash($_REQUEST['search_type']))  : '';
 
             $query_args = array(
                 'post_type' => 'property',
@@ -168,8 +168,8 @@ if (!class_exists('ERE_Search')) {
 
             // min and max price logic
             if (!empty($min_price) && !empty($max_price)) {
-                $min_price = doubleval(ere_clean($min_price));
-                $max_price = doubleval(ere_clean($max_price));
+                $min_price = doubleval(ere_clean_double_val($min_price));
+                $max_price = doubleval(ere_clean_double_val($max_price));
 
                 if ($min_price >= 0 && $max_price >= $min_price) {
                     $meta_query[] = array(
@@ -180,7 +180,7 @@ if (!class_exists('ERE_Search')) {
                     );
                 }
             } else if (!empty($min_price)) {
-                $min_price = doubleval(ere_clean($min_price));
+                $min_price = doubleval(ere_clean_double_val($min_price));
                 if ($min_price >= 0) {
                     $meta_query[] = array(
                         'key' => ERE_METABOX_PREFIX. 'property_price',
@@ -190,7 +190,7 @@ if (!class_exists('ERE_Search')) {
                     );
                 }
             } else if (!empty($max_price)) {
-                $max_price = doubleval(ere_clean($max_price));
+                $max_price = doubleval(ere_clean_double_val($max_price));
                 if ($max_price >= 0) {
                     $meta_query[] = array(
                         'key' => ERE_METABOX_PREFIX . 'property_price',
@@ -422,34 +422,34 @@ if (!class_exists('ERE_Search')) {
             $meta_query = array();
             $tax_query = array();
 
-            $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
-            $address = isset($_REQUEST['address']) ? $_REQUEST['address'] : '';
-            $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : '';
-            $city = (isset($_REQUEST['city'])&&!empty($_REQUEST['city'])) ? $_REQUEST['city'] : '';
+            $title = isset($_REQUEST['title']) ? ere_clean(wp_unslash($_REQUEST['title']))  : '';
+            $address = isset($_REQUEST['address']) ? ere_clean(wp_unslash($_REQUEST['address']))  : '';
+            $type = isset($_REQUEST['type']) ? ere_clean(wp_unslash($_REQUEST['type']))  : '';
+            $city = isset($_REQUEST['city']) ? ere_clean(wp_unslash($_REQUEST['city']))  : '';
             $status_default=ere_get_property_status_default_value();
-            $status = (isset($_REQUEST['status'])&&!empty($_REQUEST['status'])) ? $_REQUEST['status'] : $status_default;
-            $bathrooms = isset($_REQUEST['bathrooms']) ? $_REQUEST['bathrooms'] : '';
-            $bedrooms = isset($_REQUEST['bedrooms']) ? $_REQUEST['bedrooms'] : '';
-            $min_area = isset($_REQUEST['min_area']) ? $_REQUEST['min_area'] : '';
-            $max_area = isset($_REQUEST['max_area']) ? $_REQUEST['max_area'] : '';
-            $min_price = isset($_REQUEST['min_price']) ? $_REQUEST['min_price'] : '';
-            $max_price = isset($_REQUEST['max_price']) ? $_REQUEST['max_price'] : '';
-            $state = isset($_REQUEST['state']) ? $_REQUEST['state'] : '';
-            $country = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
-            $neighborhood = isset($_REQUEST['neighborhood']) ? $_REQUEST['neighborhood'] : '';
-            $label = isset($_REQUEST['label']) ? $_REQUEST['label'] : '';
-            $garage = isset($_REQUEST['garage']) ? $_REQUEST['garage'] : '';
-            $min_land_area = isset($_REQUEST['min_land_area']) ? $_REQUEST['min_land_area'] : '';
-            $max_land_area = isset($_REQUEST['max_land_area']) ? $_REQUEST['max_land_area'] : '';
-            $property_identity = isset($_REQUEST['property_identity']) ? $_REQUEST['property_identity'] : '';
-            $features = isset($_REQUEST['features']) ? $_REQUEST['features'] : '';
+            $status = isset($_REQUEST['status']) ? ere_clean(wp_unslash($_REQUEST['status']))  : $status_default;
+            $bathrooms = isset($_REQUEST['bathrooms']) ? ere_clean(wp_unslash($_REQUEST['bathrooms']))  : '';
+            $bedrooms = isset($_REQUEST['bedrooms']) ? ere_clean(wp_unslash($_REQUEST['bedrooms']))  : '';
+            $min_area = isset($_REQUEST['min_area']) ? ere_clean(wp_unslash($_REQUEST['min_area']))  : '';
+            $max_area = isset($_REQUEST['max_area']) ? ere_clean(wp_unslash($_REQUEST['max_area'])) : '';
+            $min_price = isset($_REQUEST['min_price']) ? ere_clean(wp_unslash($_REQUEST['min_price'])) : '';
+            $max_price = isset($_REQUEST['max_price']) ? ere_clean(wp_unslash($_REQUEST['max_price'])) : '';
+            $state = isset($_REQUEST['state']) ? ere_clean(wp_unslash($_REQUEST['state'])) : '';
+            $country = isset($_REQUEST['country']) ? ere_clean(wp_unslash($_REQUEST['country'])) : '';
+            $neighborhood = isset($_REQUEST['neighborhood']) ? ere_clean(wp_unslash($_REQUEST['neighborhood'])) : '';
+            $label = isset($_REQUEST['label']) ? ere_clean(wp_unslash($_REQUEST['label'])) : '';
+            $garage = isset($_REQUEST['garage']) ? ere_clean(wp_unslash($_REQUEST['garage'])) : '';
+            $min_land_area = isset($_REQUEST['min_land_area']) ? ere_clean(wp_unslash($_REQUEST['min_land_area'])) : '';
+            $max_land_area = isset($_REQUEST['max_land_area']) ? ere_clean(wp_unslash($_REQUEST['max_land_area'])) : '';
+            $property_identity = isset($_REQUEST['property_identity']) ? ere_clean(wp_unslash($_REQUEST['property_identity'])) : '';
+            $features = isset($_REQUEST['features']) ? ere_clean(wp_unslash($_REQUEST['features'])) : '';
             if($features != '') {
                 $features = explode( ';',$features );
             }
-            $search_type = isset($_REQUEST['search_type']) ? $_REQUEST['search_type'] : '';
-            $paged = isset($_REQUEST['paged']) ? $_REQUEST['paged'] : '1';
-            $item_amount = isset($_REQUEST['item_amount']) ? $_REQUEST['item_amount'] : '18';
-            $marker_image_size = isset($_REQUEST['marker_image_size']) ? $_REQUEST['marker_image_size'] : '100x100';
+            $search_type = isset($_REQUEST['search_type']) ? ere_clean(wp_unslash($_REQUEST['search_type'])) : '';
+            $paged = isset($_REQUEST['paged']) ? ere_clean(wp_unslash($_REQUEST['paged'])) : '1';
+            $item_amount = isset($_REQUEST['item_amount']) ? ere_clean(wp_unslash($_REQUEST['item_amount'])) : '18';
+            $marker_image_size = isset($_REQUEST['marker_image_size']) ? ere_clean(wp_unslash($_REQUEST['marker_image_size'])) : '100x100';
             $query_args = array(
                 'posts_per_page' => ($item_amount > 0) ? $item_amount : -1,
                 'post_type' => 'property',
@@ -471,7 +471,6 @@ if (!class_exists('ERE_Search')) {
                 $query_args['meta_key'] = ERE_METABOX_PREFIX . 'property_featured';
             }
             if (!empty($address)) {
-                $address = sanitize_text_field($address);
                 $meta_query[] = array(
                     'key' => ERE_METABOX_PREFIX. 'property_address',
                     'value' => $address,
@@ -520,7 +519,6 @@ if (!class_exists('ERE_Search')) {
 
             //bathroom
             if (!empty($bathrooms)) {
-                $bathrooms = sanitize_text_field($bathrooms);
                 $meta_query[] = array(
                     'key' => ERE_METABOX_PREFIX. 'property_bathrooms',
                     'value' => $bathrooms,
@@ -531,7 +529,6 @@ if (!class_exists('ERE_Search')) {
 
             // bedrooms
             if (!empty($bedrooms)) {
-                $bedrooms = sanitize_text_field($bedrooms);
                 $meta_query[] = array(
                     'key' => ERE_METABOX_PREFIX. 'property_bedrooms',
                     'value' => $bedrooms,
@@ -542,7 +539,6 @@ if (!class_exists('ERE_Search')) {
 
             // bedrooms
             if (!empty($garage)) {
-                $garage = sanitize_text_field($garage);
                 $meta_query[] = array(
                     'key' => ERE_METABOX_PREFIX. 'property_garage',
                     'value' => $garage,
@@ -553,8 +549,8 @@ if (!class_exists('ERE_Search')) {
 
             // min and max price logic
             if (!empty($min_price) && !empty($max_price)) {
-                $min_price = doubleval(ere_clean($min_price));
-                $max_price = doubleval(ere_clean($max_price));
+                $min_price = doubleval(ere_clean_double_val($min_price));
+                $max_price = doubleval(ere_clean_double_val($max_price));
 
                 if ($min_price >= 0 && $max_price >= $min_price) {
                     $meta_query[] = array(
@@ -565,7 +561,7 @@ if (!class_exists('ERE_Search')) {
                     );
                 }
             } else if (!empty($min_price)) {
-                $min_price = doubleval(ere_clean($min_price));
+                $min_price = doubleval(ere_clean_double_val($min_price));
                 if ($min_price >= 0) {
                     $meta_query[] = array(
                         'key' => ERE_METABOX_PREFIX. 'property_price',
@@ -575,7 +571,7 @@ if (!class_exists('ERE_Search')) {
                     );
                 }
             } else if (!empty($max_price)) {
-                $max_price = doubleval(ere_clean($max_price));
+                $max_price = doubleval(ere_clean_double_val($max_price));
                 if ($max_price >= 0) {
                     $meta_query[] = array(
                         'key' => ERE_METABOX_PREFIX . 'property_price',
@@ -667,7 +663,6 @@ if (!class_exists('ERE_Search')) {
                 );
             }
             if (!empty($property_identity)) {
-                $property_identity = sanitize_text_field($property_identity);
                 $meta_query[] = array(
                     'key' => ERE_METABOX_PREFIX. 'property_identity',
                     'value' => $property_identity,
@@ -817,8 +812,8 @@ if (!class_exists('ERE_Search')) {
         public function ere_ajax_change_price_on_status_change()
         {
             $slide_html=$min_price_html=$max_price_html='';
-            $request_status = isset($_POST['status']) ? $_POST['status'] : '';
-            $price_is_slider = isset($_POST['price_is_slider']) ? $_POST['price_is_slider'] : '';
+            $request_status = isset($_POST['status']) ? ere_clean(wp_unslash($_POST['status']))  : '';
+            $price_is_slider = isset($_POST['price_is_slider']) ? ere_clean(wp_unslash($_POST['price_is_slider']))  : '';
             if (!empty($price_is_slider)&& $price_is_slider=='true') {
                 $min_price = 0;
                 $max_price = 1000;

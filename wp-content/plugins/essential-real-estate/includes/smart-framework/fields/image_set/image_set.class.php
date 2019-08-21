@@ -34,9 +34,13 @@ if (!class_exists('GSF_Field_Image_Set')) {
 						<?php if (isset($this->params['multiple']) && $this->params['multiple']): ?>
 							<input data-field-control="" type="checkbox" name="<?php echo esc_attr($this->get_name()) ?>[]" value="<?php echo esc_attr($key); ?>" <?php echo (in_array($key, $field_value) ? ' checked="checked"' :''); ?>/>
 						<?php else: ?>
-							<input data-field-control="" type="radio" name="<?php echo esc_attr($this->get_name()) ?>" value="<?php echo esc_attr($key); ?>" <?php echo ($key === $field_value ? ' checked="checked"' :''); ?>/>
+							<input data-field-control="" type="radio" name="<?php echo esc_attr($this->get_name()) ?>" value="<?php echo esc_attr($key); ?>"
+                                <?php if ($key === $field_value): ?>
+                                    checked="checked"
+                                <?php endif; ?>
+                                />
 						<?php endif;?>
-						<img class="<?php echo ($allowClear ? 'gsf-allow-clear' : ''); ?>"
+						<img class="<?php echo esc_attr($allowClear ? 'gsf-allow-clear' : ''); ?>"
 						     src="<?php echo esc_url($value); ?>"
 						     <?php echo join(' ', $img_attr); ?>
 						     alt="<?php echo esc_attr($key); ?>"/>

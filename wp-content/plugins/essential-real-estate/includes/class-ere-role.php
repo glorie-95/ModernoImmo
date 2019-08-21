@@ -23,7 +23,7 @@ if (!class_exists('ERE_Role')) {
 			}
 
 			// Customer role
-			add_role( 'ere_customer', __( 'ERE Customer', 'essential-real-estate' ), array(
+			add_role( 'ere_customer', esc_html__( 'ERE Customer', 'essential-real-estate' ), array(
 				'read' 					=> true
 			) );
 

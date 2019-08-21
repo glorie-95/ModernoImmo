@@ -41,12 +41,17 @@ if (!class_exists('GSF_Field_Select_Ajax')) {
 			?>
 			<div class="gsf-field-select_ajax-inner">
 				<select data-field-control="" class="gsf-select-ajax repositories" type="<?php echo esc_attr($input_type); ?>"
-				        name="<?php echo esc_attr($this->get_name()) ?><?php echo $multiple ? '[]' : ''; ?>"
+                        <?php if ($multiple): ?>
+                            name="<?php echo esc_attr($this->get_name()) ?>[]"
+                            multiple
+                        <?php else: ?>
+                            name="<?php echo esc_attr($this->get_name()) ?>"
+                        <?php endif; ?>
 				        data-value="<?php echo esc_attr(is_array($field_value) ? json_encode($field_value) : $field_value) ?>"
 				        placeholder="<?php echo esc_attr($place_holder); ?>"
 				        data-url="<?php echo esc_url(admin_url('admin-ajax.php?action=gsf_get_posts')); ?>"
 				        data-source="<?php echo esc_attr($post_type); ?>"
-					<?php echo esc_attr($multiple ? 'multiple' : '' ); ?>>
+					>
 					<?php foreach ($options as $opt_key => $opt_val): ?>
 						<option value="<?php echo esc_attr($opt_key); ?>"><?php echo esc_html($opt_val); ?></option>
 					<?php endforeach;?>

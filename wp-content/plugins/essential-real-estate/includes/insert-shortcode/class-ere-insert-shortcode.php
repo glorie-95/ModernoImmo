@@ -160,8 +160,8 @@ if (!class_exists('ERE_Insert_Shortcode')) {
 			}
 			return array(
 				'type' => 'ere_selectize',
-				'title' => esc_html__( 'Narrow ', 'essential-real-estate' ) . $title,
-				'desc' => esc_html__('Enter ' . $title . ' by names to narrow output.', 'essential-real-estate'),
+				'title' => sprintf(esc_html__( 'Narrow %s', 'essential-real-estate' ), esc_html($title)),
+				'desc' => sprintf(esc_html__('Enter %s by names to narrow output.', 'essential-real-estate'), esc_html($title)) ,
 				'values' => $taxonomies
 			);
 		}
@@ -1476,7 +1476,7 @@ if (!class_exists('ERE_Insert_Shortcode')) {
 			</div>
 			<div class="clearfix"></div>
 		</div>';
-			echo $shortcode_html . $html_options;
+			echo $shortcode_html . $html_options ;
 			echo '<a class="btn" id="insert-shortcode">'. esc_html__("Insert Shortcode", "essential-real-estate").'</a>
 		</div>
 	</div>';

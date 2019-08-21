@@ -17,9 +17,9 @@ if (!class_exists('GSF_Field_Icon')) {
 				       name="<?php echo esc_attr($this->get_name()) ?>"
 				       value="<?php echo esc_attr($field_value); ?>"/>
 				<div class="gsf-icon"
-				     data-icon-title="<?php esc_html_e('Select icon','smart-framework'); ?>"
-				     data-icon-remove="<?php esc_html_e('Remove icon','smart-framework'); ?>"
-				     data-icon-search="<?php esc_html_e('Search icon...','smart-framework'); ?>">
+				     data-icon-title="<?php esc_attr_e('Select icon','smart-framework'); ?>"
+				     data-icon-remove="<?php esc_attr_e('Remove icon','smart-framework'); ?>"
+				     data-icon-search="<?php esc_attr_e('Search icon...','smart-framework'); ?>">
 					<div class="gsf-icon-info">
 						<span class="<?php echo esc_attr($field_value); ?>"></span>
 						<div class="gsf-icon-label"><?php esc_html_e('Set Icon','smart-framework'); ?></div>

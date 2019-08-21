@@ -15,5 +15,5 @@ if ( ! defined( 'ABSPATH' ) ) {
     <input type="text" class="ere-property-identity form-control search-field" data-default-value=""
            value="<?php echo esc_attr($request_property_identity); ?>"
            name="property_identity"
-           placeholder="<?php esc_html_e('Property ID', 'essential-real-estate') ?>">
+           placeholder="<?php esc_attr_e('Property ID', 'essential-real-estate') ?>">
 </div>

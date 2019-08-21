@@ -25,24 +25,24 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <div class="form-group">
                         <label for="ere_title"><?php esc_html_e('Title', 'essential-real-estate'); ?></label>
                         <input type="text" name="ere_title" id="ere_title"
-                               placeholder="<?php esc_html_e('Input title', 'essential-real-estate'); ?>" class="form-control"
+                               placeholder="<?php esc_attr_e('Input title', 'essential-real-estate'); ?>" class="form-control"
                                value="" aria-describedby="parameters">
                         <input type="hidden" name="ere_params"
                                value='<?php print base64_encode($parameters); ?>'>
                         <input type="hidden" name="ere_query"
                                value='<?php print base64_encode(serialize($search_query)); ?>'>
-                        <input type="hidden" name="ere_url" value="<?php echo $_SERVER['REQUEST_URI'] ?>">
+                        <input type="hidden" name="ere_url" value="<?php echo esc_attr($_SERVER['REQUEST_URI'])?>">
                         <input type="hidden" name="action" value='ere_save_search_ajax'>
                         <input type="hidden" name="ere_save_search_ajax"
                                value="<?php echo wp_create_nonce('ere_save_search_nonce_field') ?>">
-                        <small id="parameters" class="form-text text-muted"><?php echo sprintf(__('Parameters: %s','essential-real-estate'),$parameters); ?></small>
+                        <small id="parameters" class="form-text text-muted"><?php echo wp_kses_post(sprintf(esc_html__('Parameters: %s','essential-real-estate'),$parameters)) ; ?></small>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark btn-default"
                         data-dismiss="modal"><?php esc_html_e('Close', 'essential-real-estate'); ?></button>
-                <button data-ajax-url="<?php echo ERE_AJAX_URL ?>" id="ere_save_search" class="btn btn-primary"
+                <button data-ajax-url="<?php echo esc_url(ERE_AJAX_URL) ?>" id="ere_save_search" class="btn btn-primary"
                         type="button"><?php esc_html_e('Save', 'essential-real-estate'); ?></button>
             </div>
         </div>

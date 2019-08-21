@@ -118,7 +118,7 @@ if (isset($_GET['status']) && in_array($_GET['status'], $property_status_arr) &&
     $tax_query[] = array(
         'taxonomy' => 'property-status',
         'field' => 'slug',
-        'terms' => explode(',', $_GET['status']),
+        'terms' => explode(',', ere_clean(wp_unslash($_GET['status']))),
         'operator' => 'IN'
     );
 }
@@ -145,11 +145,11 @@ if ($tax_count > 0) {
 $author_id = $agent_id = '';
 if (isset($_GET['user_id']) ||isset($_GET['agent_id']) ) {
     if (isset($_GET['user_id'])) {
-        $author_id = $_GET['user_id'];
+        $author_id = ere_clean(wp_unslash($_GET['user_id']));
         $agent_id = get_the_author_meta(ERE_METABOX_PREFIX . 'author_agent_id', $author_id);
     }
     if (isset($_GET['agent_id'])) {
-        $agent_id = $_GET['agent_id'];
+        $agent_id = ere_clean(wp_unslash($_GET['agent_id']));
         $author_id = get_post_meta($agent_id, ERE_METABOX_PREFIX . 'agent_user_id', true);
     }
     if (!empty($author_id) && $author_id > 0 && !empty($agent_id) && $agent_id > 0) {

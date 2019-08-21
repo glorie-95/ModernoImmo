@@ -27,7 +27,7 @@ wp_enqueue_script('select2_js');
                         for="geocomplete"><?php echo esc_html__('Address', 'essential-real-estate') . ere_required_field('property_map_address'); ?></label>
                     <input type="text" class="form-control" name="property_map_address" id="geocomplete"
                            value=""
-                           placeholder="<?php esc_html_e('Enter property address', 'essential-real-estate'); ?>">
+                           placeholder="<?php esc_attr_e('Enter property address', 'essential-real-estate'); ?>">
                 </div>
             </div>
         <?php } ?>
@@ -124,8 +124,8 @@ wp_enqueue_script('select2_js');
                 <input type="text" class="form-control" name="lng" id="longitude">
             </div>
             <div class="form-group">
-                <input id="find" type="button" class="btn btn-primary btn-block" title="<?php esc_html_e('Place the pin the address above', 'essential-real-estate'); ?>"
-                       value="<?php esc_html_e('Pin address', 'essential-real-estate'); ?>">
+                <input id="find" type="button" class="btn btn-primary btn-block" title="<?php esc_attr_e('Place the pin the address above', 'essential-real-estate'); ?>"
+                       value="<?php esc_attr_e('Pin address', 'essential-real-estate'); ?>">
                 <a id="reset" href="#"
                    style="display:none;"><?php esc_html_e('Reset Marker', 'essential-real-estate'); ?></a>
             </div>

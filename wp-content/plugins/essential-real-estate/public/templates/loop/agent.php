@@ -18,7 +18,6 @@ $email = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_email']) ? $age
 
 $agent_facebook_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_facebook_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_facebook_url'][0] : '';
 $agent_twitter_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_twitter_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_twitter_url'][0] : '';
-$agent_googleplus_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_googleplus_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_googleplus_url'][0] : '';
 $agent_linkedin_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_linkedin_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_linkedin_url'][0] : '';
 $agent_pinterest_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_pinterest_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_pinterest_url'][0] : '';
 $agent_instagram_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_instagram_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_instagram_url'][0] : '';
@@ -106,11 +105,6 @@ if (preg_match('/\d+x\d+/', $custom_agent_image_size)) {
                 <?php if (!empty($agent_twitter_url)): ?>
                     <a title="Twitter" href="<?php echo esc_url($agent_twitter_url); ?>">
                         <i class="fa fa-twitter"></i>
-                    </a>
-                <?php endif; ?>
-                <?php if (!empty($agent_googleplus_url)): ?>
-                    <a title="Google Plus" href="<?php echo esc_url($agent_googleplus_url); ?>">
-                        <i class="fa fa-google-plus"></i>
                     </a>
                 <?php endif; ?>
                 <?php if (!empty($email)): ?>

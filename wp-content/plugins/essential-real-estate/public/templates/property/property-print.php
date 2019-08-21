@@ -7,24 +7,43 @@ if (!defined('ABSPATH')) {
  * @var $property_id
  */
 $the_post = get_post($property_id);
-
 if ($the_post->post_type != 'property') {
     esc_html_e('Posts ineligible to print!', 'essential-real-estate');
     return;
 }
-$page_url = get_bloginfo('url', '');
-
-print  '<html><head><title>' . $page_url . '</title>';
-print  '<link href="' . ERE_PLUGIN_URL . '/public/assets/css/property-print.css" rel="stylesheet" type="text/css" />';
-print  '<link href="' . ERE_PLUGIN_URL . '/public/assets/packages/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />';
-print  '<link href="' . ERE_PLUGIN_URL . '/public/assets/packages/fonts-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />';
+wp_enqueue_script('jquery');
+wp_add_inline_script('jquery','jQuery(window).load(function(){ print(); });');
+wp_enqueue_style(ERE_PLUGIN_PREFIX . 'property-print');
 
 if ($isRTL == 'true') {
-    print '<link href="' . ERE_PLUGIN_URL . '/public/assets/css/property-print-rtl.css" rel="stylesheet" type="text/css" />';
+    wp_enqueue_style(ERE_PLUGIN_PREFIX . 'property-print-rtl');
 }
-print '</head>';
-print  '<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script><script>$(window).load(function(){ print(); });</script>';
-print  '<body>';
+
+// Actions
+remove_action( 'wp_head',             '_wp_render_title_tag',            1     );
+remove_action( 'wp_head',             'wp_resource_hints',               2     );
+remove_action( 'wp_head',             'feed_links',                      2     );
+remove_action( 'wp_head',             'feed_links_extra',                3     );
+remove_action( 'wp_head',             'rsd_link'                               );
+remove_action( 'wp_head',             'wlwmanifest_link'                       );
+remove_action( 'wp_head',             'adjacent_posts_rel_link_wp_head', 10);
+remove_action( 'publish_future_post', 'check_and_publish_future_post',   10);
+remove_action( 'wp_head',             'noindex',                          1    );
+remove_action( 'wp_head',             'print_emoji_detection_script',     7    );
+remove_action( 'wp_head',             'wp_generator'                           );
+remove_action( 'wp_head',             'rel_canonical'                          );
+remove_action( 'wp_head',             'wp_shortlink_wp_head',            10);
+remove_action( 'wp_head',             'wp_custom_css_cb',                101   );
+remove_action( 'wp_head',             'wp_site_icon',                    99    );
+
+add_action('wp_enqueue_scripts','ere_dequeue_assets_print_property',9999);
+function ere_dequeue_assets_print_property() {
+    foreach (wp_styles()->registered as $k => $v) {
+        if (!in_array($k,array('bootstrap','font-awesome',ERE_PLUGIN_PREFIX . 'property-print',ERE_PLUGIN_PREFIX . 'property-print-rtl'))) {
+            unset(wp_styles()->registered[$k]);
+        }
+    }
+}
 
 $print_logo = ere_get_option('print_logo', '');
 $attach_id = '';
@@ -120,7 +139,11 @@ if ($additional_features > 0) {
 }
 $measurement_units = ere_get_measurement_units();
 ?>
-
+<html <?php language_attributes(); ?>>
+    <head>
+        <?php wp_head(); ?>
+    </head>
+    <body>
     <div id="property-print-wrap">
         <div class="property-print-inner">
             <?php if (!empty($image_src)): ?>
@@ -290,18 +313,18 @@ $measurement_units = ere_get_measurement_units();
                 <ul class="list-2-col ere-property-list">
                     <li>
                         <strong><?php esc_html_e('Property ID', 'essential-real-estate'); ?></strong>
-                    <span><?php
-                        if (!empty($property_identity)) {
-                            echo esc_html($property_identity);
-                        } else {
-                            echo get_the_ID();
-                        }
-                        ?></span>
+                        <span><?php
+                            if (!empty($property_identity)) {
+                                echo esc_html($property_identity);
+                            } else {
+                                echo get_the_ID();
+                            }
+                            ?></span>
                     </li>
                     <?php if (!empty($price)): ?>
                         <li>
                             <strong><?php esc_html_e('Price', 'essential-real-estate'); ?></strong>
-                        <span class="ere-property-price">
+                            <span class="ere-property-price">
                                     <?php if (!empty($price_prefix)) {
                                         echo '<span class="property-price-prefix">' . $price_prefix . ' </span>';
                                     } ?>
@@ -363,8 +386,8 @@ $measurement_units = ere_get_measurement_units();
                     <?php if (!empty($property_land)): ?>
                         <li>
                             <strong><?php esc_html_e('Land area', 'essential-real-estate'); ?></strong>
-                       <span><?php $measurement_units_land_area = ere_get_measurement_units_land_area();
-                           echo sprintf('%s %s', ere_get_format_number($property_land), $measurement_units_land_area); ?></span>
+                            <span><?php $measurement_units_land_area = ere_get_measurement_units_land_area();
+                                echo sprintf('%s %s', ere_get_format_number($property_land), $measurement_units_land_area); ?></span>
                         </li>
                     <?php endif; ?>
 
@@ -396,22 +419,22 @@ $measurement_units = ere_get_measurement_units();
                             if (!empty($property_field)):?>
                                 <li>
                                     <strong><?php echo esc_html($field['title']); ?></strong>
-                                <span><?php
-                                    if ($field['type'] == 'checkbox_list') {
-                                        $text = '';
-                                        if (count($property_field) > 0) {
-                                            foreach ($property_field as $value => $v) {
-                                                $text .= $v . ', ';
+                                    <span><?php
+                                        if ($field['type'] == 'checkbox_list') {
+                                            $text = '';
+                                            if (count($property_field) > 0) {
+                                                foreach ($property_field as $value => $v) {
+                                                    $text .= $v . ', ';
+                                                }
                                             }
+                                            $text = rtrim($text, ', ');
+                                            echo esc_html($text);
+                                        } else {
+                                            echo esc_html($property_field);
                                         }
-                                        $text = rtrim($text, ', ');
-                                        echo esc_html($text);
-                                    } else {
-                                        echo esc_html($property_field);
-                                    }
-                                    ?></span>
+                                        ?></span>
                                 </li>
-                                <?php
+                            <?php
                             endif;
                         endforeach;
                     endif; ?>
@@ -464,35 +487,35 @@ $measurement_units = ere_get_measurement_units();
                                 <?php if (isset($floor_size) && !empty($floor_size)): ?>
                                     <div class="floor-size">
 												<span
-                                                    class="floor-info-title"><?php esc_html_e('Size:', 'essential-real-estate'); ?></span>
-												<span
-                                                    class="floor-info-value"><?php echo sanitize_text_field($floor_size); ?>
-                                                    <?php echo (isset($floor_size_postfix) && !empty($floor_size_postfix)) ? sanitize_text_field($floor_size_postfix) : '' ?></span>
+                                                        class="floor-info-title"><?php esc_html_e('Size:', 'essential-real-estate'); ?></span>
+                                        <span
+                                                class="floor-info-value"><?php echo sanitize_text_field($floor_size); ?>
+                                            <?php echo (isset($floor_size_postfix) && !empty($floor_size_postfix)) ? sanitize_text_field($floor_size_postfix) : '' ?></span>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (isset($floor_bedrooms) && !empty($floor_bedrooms)): ?>
                                     <div class="floor-bed">
 												<span
-                                                    class="floor-info-title"><?php esc_html_e('Bedrooms:', 'essential-real-estate'); ?></span>
-												<span
-                                                    class="floor-info-value"><?php echo sanitize_text_field($floor_bedrooms); ?></span>
+                                                        class="floor-info-title"><?php esc_html_e('Bedrooms:', 'essential-real-estate'); ?></span>
+                                        <span
+                                                class="floor-info-value"><?php echo sanitize_text_field($floor_bedrooms); ?></span>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (isset($floor_bathrooms) && !empty($floor_bathrooms)): ?>
                                     <div class="floor-bath">
 												<span
-                                                    class="floor-info-title"><?php esc_html_e('Bathrooms:', 'essential-real-estate'); ?></span>
-												<span
-                                                    class="floor-info-value"><?php echo sanitize_text_field($floor_bathrooms); ?></span>
+                                                        class="floor-info-title"><?php esc_html_e('Bathrooms:', 'essential-real-estate'); ?></span>
+                                        <span
+                                                class="floor-info-value"><?php echo sanitize_text_field($floor_bathrooms); ?></span>
                                     </div>
                                 <?php endif; ?>
                                 <?php if (isset($floor_price) && !empty($floor_price)): ?>
                                     <div class="floor-price">
 												<span
-                                                    class="floor-info-title"><?php esc_html_e('Price:', 'essential-real-estate'); ?></span>
-												<span
-                                                    class="floor-info-value"><?php echo ere_get_format_money($floor_price); ?>
-                                                    <?php echo (isset($floor_price_postfix) && !empty($floor_price_postfix)) ? '/' . sanitize_text_field($floor_price_postfix) : '' ?></span>
+                                                        class="floor-info-title"><?php esc_html_e('Price:', 'essential-real-estate'); ?></span>
+                                        <span
+                                                class="floor-info-value"><?php echo ere_get_format_money($floor_price); ?>
+                                            <?php echo (isset($floor_price_postfix) && !empty($floor_price_postfix)) ? '/' . sanitize_text_field($floor_price_postfix) : '' ?></span>
                                     </div>
                                 <?php endif; ?>
                             </div>
@@ -528,7 +551,6 @@ $measurement_units = ere_get_measurement_units();
                         <div class="agent-info">
                             <?php
                             $email = $avatar_src = $agent_link = $agent_name = $agent_position = $agent_facebook_url = $agent_twitter_url =
-                            $agent_googleplus_url = $agent_linkedin_url = $agent_pinterest_url = $agent_skype =
                             $agent_youtube_url = $agent_vimeo_url = $agent_mobile_number = $agent_office_address = $agent_website_url = $agent_description = '';
                             if ($agent_display_option != 'other_info') {
                                 $width = 270;
@@ -558,7 +580,6 @@ $measurement_units = ere_get_measurement_units();
                                     }
                                     $agent_facebook_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_facebook_url', $user_id);
                                     $agent_twitter_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_twitter_url', $user_id);
-                                    $agent_googleplus_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_googleplus_url', $user_id);
                                     $agent_linkedin_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_linkedin_url', $user_id);
                                     $agent_pinterest_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_pinterest_url', $user_id);
                                     $agent_instagram_url = get_the_author_meta(ERE_METABOX_PREFIX . 'author_instagram_url', $user_id);
@@ -588,7 +609,6 @@ $measurement_units = ere_get_measurement_units();
 
                                     $agent_facebook_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_facebook_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_facebook_url'][0] : '';
                                     $agent_twitter_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_twitter_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_twitter_url'][0] : '';
-                                    $agent_googleplus_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_googleplus_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_googleplus_url'][0] : '';
                                     $agent_linkedin_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_linkedin_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_linkedin_url'][0] : '';
                                     $agent_pinterest_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_pinterest_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_pinterest_url'][0] : '';
                                     $agent_instagram_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_instagram_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_instagram_url'][0] : '';
@@ -615,10 +635,10 @@ $measurement_units = ere_get_measurement_units();
                                 <div class="list-2-col">
                                     <div class="agent-avatar">
                                         <img
-                                            src="<?php echo esc_url($avatar_src) ?>"
-                                            onerror="this.src = '<?php echo esc_url($no_avatar_src) ?>';"
-                                            alt="<?php echo esc_attr($agent_name) ?>"
-                                            title="<?php echo esc_attr($agent_name) ?>">
+                                                src="<?php echo esc_url($avatar_src) ?>"
+                                                onerror="this.src = '<?php echo esc_url($no_avatar_src) ?>';"
+                                                alt="<?php echo esc_attr($agent_name) ?>"
+                                                title="<?php echo esc_attr($agent_name) ?>">
                                     </div>
                                     <div class="agent-content">
                                         <div class="agent-heading">
@@ -638,11 +658,6 @@ $measurement_units = ere_get_measurement_units();
                                             <?php if (!empty($agent_twitter_url)): ?>
                                                 <p>
                                                     <i class="fa fa-twitter"></i><?php echo esc_url($agent_twitter_url); ?>
-                                                </p>
-                                            <?php endif; ?>
-                                            <?php if (!empty($agent_googleplus_url)): ?>
-                                                <p>
-                                                    <i class="fa fa-google-plus"></i><?php echo esc_url($agent_googleplus_url); ?>
                                                 </p>
                                             <?php endif; ?>
                                             <?php if (!empty($agent_skype)): ?>
@@ -735,6 +750,5 @@ $measurement_units = ere_get_measurement_units();
             <?php endif; ?>
         </div>
     </div>
-<?php
-print '</body></html>';
-wp_die();
+    </body>
+</html>

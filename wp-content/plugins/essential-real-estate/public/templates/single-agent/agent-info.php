@@ -21,7 +21,6 @@ $agent_website_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_web
 
 $agent_facebook_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_facebook_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_facebook_url'][0] : '';
 $agent_twitter_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_twitter_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_twitter_url'][0] : '';
-$agent_googleplus_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_googleplus_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_googleplus_url'][0] : '';
 $agent_linkedin_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_linkedin_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_linkedin_url'][0] : '';
 $agent_pinterest_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_pinterest_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_pinterest_url'][0] : '';
 $agent_instagram_url = isset($agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_instagram_url']) ? $agent_post_meta_data[ERE_METABOX_PREFIX . 'agent_instagram_url'][0] : '';
@@ -106,11 +105,6 @@ $total_property = $ere_property->get_total_properties_by_user($agent_id, $agent_
                     <?php if (!empty($agent_twitter_url)): ?>
                         <a title="Twitter" href="<?php echo esc_url($agent_twitter_url); ?>">
                             <i class="fa fa-twitter"></i>
-                        </a>
-                    <?php endif; ?>
-                    <?php if (!empty($agent_googleplus_url)): ?>
-                        <a title="Google Plus" href="<?php echo esc_url($agent_googleplus_url); ?>">
-                            <i class="fa fa-google-plus"></i>
                         </a>
                     <?php endif; ?>
                     <?php if (!empty($email)): ?>
@@ -235,29 +229,29 @@ $total_property = $ere_property->get_total_properties_by_user($agent_id, $agent_
 
                 <div class="form-group">
                     <input class="form-control" name="sender_name" type="text"
-                           placeholder="<?php esc_html_e('Full Name', 'essential-real-estate'); ?> *">
+                           placeholder="<?php esc_attr_e('Full Name', 'essential-real-estate'); ?> *">
 
                     <div
                         class="hidden name-error form-error"><?php esc_html_e('Please enter your Name!', 'essential-real-estate'); ?></div>
                 </div>
                 <div class="form-group">
                     <input class="form-control" name="sender_phone" type="text"
-                           placeholder="<?php esc_html_e('Phone Number', 'essential-real-estate'); ?> *">
+                           placeholder="<?php esc_attr_e('Phone Number', 'essential-real-estate'); ?> *">
 
                     <div
                         class="hidden phone-error form-error"><?php esc_html_e('Please enter your Phone!', 'essential-real-estate'); ?></div>
                 </div>
                 <div class="form-group">
                     <input class="form-control" name="sender_email" type="email"
-                           placeholder="<?php esc_html_e('Email Adress', 'essential-real-estate'); ?> *">
+                           placeholder="<?php esc_attr_e('Email Adress', 'essential-real-estate'); ?> *">
 
                     <div class="hidden email-error form-error"
-                         data-not-valid="<?php esc_html_e('Your Email address is not Valid!', 'essential-real-estate') ?>"
-                         data-error="<?php esc_html_e('Please enter your Email!', 'essential-real-estate') ?>"><?php esc_html_e('Please enter your Email!', 'essential-real-estate'); ?></div>
+                         data-not-valid="<?php esc_attr_e('Your Email address is not Valid!', 'essential-real-estate') ?>"
+                         data-error="<?php esc_attr_e('Please enter your Email!', 'essential-real-estate') ?>"><?php esc_html_e('Please enter your Email!', 'essential-real-estate'); ?></div>
                 </div>
                 <div class="form-group">
 						<textarea class="form-control" name="sender_msg" rows="5"
-                                  placeholder="<?php esc_html_e('Message', 'essential-real-estate'); ?> *"></textarea>
+                                  placeholder="<?php esc_attr_e('Message', 'essential-real-estate'); ?> *"></textarea>
 
                     <div
                         class="hidden message-error form-error"><?php esc_html_e('Please enter your Message!', 'essential-real-estate'); ?></div>

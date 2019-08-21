@@ -9,13 +9,13 @@
 			if (!empty($field_value)) {
 				$thumbnail = wp_get_attachment_image_src($field_value, 'thumbnail');
 				if ($thumbnail && is_array($thumbnail)) {
-					echo '<span data-id="' . $field_value . '"><img src="' . $thumbnail[0] . '" alt="" /><span class="close">x</span></span>';
+					echo '<span data-id="' . $field_value . '"><img src="' . $thumbnail[0] . '" /><span class="close">x</span></span>';
 				}
 			}
 			?>
 		</div>
 		<input type="hidden" name="<?php echo esc_attr($field_output_name); ?>" id="<?php echo esc_attr( $field_output_id ); ?>" value="<?php echo esc_attr($field_value); ?>">
-		<p class="none"><a href="#" class="button"><?php esc_html_e('Pick Image','g5plus-pasco'); ?></a></p>
+		<p class="none"><a href="#" class="button"><?php esc_html_e('Pick Image','essential-real-estate'); ?></a></p>
 	</div>
 
 </div>

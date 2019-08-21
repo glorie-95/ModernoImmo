@@ -21,12 +21,12 @@ if (!class_exists('GSF_Field_File')) {
 			$field_value = $this->get_value();
 			$field_value_arr = explode('|', $field_value);
 			$remove_text = esc_html__('Remove','smart-framework');
-			$lib_filter = '';
-			if (isset($this->params['lib_filter']) && !empty($this->params['lib_filter'])) {
-				$lib_filter = sprintf('data-lib-filter="%s"', esc_attr($this->params['lib_filter']));
-			}
 			?>
-			<div class="gsf-field-file-inner" data-remove-text="<?php echo esc_attr($remove_text); ?>" <?php echo ($lib_filter); ?>>
+			<div class="gsf-field-file-inner" data-remove-text="<?php echo esc_attr($remove_text); ?>"
+                <?php if (isset($this->params['lib_filter']) && !empty($this->params['lib_filter'])): ?>
+                    data-lib-filter="<?php echo esc_attr($this->params['lib_filter'])?>"
+                <?php endif; ?>
+            >
 				<input data-field-control="" type="hidden" name="<?php echo esc_attr($this->get_name()) ?>" value="<?php echo esc_attr($field_value); ?>"/>
 				<?php foreach ($field_value_arr as $file_id): ?>
 					<?php
